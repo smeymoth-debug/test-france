@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DELF A1 French Mastery</title>
+    <title>DELF A1.2 Mastery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -18,73 +18,77 @@
 <body class="bg-slate-50 text-slate-900 min-h-screen flex items-center justify-center p-4">
 
     <div id="app" class="w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100 flex flex-col min-h-[600px]">
-        </div>
+    </div>
 
     <script>
         const apiKey = "YOUR_API_KEY_HERE"; 
         
         const QUIZ_DATA = [
-            // 1-10: Greetings & Basics
-            { question: "Someone asks you, 'Comment ça va ?' Which is a correct response?", options: ["Au revoir.", "Ça va bien, merci.", "Je m'appelle Marc.", "Enchanté."], correct: 1, explanation: "'Ça va bien, merci' means 'It's going well, thank you.'", category: "Communication" },
-            { question: "How do you say 'Good evening' in French?", options: ["Bonjour", "Bonne nuit", "Bonsoir", "Salut"], correct: 2, explanation: "'Bonsoir' is used specifically for 'Good evening'.", category: "Communication" },
-            { question: "What does 'Enchanté' mean?", options: ["Goodbye", "Nice to meet you", "Please", "Thank you"], correct: 1, explanation: "'Enchanté' is used when meeting someone for the first time.", category: "Communication" },
-            { question: "How do you ask 'What is your name?' (Formal)?", options: ["Tu t'appelles comment ?", "Comment vous appelez-vous ?", "Ça va ?", "Qui est-ce ?"], correct: 1, explanation: 'Formal/Plural addresses use the "vous" form.', category: "Communication" },
-            { question: "Which word means 'Please' (Informal)?", options: ["S'il vous plaît", "Merci", "S'il te plaît", "De rien"], correct: 2, explanation: "'S'il te plaît' is the informal version (tu).", category: "Communication" },
-            { question: "How do you say 'Goodbye'?", options: ["Bonjour", "Salut", "Au revoir", "À tes souhaits"], correct: 2, explanation: "'Au revoir' means 'until we see each other again.'", category: "Communication" },
-            { question: "Which is a response to 'Merci'?", options: ["Pardon", "De rien", "S'il vous plaît", "Désolé"], correct: 1, explanation: "'De rien' means 'It's nothing' or 'You're welcome'.", category: "Communication" },
-            { question: "How do you apologize for a small mistake?", options: ["Merci", "Enchanté", "Pardon", "S'il vous plaît"], correct: 2, explanation: "'Pardon' is used for minor apologies.", category: "Communication" },
-            { question: "What is 'Mr.' in French?", options: ["Madame", "Mademoiselle", "Monsieur", "Maître"], correct: 2, explanation: "Monsieur is the formal title for a man.", category: "Vocabulary" },
-            { question: "Which phrase means 'I don't understand'?", options: ["Je ne sais pas", "Je ne comprends pas", "Je ne parle pas", "Je suis d'accord"], correct: 1, explanation: "'Comprendre' means 'to understand'.", category: "Communication" },
+            // Grammar: Passé Composé (1-10)
+            { question: "Hier, j'___ mangé au restaurant.", options: ["suis", "ai", "as", "es"], correct: 1, explanation: "Most verbs use 'avoir' as the auxiliary in Passé Composé.", category: "Grammar" },
+            { question: "Elle ___ allée au marché ce matin.", options: ["a", "est", "va", "es"], correct: 1, explanation: "The verb 'aller' uses 'être' and must agree in gender (allée).", category: "Grammar" },
+            { question: "Nous ___ fini nos devoirs.", options: ["sommes", "avez", "avons", "ont"], correct: 2, explanation: "Finir uses 'avoir' in the past tense.", category: "Grammar" },
+            { question: "Ils ___ venus nous voir.", options: ["ont", "sont", "vont", "seront"], correct: 1, explanation: "Venir is a 'DR MRS VANDERTRAMP' verb and uses être.", category: "Grammar" },
+            { question: "Qu'est-ce que tu ___ fait hier ?", options: ["as", "es", "est", "a"], correct: 0, explanation: "Faire uses avoir; the past participle is 'fait'.", category: "Grammar" },
+            { question: "Je ___ sorti la poubelle.", options: ["suis", "ai", "es", "as"], correct: 1, explanation: "When 'sortir' has a direct object, it uses avoir!", category: "Grammar" },
+            { question: "Vous ___ entendu ce bruit ?", options: ["avez", "êtes", "as", "ont"], correct: 0, explanation: "Entendre uses avoir.", category: "Grammar" },
+            { question: "Le film ___ déjà commencé.", options: ["est", "a", "va", "as"], correct: 1, explanation: "Commencer uses avoir.", category: "Grammar" },
+            { question: "Elles ___ parties en vacances.", options: ["ont", "sont", "vont", "fais"], correct: 1, explanation: "Partir uses être + agreement (plural feminine).", category: "Grammar" },
+            { question: "On ___ vu un beau film.", options: ["est", "a", "as", "es"], correct: 1, explanation: "Voir becomes 'vu' and uses avoir.", category: "Grammar" },
 
-            // 11-20: Être & Avoir (Grammar)
-            { question: "Complete: 'Je ___ étudiant.'", options: ["est", "es", "sommes", "suis"], correct: 3, explanation: "The verb être: Je suis.", category: "Grammar" },
-            { question: "Complete: 'Tu ___ un stylo ?'", options: ["ai", "as", "a", "avez"], correct: 1, explanation: "The verb avoir: Tu as.", category: "Grammar" },
-            { question: "Complete: 'Ils ___ français.'", options: ["sont", "ont", "sommes", "êtes"], correct: 0, explanation: "Ils sont (They are).", category: "Grammar" },
-            { question: "Complete: 'Nous ___ faim.'", options: ["sommes", "avons", "avez", "ont"], correct: 1, explanation: "In French, you 'have' hunger: Nous avons faim.", category: "Grammar" },
-            { question: "Complete: 'Vous ___ fatigué.'", options: ["êtes", "suis", "es", "est"], correct: 0, explanation: "Vous êtes (You are).", category: "Grammar" },
-            { question: "Complete: 'Elle ___ vingt ans.'", options: ["est", "a", "as", "es"], correct: 1, explanation: "Age uses the verb 'avoir' in French.", category: "Grammar" },
-            { question: "Which is the plural of 'est'?", options: ["sommes", "êtes", "sont", "suis"], correct: 2, explanation: "Il/Elle est -> Ils/Elles sont.", category: "Grammar" },
-            { question: "Complete: 'On ___ ensemble.'", options: ["sommes", "suis", "est", "êtes"], correct: 2, explanation: "'On' conjugates like 'il/elle'.", category: "Grammar" },
-            { question: "Translate 'We have':", options: ["Nous sommes", "Nous avons", "Ils ont", "Vous avez"], correct: 1, explanation: "Nous avons.", category: "Grammar" },
-            { question: "Translate 'You are' (informal):", options: ["Tu es", "Tu as", "Vous êtes", "Il est"], correct: 0, explanation: "Tu es.", category: "Grammar" },
+            // Grammar: Futur Proche (11-18)
+            { question: "Ce soir, je ___ regarder la télé.", options: ["vais", "vas", "va", "vont"], correct: 0, explanation: "Futur Proche = Aller + Infinitive.", category: "Grammar" },
+            { question: "Nous ___ partir à 8 heures.", options: ["allons", "allons", "allez", "vont"], correct: 0, explanation: "Nous allons + infinitive.", category: "Grammar" },
+            { question: "Est-ce que tu ___ sortir ce week-end ?", options: ["vais", "vas", "va", "allez"], correct: 1, explanation: "Tu vas.", category: "Grammar" },
+            { question: "Ils ___ acheter une nouvelle voiture.", options: ["vont", "va", "allez", "ont"], correct: 0, explanation: "Ils vont.", category: "Grammar" },
+            { question: "Elle ___ se doucher.", options: ["va", "vas", "vont", "allons"], correct: 0, explanation: "Reflexive verbs follow 'aller'.", category: "Grammar" },
+            { question: "Vous ___ manger avec nous ?", options: ["allez", "allons", "va", "vont"], correct: 0, explanation: "Vous allez.", category: "Grammar" },
+            { question: "Je ___ ne pas venir.", options: ["vais", "vas", "va", "ai"], correct: 0, explanation: "Negation: Je vais ne pas...", category: "Grammar" },
+            { question: "Demain, il ___ pleuvoir.", options: ["va", "est", "a", "fait"], correct: 0, explanation: "Weather in Futur Proche uses Aller.", category: "Grammar" },
 
-            // 21-30: Articles & Nouns
-            { question: "___ pomme (The apple).", options: ["Le", "La", "Les", "Un"], correct: 1, explanation: "Pomme is feminine.", category: "Vocabulary" },
-            { question: "___ livre (The book).", options: ["Le", "La", "Les", "Une"], correct: 0, explanation: "Livre is masculine.", category: "Vocabulary" },
-            { question: "___ écoles (The schools).", options: ["Le", "La", "L'", "Les"], correct: 3, explanation: "Use 'les' for plural nouns.", category: "Grammar" },
-            { question: "___ ordinateur (The computer).", options: ["Le", "La", "L'", "Les"], correct: 2, explanation: "Use L' before a vowel.", category: "Grammar" },
-            { question: "Which is 'A boy'?", options: ["Un garçon", "Une garçon", "Le garçon", "La garçon"], correct: 0, explanation: "'Un' is the masculine indefinite article.", category: "Vocabulary" },
-            { question: "Which is 'Some girls'?", options: ["Un filles", "Une filles", "Des filles", "La filles"], correct: 2, explanation: "'Des' is plural for 'a/an'.", category: "Grammar" },
-            { question: "___ stylo (A pen).", options: ["Un", "Une", "Des", "La"], correct: 0, explanation: "Stylo is masculine.", category: "Vocabulary" },
-            { question: "___ chaise (A chair).", options: ["Un", "Une", "Des", "Le"], correct: 1, explanation: "Chaise is feminine.", category: "Vocabulary" },
-            { question: "What is the plural of 'Le gâteau'?", options: ["Les gâteaus", "Les gâteau", "Les gâteaux", "Le gâteaux"], correct: 2, explanation: "Words ending in -au take an 'x' in plural.", category: "Grammar" },
-            { question: "Which is 'The water'?", options: ["Le eau", "La eau", "L'eau", "Les eaux"], correct: 2, explanation: "Eau starts with a vowel, so La becomes L'.", category: "Vocabulary" },
+            // Vocabulary: Directions & Places (19-27)
+            { question: "Tournez ___ la gauche au feu rouge.", options: ["à", "sur", "dans", "chez"], correct: 0, explanation: "Directions use 'à'.", category: "Vocabulary" },
+            { question: "Le cinéma est ___ la banque et l'école.", options: ["devant", "entre", "sous", "chez"], correct: 1, explanation: "'Entre' means between.", category: "Vocabulary" },
+            { question: "Je vais ___ le médecin car je suis malade.", options: ["à", "chez", "dans", "en"], correct: 1, explanation: "Use 'chez' for people/professions.", category: "Vocabulary" },
+            { question: "Continuez tout ___.", options: ["droit", "droite", "gauche", "loin"], correct: 0, explanation: "'Tout droit' means straight ahead.", category: "Vocabulary" },
+            { question: "La bibliothèque est ___ de la poste.", options: ["à côté", "en", "dans", "sur"], correct: 0, explanation: "à côté de = next to.", category: "Vocabulary" },
+            { question: "Pardon, pour aller ___ la gare s'il vous plaît ?", options: ["à", "au", "en", "dans"], correct: 0, explanation: "Gare is feminine (à la).", category: "Vocabulary" },
+            { question: "Le chat est ___ la table.", options: ["sous", "entre", "chez", "vers"], correct: 0, explanation: "Sous = under.", category: "Vocabulary" },
+            { question: "J'habite ___ cinquième étage.", options: ["à", "au", "en", "sur"], correct: 1, explanation: "Au = at the (masculine).", category: "Vocabulary" },
+            { question: "La boulangerie est ___ face de l'église.", options: ["à", "en", "au", "sur"], correct: 1, explanation: "En face de = opposite.", category: "Vocabulary" },
 
-            // 31-40: Numbers & Time
-            { question: "How do you say '12'?", options: ["Dix-deux", "Deux", "Douze", "Onze"], correct: 2, explanation: "12 = Douze.", category: "Numbers" },
-            { question: "How do you say '20'?", options: ["Vingt", "Trente", "Dix", "Quatre-vingt"], correct: 0, explanation: "20 = Vingt.", category: "Numbers" },
-            { question: "How do you say '15'?", options: ["Cinq", "Cinquante", "Quinze", "Quatorze"], correct: 2, explanation: "15 = Quinze.", category: "Numbers" },
-            { question: "What number is 'soixante-dix'?", options: ["60", "70", "80", "90"], correct: 1, explanation: "60 + 10 = 70.", category: "Numbers" },
-            { question: "How do you say '80'?", options: ["Huitante", "Octante", "Quatre-vingts", "Soixante-vingt"], correct: 2, explanation: "4 x 20 = 80.", category: "Numbers" },
-            { question: "What time is 'Il est midi'?", options: ["12:00 AM", "12:00 PM", "6:00 PM", "1:00 PM"], correct: 1, explanation: "Midi means noon.", category: "Time" },
-            { question: "How do you say 'It is 5:00'?", options: ["Il est cinq heures", "Il a cinq heures", "C'est cinq", "Il est cinq"], correct: 0, explanation: "Time uses 'Il est... heures'.", category: "Time" },
-            { question: "What day is 'Lundi'?", options: ["Tuesday", "Sunday", "Monday", "Friday"], correct: 2, explanation: "Lundi = Monday.", category: "Time" },
-            { question: "Which month is 'Août'?", options: ["April", "August", "October", "January"], correct: 1, explanation: "Août = August.", category: "Time" },
-            { question: "How do you say 'Today'?", options: ["Demain", "Hier", "Aujourd'hui", "Maintenant"], correct: 2, explanation: "Aujourd'hui = Today.", category: "Time" },
+            // Vocabulary: Daily Routine (28-36)
+            { question: "Le matin, je ___ réveille à 7h.", options: ["me", "te", "se", "nous"], correct: 0, explanation: "Reflexive: Je me.", category: "Vocabulary" },
+            { question: "Nous ___ brossons les dents.", options: ["nous", "vous", "se", "me"], correct: 0, explanation: "Nous nous brossons.", category: "Vocabulary" },
+            { question: "Il ___ lave avant de dormir.", options: ["se", "me", "te", "le"], correct: 0, explanation: "Il se lave.", category: "Vocabulary" },
+            { question: "À quelle heure tu ___ couches ?", options: ["te", "me", "se", "vous"], correct: 0, explanation: "Tu te couches.", category: "Vocabulary" },
+            { question: "Après le travail, je ___ repose.", options: ["me", "se", "le", "la"], correct: 0, explanation: "Se reposer = to rest.", category: "Vocabulary" },
+            { question: "Vous ___ préparez pour la fête ?", options: ["vous", "nous", "se", "me"], correct: 0, explanation: "Vous vous préparez.", category: "Vocabulary" },
+            { question: "Les enfants ___ habillent vite.", options: ["se", "me", "te", "nous"], correct: 0, explanation: "Ils se habillent (s'habillent).", category: "Vocabulary" },
+            { question: "Elle ___ maquille dans la salle de bain.", options: ["se", "me", "te", "vous"], correct: 0, explanation: "Elle se maquille.", category: "Vocabulary" },
+            { question: "Je ___ promène dans le parc.", options: ["me", "te", "se", "nous"], correct: 0, explanation: "Se promener = to walk.", category: "Vocabulary" },
 
-            // 41-52: Family & Verbs
-            { question: "Who is 'le frère de mon père'?", options: ["Mon cousin", "Mon grand-père", "Mon oncle", "Mon fils"], correct: 2, explanation: "Your father's brother is your uncle.", category: "Family" },
-            { question: "How do you say 'My mother'?", options: ["Mon mère", "Ma mère", "Mes mères", "Le mère"], correct: 1, explanation: "'Ma' is feminine possessive.", category: "Family" },
-            { question: "Complete: 'Je ___ au cinéma.'", options: ["vais", "vas", "va", "vont"], correct: 0, explanation: "Aller (to go): Je vais.", category: "Grammar" },
-            { question: "Which verb means 'To eat'?", options: ["Boire", "Dormir", "Manger", "Parler"], correct: 2, explanation: "Manger = To eat.", category: "Vocabulary" },
-            { question: "Complete: 'Nous ___ français.' (To speak)", options: ["parle", "parles", "parlez", "parlons"], correct: 3, explanation: "-er verbs take -ons with 'Nous'.", category: "Grammar" },
-            { question: "What is the opposite of 'petit'?", options: ["Grand", "Mince", "Froid", "Beau"], correct: 0, explanation: "Grand = Big/Tall.", category: "Vocabulary" },
-            { question: "How do you say 'The yellow car'?", options: ["La jaune voiture", "La voiture jaune", "Le voiture jaune", "Jaune voiture"], correct: 1, explanation: "Colors usually come after the noun.", category: "Grammar" },
-            { question: "Which is 'Black'?", options: ["Blanc", "Rouge", "Bleu", "Noir"], correct: 3, explanation: "Noir = Black.", category: "Vocabulary" },
-            { question: "Where do you buy bread?", options: ["À la banque", "À la boulangerie", "Au cinéma", "À l'école"], correct: 1, explanation: "Boulangerie = Bakery.", category: "Vocabulary" },
-            { question: "Complete: 'Tu ___ italien ?'", options: ["parle", "parles", "parlons", "parlez"], correct: 1, explanation: "Tu parles.", category: "Grammar" },
-            { question: "How do you say 'I live in Paris'?", options: ["Je habite à Paris", "J'habite à Paris", "Je suis habiter Paris", "J'habite en Paris"], correct: 1, explanation: "J'habite (elision before 'h').", category: "Grammar" },
-            { question: "Which means 'The house'?", options: ["Le bâtiment", "La maison", "Le bureau", "L'appartement"], correct: 1, explanation: "Maison is feminine.", category: "Vocabulary" }
+            // Vocabulary: Work & Health (37-45)
+            { question: "J'ai ___ à la tête.", options: ["froid", "mal", "faim", "soif"], correct: 1, explanation: "Avoir mal à = to have a pain.", category: "Vocabulary" },
+            { question: "Il travaille dans un hôpital, il est ___.", options: ["infirmier", "avocat", "serveur", "vendeur"], correct: 0, explanation: "Infirmier = nurse.", category: "Vocabulary" },
+            { question: "Elle vend des vêtements, elle est ___.", options: ["vendeuse", "boulangère", "pilote", "factrice"], correct: 0, explanation: "Vendeuse = saleswoman.", category: "Vocabulary" },
+            { question: "Tu as de la fièvre, tu es ___.", options: ["fatigué", "malade", "heureux", "triste"], correct: 1, explanation: "Malade = sick.", category: "Vocabulary" },
+            { question: "Mon métier est ___ les ordinateurs.", options: ["réparer", "manger", "chanter", "danser"], correct: 0, explanation: "Réparer = to repair.", category: "Vocabulary" },
+            { question: "Je cherche un ___ dans la comptabilité.", options: ["emploi", "appartement", "repas", "vêtement"], correct: 0, explanation: "Emploi = job.", category: "Vocabulary" },
+            { question: "Le ___ soigne les dents.", options: ["dentiste", "médecin", "pharmacien", "opticien"], correct: 0, explanation: "Dentiste.", category: "Vocabulary" },
+            { question: "J'ai besoin d'un ___ pour travailler.", options: ["ordinateur", "lit", "four", "canapé"], correct: 0, explanation: "Computer.", category: "Vocabulary" },
+            { question: "Prenez ce ___ trois fois par jour.", options: ["médicament", "livre", "stylo", "vélo"], correct: 0, explanation: "Médicament = medicine.", category: "Vocabulary" },
+
+            // Mixed Grammar: Pronouns & Quantities (46-54)
+            { question: "Je ___ regarde (la télé).", options: ["la", "le", "les", "lui"], correct: 0, explanation: "Direct object pronoun for feminine.", category: "Grammar" },
+            { question: "Tu ___ téléphones (à ta mère) ?", options: ["lui", "la", "le", "les"], correct: 0, explanation: "Indirect object (téléphoner à) uses 'lui'.", category: "Grammar" },
+            { question: "Je mange ___ pain.", options: ["du", "de la", "des", "le"], correct: 0, explanation: "Partitive article for masculine (bread).", category: "Grammar" },
+            { question: "Il y a ___ étudiants dans la classe.", options: ["beaucoup d'", "beaucoup", "très", "trop le"], correct: 0, explanation: "Beaucoup de/d' is the fixed expression.", category: "Grammar" },
+            { question: "Je n'ai pas ___ voiture.", options: ["de", "du", "une", "la"], correct: 0, explanation: "Negation: un/une/du becomes 'de'.", category: "Grammar" },
+            { question: "Donne-___ le livre.", options: ["moi", "me", "je", "ma"], correct: 0, explanation: "Imperative uses 'moi' at the end.", category: "Grammar" },
+            { question: "C'est ___ voiture ?", options: ["ta", "ton", "tes", "toi"], correct: 0, explanation: "Voiture is feminine.", category: "Grammar" },
+            { question: "Ils sont plus grands ___ nous.", options: ["que", "de", "comme", "et"], correct: 0, explanation: "Comparison: plus... que.", category: "Grammar" },
+            { question: "Je bois ___ eau.", options: ["de l'", "du", "de la", "des"], correct: 0, explanation: "De l' before a vowel.", category: "Grammar" }
         ];
 
         let state = {
@@ -100,7 +104,7 @@
             streak: 0
         };
 
-        // --- STREAK & STORAGE LOGIC ---
+        // --- CORE LOGIC (STREAK, RENDER, ETC) ---
         function updateStreak() {
             const today = new Date().toDateString();
             const lastDate = localStorage.getItem('delf_last_date');
@@ -109,7 +113,6 @@
             if (lastDate !== today) {
                 const yesterday = new Date();
                 yesterday.setDate(yesterday.getDate() - 1);
-                
                 if (lastDate === yesterday.toDateString()) {
                     currentStreak++;
                 } else {
@@ -123,14 +126,13 @@
 
         function getLevelTitle(score) {
             const pct = (score / QUIZ_DATA.length) * 100;
-            if (pct === 100) return "Expert Francophone 👑";
-            if (pct >= 80) return "Avancé A1 🚀";
-            if (pct >= 50) return "Apprenti 📚";
-            return "Débutant 🌱";
+            if (pct === 100) return "Expert A1.2 🏆";
+            if (pct >= 80) return "Maître de la Langue 🌟";
+            if (pct >= 50) return "En Progression 📖";
+            return "Débutant A1.2 🌱";
         }
 
-        // --- AI & AUDIO HELPERS ---
-        async function fetchWithRetry(url, options, retries = 3) {
+        async function fetchWithRetry(url, options) {
             const response = await fetch(url, options);
             if (!response.ok) throw new Error('API failed');
             return await response.json();
@@ -146,18 +148,17 @@
                     {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: `User is taking a DELF A1 quiz. Question: "${question.question}" Give a 1-sentence hint in English without the answer.` }] }] })
+                        body: JSON.stringify({ contents: [{ parts: [{ text: `User is taking a DELF A1.2 French quiz. Question: "${question.question}" Give a 1-sentence hint in English without the answer.` }] }] })
                     }
                 );
                 state.aiHint = result.candidates[0].content.parts[0].text;
-            } catch (e) { state.aiHint = "Check the subject or gender of the noun!"; }
+            } catch (e) { state.aiHint = "Look at the verb ending or the gender!"; }
             state.isLoadingAI = false; render();
         }
 
-        async function speakText(text, id) {
+        function speakText(text, id) {
             if (state.isSpeaking === id) return;
             state.isSpeaking = id; render();
-            // Simplified: In a real app, use Web Speech API or Gemini TTS here
             const msg = new SpeechSynthesisUtterance(text);
             msg.lang = 'fr-FR';
             msg.onend = () => { state.isSpeaking = null; render(); };
@@ -169,10 +170,8 @@
             const input = document.getElementById('chat-input');
             const userMsg = input.value.trim();
             if (!userMsg || state.isLoadingAI) return;
-
             state.chatMessages.push({ role: 'user', text: userMsg });
             input.value = ""; state.isLoadingAI = true; render();
-
             try {
                 const result = await fetchWithRetry(
                     `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
@@ -181,21 +180,19 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             contents: [
-                                { role: "user", parts: [{ text: "Act as a friendly French tutor. Keep it simple for A1 level." }] },
+                                { role: "user", parts: [{ text: "Act as a French tutor for DELF A1.2 level. Focus on Passé Composé and Daily Routines." }] },
                                 ...state.chatMessages.map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.text }] }))
                             ]
                         })
                     }
                 );
                 state.chatMessages.push({ role: 'bot', text: result.candidates[0].content.parts[0].text });
-            } catch (e) { state.chatMessages.push({ role: 'bot', text: "Oups! I had a connection issue." }); }
+            } catch (e) { state.chatMessages.push({ role: 'bot', text: "Erreur de connexion..." }); }
             state.isLoadingAI = false; render();
         }
 
-        // --- CORE ENGINE ---
         function render() {
             const app = document.getElementById('app');
-            
             if (state.gameState === 'start') {
                 app.innerHTML = `
                     <div class="p-12 text-center space-y-8 fade-in">
@@ -204,20 +201,19 @@
                                 <i data-lucide="flame" class="w-4 h-4"></i> ${state.streak} JOUR STREAK
                             </div>
                         ` : ''}
-                        <div class="w-24 h-24 bg-blue-100 rounded-3xl flex items-center justify-center mx-auto transform rotate-3 shadow-lg">
-                            <i data-lucide="languages" class="w-12 h-12 text-blue-600"></i>
+                        <div class="w-24 h-24 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto transform rotate-3 shadow-lg">
+                            <i data-lucide="graduation-cap" class="w-12 h-12 text-white"></i>
                         </div>
                         <div>
-                            <h1 class="text-5xl font-black tracking-tight text-slate-900 mb-2">DELF A1</h1>
-                            <p class="text-slate-500 font-medium">52 Questions pour Maîtriser le Français</p>
+                            <h1 class="text-5xl font-black tracking-tight text-slate-900 mb-2">DELF A1.2</h1>
+                            <p class="text-slate-500 font-medium">54 Questions: Passé, Futur et Routine</p>
                         </div>
-                        <button onclick="startGame()" class="w-full py-5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold text-xl shadow-xl transition-all transform hover:-translate-y-1">Commencer</button>
+                        <button onclick="startGame()" class="w-full py-5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold text-xl shadow-xl transition-all">Commencer</button>
                     </div>
                 `;
             } else if (state.gameState === 'quiz') {
                 const q = QUIZ_DATA[state.currentIdx];
                 const progress = ((state.currentIdx + 1) / QUIZ_DATA.length) * 100;
-
                 app.innerHTML = `
                     <div class="flex flex-col fade-in">
                         <div class="p-6 bg-white border-b border-slate-100">
@@ -245,9 +241,8 @@
                                         else cls = "opacity-50 border-slate-100";
                                     }
                                     return `
-                                        <button onclick="handleAnswer(${i})" ${state.isAnswered ? 'disabled' : ''} class="w-full p-4 text-left rounded-2xl border-2 font-semibold transition-all flex items-center justify-between ${cls}">
-                                            <span>${opt}</span>
-                                            ${state.isAnswered && i === q.correct ? '<i data-lucide="check-circle-2" class="w-5 h-5"></i>' : ''}
+                                        <button onclick="handleAnswer(${i})" ${state.isAnswered ? 'disabled' : ''} class="w-full p-4 text-left rounded-2xl border-2 font-semibold transition-all ${cls}">
+                                            ${opt}
                                         </button>
                                     `;
                                 }).join('')}
@@ -276,9 +271,6 @@
                 app.innerHTML = `
                     <div class="flex flex-col h-[650px] fade-in">
                         <div class="p-8 text-center bg-white border-b">
-                            <div class="text-orange-500 font-bold flex justify-center items-center gap-1 mb-2">
-                                <i data-lucide="flame" class="w-4 h-4"></i> Streak: ${state.streak} Jours
-                            </div>
                             <h2 class="text-4xl font-black mb-1">${state.score} / ${QUIZ_DATA.length}</h2>
                             <p class="text-blue-600 font-bold uppercase tracking-widest text-sm">${title}</p>
                         </div>
@@ -286,19 +278,19 @@
                             <div id="chat-container" class="flex-1 overflow-y-auto p-4 space-y-4">
                                 ${state.chatMessages.map(m => `
                                     <div class="flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}">
-                                        <div class="max-w-[85%] p-3 rounded-2xl text-sm ${m.role === 'user' ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-white border rounded-tl-none'} shadow-sm">
+                                        <div class="max-w-[85%] p-3 rounded-2xl text-sm ${m.role === 'user' ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-white border rounded-tl-none'}">
                                             ${m.text}
                                         </div>
                                     </div>
                                 `).join('')}
                             </div>
                             <form onsubmit="handleChat(event)" class="p-4 bg-white border-t flex gap-2">
-                                <input id="chat-input" type="text" placeholder="Dis quelque chose en français..." class="flex-1 bg-slate-100 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                                <input id="chat-input" type="text" placeholder="Pratiquer mon A1.2..." class="flex-1 bg-slate-100 rounded-xl px-4 py-3 text-sm outline-none">
                                 <button type="submit" class="p-3 bg-blue-600 text-white rounded-xl"><i data-lucide="send" class="w-4 h-4"></i></button>
                             </form>
                         </div>
                         <div class="p-4 bg-white border-t flex gap-2">
-                            <button onclick="startGame()" class="flex-1 py-3 bg-slate-100 rounded-xl font-bold">Recommencer</button>
+                            <button onclick="startGame()" class="flex-1 py-3 bg-slate-100 rounded-xl font-bold">Réessayer</button>
                             <button onclick="location.reload()" class="flex-1 py-3 bg-white border rounded-xl font-bold">Menu</button>
                         </div>
                     </div>
@@ -310,32 +302,18 @@
         }
 
         function startGame() {
-            state.gameState = 'quiz';
-            state.currentIdx = 0;
-            state.score = 0;
-            state.isAnswered = false;
-            state.aiHint = "";
-            state.chatMessages = [];
-            render();
+            state.gameState = 'quiz'; state.currentIdx = 0; state.score = 0; state.isAnswered = false; state.aiHint = ""; state.chatMessages = []; render();
         }
-
         function handleAnswer(idx) {
-            state.selectedIdx = idx;
-            state.isAnswered = true;
-            if (idx === QUIZ_DATA[state.currentIdx].correct) state.score++;
-            render();
+            state.selectedIdx = idx; state.isAnswered = true;
+            if (idx === QUIZ_DATA[state.currentIdx].correct) state.score++; render();
         }
-
         function nextQuestion() {
             if (state.currentIdx + 1 < QUIZ_DATA.length) {
-                state.currentIdx++;
-                state.isAnswered = false;
-                state.aiHint = "";
-                render();
+                state.currentIdx++; state.isAnswered = false; state.aiHint = ""; render();
             } else {
-                updateStreak();
-                state.gameState = 'end';
-                state.chatMessages.push({ role: 'bot', text: `Bravo ! You finished with ${state.score}/${QUIZ_DATA.length}. How are you feeling about your French?` });
+                updateStreak(); state.gameState = 'end';
+                state.chatMessages.push({ role: 'bot', text: "Félicitations ! Tu as terminé le niveau A1.2. Comment s'est passée ta journée d'hier ?" });
                 render();
             }
         }
