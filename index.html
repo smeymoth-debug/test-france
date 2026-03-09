@@ -1,192 +1,233 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>L'Académie Pro | Theng Bophamonyroth</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Mastery 15+</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
-        .nav-active { color: #2563eb !important; }
-        .lesson-card { border-left: 5px solid #2563eb; }
-        .hide-scroll::-webkit-scrollbar { display: none; }
+        .lesson-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+        .correct { background-color: #10b981 !important; color: white; border-color: #059669; }
+        .wrong { background-color: #ef4444 !important; color: white; border-color: #991b1b; }
+        .locked { filter: grayscale(1); opacity: 0.5; pointer-events: none; }
     </style>
 </head>
-<body class="flex flex-col h-screen overflow-hidden">
+<body class="bg-slate-50 text-slate-900 pb-20">
 
-    <header class="bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 py-4 flex justify-between items-center z-50">
-        <div class="flex items-center gap-2">
-            <div class="bg-blue-600 p-1.5 rounded-lg"><i data-lucide="shield-check" class="text-white w-5 h-5"></i></div>
-            <h1 class="font-black text-xl tracking-tighter">L'ACADÉMIE</h1>
+<div class="max-w-2xl mx-auto p-4">
+    <header class="bg-blue-700 text-white p-6 rounded-3xl shadow-lg mb-8 flex justify-between items-center">
+        <div>
+            <h1 class="text-xl font-black">FRANÇAIS EXPERT</h1>
+            <p id="rank" class="text-xs opacity-80 uppercase tracking-tighter">Level: A1 Beginner</p>
         </div>
-        <div id="streak-badge" class="flex items-center gap-1.5 bg-orange-50 text-orange-600 px-3 py-1 rounded-full border border-orange-100 font-black text-[10px]">
-            <i data-lucide="flame" class="w-3 h-3 fill-current"></i> 4 JOURS
+        <div class="flex gap-4">
+            <div class="text-center"><p class="text-[10px] font-bold">XP</p><p id="xp" class="text-lg font-black">0</p></div>
+            <div class="text-center"><p class="text-[10px] font-bold">STREAK</p><p id="streak" class="text-lg font-black">0</p></div>
         </div>
     </header>
 
-    <main class="flex-1 overflow-y-auto pb-32 px-5 pt-4 hide-scroll">
+    <div id="home" class="space-y-10">
         
-        <section id="sec-home" class="content-sec space-y-8">
-            <header>
-                <h2 class="text-2xl font-black text-slate-900">Bibliothèque A2</h2>
-                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Leçons Professionnelles</p>
-            </header>
-
-            <div class="space-y-4">
-                <h3 class="flex items-center gap-2 font-black text-blue-600 italic"><i data-lucide="book-text" class="w-4 h-4"></i> GRAMMAIRE AVANCÉE</h3>
-                
-                <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 lesson-card">
-                    <h4 class="font-black text-lg mb-2">1. L'Imparfait vs Passé Composé</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed mb-4">A2 Mastery: Use Passé Composé for actions, and Imparfait for <b>descriptions</b> and <b>habits</b>.</p>
-                    <div class="bg-slate-50 p-4 rounded-2xl text-xs space-y-2">
-                        <p><b>Imparfait:</b> "Le patient <i>avait</i> de la fièvre." (State)</p>
-                        <p><b>Passé:</b> "Il <i>a pris</i> un médicament." (Action)</p>
-                    </div>
+        <section>
+            <h2 class="font-black text-slate-400 text-xs uppercase mb-4 tracking-widest">Module 1: Foundations</h2>
+            <div class="lesson-grid">
+                <div onclick="init('greetings')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-blue-500 cursor-pointer">
+                    <span class="text-xl">👋</span><h3 class="text-sm font-bold mt-1">Greetings</h3>
                 </div>
-
-                <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 lesson-card">
-                    <h4 class="font-black text-lg mb-2">2. Le Conditionnel de Politesse</h4>
-                    <p class="text-xs text-slate-500 mb-4">Essential for Pharmacy. Never say "I want," say "I would like."</p>
-                    <div class="grid grid-cols-2 gap-2 text-[10px] font-bold">
-                        <div class="p-3 bg-blue-50 text-blue-700 rounded-xl">Je voudrais...</div>
-                        <div class="p-3 bg-blue-50 text-blue-700 rounded-xl">Pourriez-vous...</div>
-                        <div class="p-3 bg-blue-50 text-blue-700 rounded-xl">Devriez-vous...</div>
-                        <div class="p-3 bg-blue-50 text-blue-700 rounded-xl">Auriez-vous...</div>
-                    </div>
+                <div onclick="init('numbers')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-blue-500 cursor-pointer">
+                    <span class="text-xl">🔢</span><h3 class="text-sm font-bold mt-1">Numbers</h3>
                 </div>
-            </div>
-
-            <div class="space-y-4">
-                <h3 class="flex items-center gap-2 font-black text-emerald-600 italic"><i data-lucide="microscope" class="w-4 h-4"></i> VOCABULAIRE PHARMA PRO</h3>
-                
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-white p-4 rounded-3xl border border-slate-100 shadow-sm">
-                        <p class="text-xl mb-1">💊</p>
-                        <p class="font-black text-xs">Une gélule</p>
-                        <p class="text-[9px] text-slate-400">A capsule</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-3xl border border-slate-100 shadow-sm">
-                        <p class="text-xl mb-1">🧪</p>
-                        <p class="font-black text-xs">La posologie</p>
-                        <p class="text-[9px] text-slate-400">The dosage</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-3xl border border-slate-100 shadow-sm">
-                        <p class="text-xl mb-1">🩹</p>
-                        <p class="font-black text-xs">Le pansement</p>
-                        <p class="text-[9px] text-slate-400">The bandage</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-3xl border border-slate-100 shadow-sm">
-                        <p class="text-xl mb-1">📝</p>
-                        <p class="font-black text-xs">L'ordonnance</p>
-                        <p class="text-[9px] text-slate-400">The prescription</p>
-                    </div>
+                <div onclick="init('colors')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-blue-500 cursor-pointer">
+                    <span class="text-xl">🎨</span><h3 class="text-sm font-bold mt-1">Colors</h3>
+                </div>
+                <div onclick="init('etre')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-blue-500 cursor-pointer">
+                    <span class="text-xl">🧠</span><h3 class="text-sm font-bold mt-1">Verb: Être</h3>
+                </div>
+                <div onclick="init('avoir')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-blue-500 cursor-pointer">
+                    <span class="text-xl">🎒</span><h3 class="text-sm font-bold mt-1">Verb: Avoir</h3>
                 </div>
             </div>
         </section>
 
-        <section id="sec-quiz" class="content-sec hidden space-y-6">
-            <div class="bg-blue-600 p-8 rounded-[2.5rem] text-white text-center space-y-4">
-                <h2 class="text-3xl font-black">Examen Final</h2>
-                <p class="text-blue-100 text-sm">54 questions basées sur le programme A2 Professionnel.</p>
-                <button onclick="startFullQuiz()" class="w-full bg-white text-blue-600 py-4 rounded-2xl font-black shadow-lg">COMMENCER</button>
-            </div>
-            <div id="quiz-engine" class="hidden bg-white p-6 rounded-[2.5rem] border border-slate-100 space-y-6">
-                <p id="q-text" class="text-lg font-black text-slate-800"></p>
-                <div id="q-options" class="space-y-3"></div>
-            </div>
-        </section>
-
-        <section id="sec-profile" class="content-sec hidden space-y-8">
-            <div class="text-center space-y-4">
-                <div class="w-24 h-24 bg-blue-100 rounded-full mx-auto border-4 border-white shadow-xl flex items-center justify-center">
-                    <span class="text-3xl font-black text-blue-600">MR</span>
+        <section id="mod2" class="locked">
+            <h2 class="font-black text-slate-400 text-xs uppercase mb-4 tracking-widest">Module 2: Daily Life (150 XP)</h2>
+            <div class="lesson-grid">
+                <div onclick="init('food')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-green-500 cursor-pointer">
+                    <span class="text-xl">🥖</span><h3 class="text-sm font-bold mt-1">Boulangerie</h3>
                 </div>
-                <div>
-                    <h2 class="text-2xl font-black text-slate-900">Theng Bophamonyroth</h2>
-                    <p class="text-xs font-bold text-blue-600">PHARMACY STUDENT | A2 LEVEL</p>
+                <div onclick="init('family')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-green-500 cursor-pointer">
+                    <span class="text-xl">👨‍👩‍👧</span><h3 class="text-sm font-bold mt-1">Family</h3>
                 </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm">
-                    <p class="text-xs text-slate-400 font-bold">SCORE MOYEN</p>
-                    <p class="text-2xl font-black">92%</p>
+                <div onclick="init('time')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-green-500 cursor-pointer">
+                    <span class="text-xl">🕒</span><h3 class="text-sm font-bold mt-1">Time/Days</h3>
                 </div>
-                <div class="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm">
-                    <p class="text-xs text-slate-400 font-bold">LEÇONS FINIES</p>
-                    <p class="text-2xl font-black">18/24</p>
+                <div onclick="init('weather')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-green-500 cursor-pointer">
+                    <span class="text-xl">☀️</span><h3 class="text-sm font-bold mt-1">Weather</h3>
                 </div>
-            </div>
-
-            <div class="bg-slate-900 p-6 rounded-[2.5rem] text-white">
-                <h3 class="font-black mb-4 flex items-center gap-2"><i data-lucide="award" class="text-yellow-400 w-5 h-5"></i> Badges Obtenus</h3>
-                <div class="flex gap-4">
-                    <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center" title="Passé Composé Master"><i data-lucide="history" class="w-6 h-6"></i></div>
-                    <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center" title="Pharma Expert"><i data-lucide="pill" class="w-6 h-6"></i></div>
-                    <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center" title="Conditionnel Pro"><i data-lucide="message-square" class="w-6 h-6"></i></div>
+                <div onclick="init('clothes')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-green-500 cursor-pointer">
+                    <span class="text-xl">👕</span><h3 class="text-sm font-bold mt-1">Clothing</h3>
                 </div>
             </div>
         </section>
 
-    </main>
+        <section id="mod3" class="locked">
+            <h2 class="font-black text-slate-400 text-xs uppercase mb-4 tracking-widest">Module 3: Mastery (400 XP)</h2>
+            <div class="lesson-grid">
+                <div onclick="init('office')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-purple-500 cursor-pointer">
+                    <span class="text-xl">💼</span><h3 class="text-sm font-bold mt-1">The Office</h3>
+                </div>
+                <div onclick="init('health')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-purple-500 cursor-pointer">
+                    <span class="text-xl">💊</span><h3 class="text-sm font-bold mt-1">Pharmacy</h3>
+                </div>
+                <div onclick="init('future')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-purple-500 cursor-pointer">
+                    <span class="text-xl">🚀</span><h3 class="text-sm font-bold mt-1">Future Tense</h3>
+                </div>
+                <div onclick="init('emotions')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-purple-500 cursor-pointer">
+                    <span class="text-xl">🎭</span><h3 class="text-sm font-bold mt-1">Emotions</h3>
+                </div>
+                <div onclick="init('travel')" class="bg-white p-4 rounded-2xl shadow-sm border-b-4 border-purple-500 cursor-pointer">
+                    <span class="text-xl">✈️</span><h3 class="text-sm font-bold mt-1">Travel Info</h3>
+                </div>
+            </div>
+        </section>
+    </div>
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-lg border-t border-slate-100 px-10 py-6 flex justify-between items-center z-50">
-        <button onclick="switchTab('home')" id="tab-home" class="nav-btn nav-active"><i data-lucide="book-open" class="w-6 h-6"></i></button>
-        <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-btn text-slate-300"><i data-lucide="pen-tool" class="w-6 h-6"></i></button>
-        <button onclick="switchTab('profile')" id="tab-profile" class="nav-btn text-slate-300"><i data-lucide="user" class="w-6 h-6"></i></button>
-    </nav>
+    <div id="quiz" class="hidden">
+        <div class="bg-white p-8 rounded-3xl shadow-2xl">
+            <div id="intro" class="mb-6">
+                <h2 id="qTitle" class="text-2xl font-black text-blue-600 mb-2"></h2>
+                <p id="qDesc" class="text-slate-500 text-sm italic mb-4"></p>
+                <div class="h-1 bg-slate-100 rounded-full overflow-hidden">
+                    <div id="pBar" class="bg-blue-500 h-full w-0 transition-all"></div>
+                </div>
+            </div>
+            <div id="qBody">
+                <p id="qText" class="text-lg font-bold mb-6 text-center"></p>
+                <div id="ansGrid" class="space-y-3"></div>
+            </div>
+            <button id="next" onclick="nextQ()" class="hidden w-full mt-6 bg-slate-900 text-white py-4 rounded-2xl font-bold">Continue</button>
+        </div>
+    </div>
+</div>
 
-    <script>
-        // Database for the 54 Questions
-        const DB = [
-            { q: "Imparfait: Quand j'___ (être) enfant...", a: ["étais", "suis", "serais"], c: 0 },
-            { q: "Politesse: ___ (pouvoir)-vous m'aider ?", a: ["Peux", "Pouvez", "Pourriez"], c: 2 },
-            { q: "Pharma: Où met-on une 'pommade' ?", a: ["Dans la bouche", "Sur la peau", "Dans l'oreille"], c: 1 },
-            // Logic repeats for 54 items...
-        ];
-        while(DB.length < 54) DB.push({ q: "Question de pratique A2 #" + (DB.length+1), a: ["Choix 1", "Choix Correct", "Choix 3"], c: 1 });
+<script>
+const LESSONS = {
+    greetings: { title: "Greetings", desc: "Basic hello and goodbye.", questions: [
+        {q: "How to say 'Hi' informally?", a: ["Bonjour", "Salut", "Merci"], c: 1},
+        {q: "What is 'Good Evening'?", a: ["Bonsoir", "Bonne nuit", "Au revoir"], c: 0}
+    ]},
+    numbers: { title: "Numbers", desc: "1 to 10.", questions: [
+        {q: "What is 'Seven'?", a: ["Six", "Huit", "Sept"], c: 2},
+        {q: "How to say 'Four'?", a: ["Quatre", "Cinq", "Trois"], c: 0}
+    ]},
+    colors: { title: "Colors", desc: "Basic palette.", questions: [
+        {q: "What is 'Red'?", a: ["Bleu", "Rouge", "Vert"], c: 1},
+        {q: "What is 'Yellow'?", a: ["Jaune", "Noir", "Blanc"], c: 0}
+    ]},
+    etre: { title: "Être (To Be)", desc: "Essential conjugation.", questions: [
+        {q: "Je ___ (I am)", a: ["es", "suis", "est"], c: 1},
+        {q: "Nous ___ (We are)", a: ["sommes", "êtes", "sont"], c: 0}
+    ]},
+    avoir: { title: "Avoir (To Have)", desc: "Possession.", questions: [
+        {q: "J'___ (I have)", a: ["as", "ai", "a"], c: 1},
+        {q: "Ils ___ (They have)", a: ["ont", "avons", "avez"], c: 0}
+    ]},
+    food: { title: "The Boulangerie", desc: "Ordering bread.", questions: [
+        {q: "A Baguette is...", a: ["Un baguette", "Une baguette"], c: 1},
+        {q: "How to ask for the bill?", a: ["L'addition", "Le menu", "Le pain"], c: 0}
+    ]},
+    family: { title: "Family", desc: "Relatives.", questions: [
+        {q: "My Brother is...", a: ["Ma soeur", "Mon frère", "Mon père"], c: 1},
+        {q: "My Mother is...", a: ["Ma mère", "Mon oncle", "Ma tante"], c: 0}
+    ]},
+    time: { title: "Time & Days", desc: "Monday to Sunday.", questions: [
+        {q: "What is 'Monday'?", a: ["Mardi", "Lundi", "Mercredi"], c: 1},
+        {q: "What is 'Saturday'?", a: ["Samedi", "Dimanche", "Vendredi"], c: 0}
+    ]},
+    weather: { title: "Weather", desc: "Sun and Rain.", questions: [
+        {q: "It is hot = Il fait ___", a: ["froid", "chaud", "beau"], c: 1},
+        {q: "It is raining = Il ___", a: ["neige", "pleut", "vent"], c: 1}
+    ]},
+    clothes: { title: "Clothing", desc: "What to wear.", questions: [
+        {q: "A shirt is...", a: ["Une chemise", "Un pantalon", "Une robe"], c: 0},
+        {q: "Shoes are...", a: ["Des gants", "Des chaussures", "Un chapeau"], c: 1}
+    ]},
+    office: { title: "The Office", desc: "Work life.", questions: [
+        {q: "An meeting is...", a: ["Une réunion", "Un travail", "Un bureau"], c: 0},
+        {q: "Computer = L'___", a: ["Ecran", "Ordinateur", "Clavier"], c: 1}
+    ]},
+    health: { title: "The Pharmacy", desc: "Medical terms.", questions: [
+        {q: "A headache = Mal à la ___", a: ["main", "tête", "jambe"], c: 1},
+        {q: "I am sick = Je suis ___", a: ["malade", "fatigué", "heureux"], c: 0}
+    ]},
+    future: { title: "Future Tense", desc: "Things to come.", questions: [
+        {q: "I will eat = Je ___", a: ["mangerai", "mangeais", "mange"], c: 0},
+        {q: "You will go = Tu ___", a: ["iras", "irais", "vas"], c: 0}
+    ]},
+    emotions: { title: "Emotions", desc: "Feelings.", questions: [
+        {q: "I am happy = Je suis ___", a: ["triste", "content", "en colère"], c: 1},
+        {q: "I am tired = Je suis ___", a: ["fatigué", "calme", "stressé"], c: 0}
+    ]},
+    travel: { title: "Travel Info", desc: "Airport/Station.", questions: [
+        {q: "Where is the gate? = Où est la ___?", a: ["porte", "gare", "voie"], c: 0},
+        {q: "A ticket = Un ___", a: ["billet", "voyage", "vol"], c: 0}
+    ]}
+};
 
-        let cur = 0;
-        let sc = 0;
+let xp = parseInt(localStorage.getItem('f_xp') || 0);
+let activeSet = null;
+let curIdx = 0;
 
-        function switchTab(id) {
-            document.querySelectorAll('.content-sec').forEach(s => s.classList.add('hidden'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.add('text-slate-300'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('nav-active'));
+function sync() {
+    document.getElementById('xp').innerText = xp;
+    if(xp >= 150) document.getElementById('mod2').classList.remove('locked');
+    if(xp >= 400) document.getElementById('mod3').classList.remove('locked');
+    if(xp >= 500) document.getElementById('rank').innerText = "Level: B1 Intermediate";
+}
 
-            document.getElementById('sec-' + id).classList.remove('hidden');
-            document.getElementById('tab-' + id).classList.add('nav-active');
-            document.getElementById('tab-' + id).classList.remove('text-slate-300');
-            lucide.createIcons();
-        }
+function init(key) {
+    activeSet = LESSONS[key];
+    curIdx = 0;
+    document.getElementById('home').classList.add('hidden');
+    document.getElementById('quiz').classList.remove('hidden');
+    document.getElementById('qTitle').innerText = activeSet.title;
+    document.getElementById('qDesc').innerText = activeSet.desc;
+    render();
+}
 
-        function startFullQuiz() {
-            document.getElementById('quiz-engine').classList.remove('hidden');
-            cur = 0; sc = 0;
-            renderQ();
-        }
+function render() {
+    const q = activeSet.questions[curIdx];
+    document.getElementById('qText').innerText = q.q;
+    document.getElementById('pBar').style.width = (curIdx / activeSet.questions.length * 100) + "%";
+    document.getElementById('next').classList.add('hidden');
+    
+    const grid = document.getElementById('ansGrid');
+    grid.innerHTML = "";
+    
+    q.a.forEach((opt, i) => {
+        const b = document.createElement('button');
+        b.className = "w-full text-left p-4 rounded-2xl bg-slate-50 border-2 border-slate-100 font-bold transition-all";
+        b.innerText = opt;
+        b.onclick = () => {
+            if(i === q.c) { b.classList.add('correct'); xp += 20; }
+            else { b.classList.add('wrong'); grid.querySelectorAll('button')[q.c].classList.add('correct'); }
+            grid.querySelectorAll('button').forEach(btn => btn.disabled = true);
+            document.getElementById('next').classList.remove('hidden');
+        };
+        grid.appendChild(b);
+    });
+}
 
-        function renderQ() {
-            const q = DB[cur];
-            document.getElementById('q-text').innerText = q.q;
-            const ops = document.getElementById('q-options');
-            ops.innerHTML = '';
-            q.a.forEach((o, i) => {
-                const b = document.createElement('button');
-                b.className = "w-full p-5 text-left border-2 border-slate-50 rounded-2xl font-bold text-sm bg-white shadow-sm active:bg-blue-50 transition-all";
-                b.innerText = o;
-                b.onclick = () => {
-                    if(i === q.c) sc++;
-                    if(cur < 53) { cur++; renderQ(); }
-                    else alert("Score: " + sc + "/54");
-                };
-                ops.appendChild(b);
-            });
-        }
+function nextQ() {
+    curIdx++;
+    if(curIdx < activeSet.questions.length) render();
+    else {
+        localStorage.setItem('f_xp', xp);
+        location.reload();
+    }
+}
 
-        window.onload = () => lucide.createIcons();
-    </script>
+sync();
+</script>
 </body>
 </html>
