@@ -3,165 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edito A1: Comprehensive Study Suite</title>
+    <title>Édito A1: Full Master Suite</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; background-color: #f8fafc; }
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .correct { background-color: #10b981 !important; color: white; }
-        .wrong { background-color: #ef4444 !important; color: white; }
+        .grammar-card { background: #ffffff; border-left: 5px solid #3b82f6; padding: 2rem; border-radius: 1.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); margin-bottom: 2rem; }
+        .correct { background-color: #10b981 !important; color: white; border-color: #059669 !important; }
+        .wrong { background-color: #ef4444 !important; color: white; border-color: #b91c1c !important; }
+        .btn-unit { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 pb-20">
+<body class="pb-20">
 
-<div class="max-w-5xl mx-auto px-4 py-8">
-    <header class="flex flex-col md:flex-row justify-between items-center bg-white p-8 rounded-[2rem] shadow-sm border border-slate-200 mb-8">
+<div class="max-w-6xl mx-auto px-4 py-8">
+    <header class="bg-white p-10 rounded-[3rem] shadow-xl border border-slate-200 mb-10 flex flex-col md:flex-row justify-between items-center">
         <div>
-            <h1 class="text-3xl font-extrabold tracking-tighter text-slate-800">ÉDITO <span class="text-blue-600">FRANÇAIS A1</span></h1>
-            <p class="text-slate-500 font-medium">Digital Course: Units 7, 8, 9 & 10</p>
+            <h1 class="text-5xl font-black tracking-tighter text-slate-900 italic">ÉDITO <span class="text-blue-600 underline decoration-blue-200 underline-offset-8">FRANÇAIS</span></h1>
+            <p class="text-slate-500 font-bold mt-4 uppercase tracking-[0.2em] text-xs">Pharmacy Major • Advanced Study Suite • 60Q Exam</p>
         </div>
-        <div class="mt-4 md:mt-0">
-            <button onclick="window.scrollTo(0, document.getElementById('quizSection').offsetTop)" class="bg-blue-600 text-white px-6 py-3 rounded-2xl font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition">
-                <i class="fas fa-edit mr-2"></i> Take the 60Q Exam
+        <div class="mt-8 md:mt-0">
+            <button onclick="window.scrollTo(0, document.getElementById('quizSection').offsetTop)" class="bg-blue-600 text-white px-10 py-5 rounded-[2rem] font-black shadow-2xl shadow-blue-200 hover:bg-blue-700 hover:-translate-y-1 transition active:scale-95">
+                <i class="fas fa-play mr-2"></i> START 60Q EXAM
             </button>
         </div>
     </header>
 
-    <div class="flex flex-wrap gap-2 mb-8 bg-slate-200/50 p-2 rounded-2xl">
-        <button onclick="openTab('unit7')" class="unit-btn active flex-1 py-3 rounded-xl font-bold text-sm bg-white shadow-sm transition-all">Unit 7: Home</button>
-        <button onclick="openTab('unit8')" class="unit-btn flex-1 py-3 rounded-xl font-bold text-sm text-slate-500 hover:bg-white/50 transition-all">Unit 8: Health</button>
-        <button onclick="openTab('unit9')" class="unit-btn flex-1 py-3 rounded-xl font-bold text-sm text-slate-500 hover:bg-white/50 transition-all">Unit 9: Vacations</button>
-        <button onclick="openTab('unit10')" class="unit-btn flex-1 py-3 rounded-xl font-bold text-sm text-slate-500 hover:bg-white/50 transition-all">Unit 10: Career</button>
-    </div>
+    <nav class="flex flex-wrap gap-3 mb-12 bg-slate-200/40 p-3 rounded-[2rem] backdrop-blur-md sticky top-4 z-50">
+        <button onclick="openTab('unit7')" class="unit-btn active flex-1 py-4 rounded-2xl font-black text-sm bg-white shadow-md text-blue-600">UNIT 7</button>
+        <button onclick="openTab('unit8')" class="unit-btn flex-1 py-4 rounded-2xl font-black text-sm text-slate-500 hover:bg-white/60">UNIT 8</button>
+        <button onclick="openTab('unit9')" class="unit-btn flex-1 py-4 rounded-2xl font-black text-sm text-slate-500 hover:bg-white/60">UNIT 9</button>
+        <button onclick="openTab('unit10')" class="unit-btn flex-1 py-4 rounded-2xl font-black text-sm text-slate-500 hover:bg-white/60">UNIT 10</button>
+    </nav>
 
-    <main id="lessonContainer">
-        
-        <div id="unit7" class="tab-content active space-y-6">
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 text-xl"><i class="fas fa-home"></i></div>
-                    <h2 class="text-2xl font-black">Unit 7: Logement & Vie Citadine</h2>
-                </div>
-                
+    <main id="lessonContent">
+        <div id="unit7" class="tab-content active space-y-8">
+            <div class="grammar-card">
+                <h2 class="text-2xl font-black text-blue-600 mb-6 underline">Grammaire: Localisation et Prépositions</h2>
                 <div class="grid md:grid-cols-2 gap-10">
                     <div>
-                        <h3 class="text-lg font-bold mb-4 text-blue-600 border-b-2 border-blue-100 pb-2">1. Vocabulary: The Apartment</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">You need to master the layout of the <b>Immeuble</b> (building) and the <b>Pièces</b> (rooms):</p>
+                        <h3 class="font-bold text-lg mb-4">1. Articles Contractés (Specifics)</h3>
+                        <p class="text-sm mb-4 italic">Essential for floors and locations:</p>
                         <ul class="space-y-2 text-sm">
-                            <li class="flex justify-between"><b>L'ascenseur:</b> <span>The elevator</span></li>
-                            <li class="flex justify-between"><b>Le rez-de-chaussée:</b> <span>Ground floor</span></li>
-                            <li class="flex justify-between"><b>Le loyer / les charges:</b> <span>Rent / Utilities</span></li>
-                            <li class="flex justify-between border-t pt-2"><b>La salle de bains:</b> <span>Bathroom (with bath)</span></li>
-                            <li class="flex justify-between"><b>Le séjour / salon:</b> <span>Living room</span></li>
+                            <li class="p-2 bg-blue-50 rounded-lg border-l-4 border-blue-400"><b>À + Le = AU</b> (Je suis au premier étage)</li>
+                            <li class="p-2 bg-blue-50 rounded-lg border-l-4 border-blue-400"><b>À + Les = AUX</b> (Je parle aux voisins)</li>
+                            <li class="p-2 bg-slate-50 rounded-lg border-l-4 border-slate-400"><b>De + Le = DU</b> (En face du salon)</li>
+                            <li class="p-2 bg-slate-50 rounded-lg border-l-4 border-slate-400"><b>De + Les = DES</b> (Près des chambres)</li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold mb-4 text-blue-600 border-b-2 border-blue-100 pb-2">2. Communication: Repairs</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">When something breaks (<b>une panne</b>), you must call a professional:</p>
-                        <ul class="space-y-3">
-                            <li class="bg-slate-50 p-3 rounded-xl"><span class="font-bold">Plombier:</span> Used for <i>une fuite d'eau</i> (water leak).</li>
-                            <li class="bg-slate-50 p-3 rounded-xl"><span class="font-bold">Électricien:</span> Used when <i>la lumière ne marche pas</i>.</li>
-                            <li class="bg-slate-50 p-3 rounded-xl"><span class="font-bold">Serrurier:</span> Used for <i>clés perdues</i> (lost keys).</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="unit8" class="tab-content space-y-6">
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center text-green-600 text-xl"><i class="fas fa-heartbeat"></i></div>
-                    <h2 class="text-2xl font-black">Unit 8: Corps, Santé et Sport</h2>
-                </div>
-                <div class="grid md:grid-cols-2 gap-10">
-                    <div>
-                        <h3 class="text-lg font-bold mb-4 text-green-600 border-b-2 border-green-100 pb-2">1. Body & Symptoms</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Essential for a <b>rendez-vous chez le médecin</b>:</p>
-                        <div class="grid grid-cols-2 gap-2 text-sm">
-                            <div class="p-2 border rounded-lg"><b>La tête:</b> Head</div>
-                            <div class="p-2 border rounded-lg"><b>Le dos:</b> Back</div>
-                            <div class="p-2 border rounded-lg"><b>Le ventre:</b> Stomach</div>
-                            <div class="p-2 border rounded-lg"><b>La gorge:</b> Throat</div>
+                        <h3 class="font-bold text-lg mb-4">2. Prépositions de Lieu</h3>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">Sur (On)</div>
+                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">Sous (Under)</div>
+                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">Devant (Front)</div>
+                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">Derrière (Behind)</div>
+                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">À droite de</div>
+                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">À gauche de</div>
                         </div>
-                        <p class="mt-4 text-xs font-bold text-slate-400 uppercase">Key Rule: Avoir mal à...</p>
-                        <p class="text-sm italic">"J'ai mal <b>au</b> ventre (M), <b>à la</b> gorge (F), <b>aux</b> oreilles (Plural)."</p>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold mb-4 text-green-600 border-b-2 border-green-100 pb-2">2. Nutrition & Diet</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Describing food quality and health habits:</p>
-                        <ul class="space-y-2 text-sm">
-                            <li>🍎 <b>Sain(e):</b> Healthy</li>
-                            <li>🍔 <b>Gras:</b> Fatty / Greasy</li>
-                            <li>🧂 <b>Salé:</b> Salty</li>
-                            <li>🍰 <b>Sucré:</b> Sweet</li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="unit9" class="tab-content space-y-6">
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-600 text-xl"><i class="fas fa-umbrella-beach"></i></div>
-                    <h2 class="text-2xl font-black">Unit 9: Vacances et Nature</h2>
-                </div>
+        <div id="unit8" class="tab-content space-y-8">
+            <div class="grammar-card border-green-500">
+                <h2 class="text-2xl font-black text-green-600 mb-6 underline">Grammaire: Possession et Conseil</h2>
                 <div class="grid md:grid-cols-2 gap-10">
                     <div>
-                        <h3 class="text-lg font-bold mb-4 text-orange-600 border-b-2 border-orange-100 pb-2">1. Destinations & Stays</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">French people's vacation habits:</p>
-                        <ul class="space-y-2 text-sm">
-                            <li>🏖️ <b>À la mer:</b> At the seaside (54% popularity)</li>
-                            <li>⛰️ <b>À la montagne:</b> In the mountains</li>
-                            <li>🏕️ <b>Le camping:</b> Under a tent / in a caravan</li>
-                            <li>🏨 <b>L'hôtel:</b> Formal stay</li>
-                        </ul>
+                        <h3 class="font-bold text-lg mb-4">1. Adjectifs Possessifs (Complete)</h3>
+                        <table class="w-full text-sm border-collapse">
+                            <thead><tr class="bg-green-50">
+                                <th class="p-2 border">Owner</th><th class="p-2 border">Masc</th><th class="p-2 border">Fem</th><th class="p-2 border">Plural</th>
+                            </tr></thead>
+                            <tbody class="text-center">
+                                <tr><td class="p-2 border">Je</td><td class="p-2 border font-bold">Mon</td><td class="p-2 border font-bold">Ma</td><td class="p-2 border font-bold">Mes</td></tr>
+                                <tr><td class="p-2 border">Tu</td><td class="p-2 border font-bold">Ton</td><td class="p-2 border font-bold">Ta</td><td class="p-2 border font-bold">Tes</td></tr>
+                                <tr><td class="p-2 border">Il/Elle</td><td class="p-2 border font-bold">Son</td><td class="p-2 border font-bold">Sa</td><td class="p-2 border font-bold">Ses</td></tr>
+                            </tbody>
+                        </table>
+                        <p class="text-[10px] text-red-500 mt-2 font-bold uppercase">Note: If the Fem. word starts with a vowel, use 'Mon' (e.g., Mon oreille).</p>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold mb-4 text-orange-600 border-b-2 border-orange-100 pb-2">2. Animals & Fauna</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Recognizing animals in the <b>campagne</b>:</p>
-                        <ul class="space-y-2 text-sm">
-                            <li>🐄 <b>La vache:</b> Cow</li>
-                            <li>🦆 <b>Le canard:</b> Duck</li>
-                            <li>🐎 <b>Le cheval:</b> Horse</li>
-                            <li>🐰 <b>Le lapin:</b> Rabbit</li>
-                        </ul>
+                        <h3 class="font-bold text-lg mb-4 text-green-700 italic">Pharmacy Special: L'Impératif</h3>
+                        <p class="text-sm mb-3">Used for patient instructions:</p>
+                        <div class="p-4 bg-green-900 text-white rounded-2xl text-xs font-mono">
+                            <p class="mb-2 underline text-green-300">// Give Advice:</p>
+                            <p>Prenez un comprimé ! (Take a pill)</p>
+                            <p>Dormez huit heures ! (Sleep 8 hours)</p>
+                            <p>Ne mangez pas de sucre ! (Don't eat sugar)</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="unit10" class="tab-content space-y-6">
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-600 text-xl"><i class="fas fa-briefcase"></i></div>
-                    <h2 class="text-2xl font-black">Unit 10: Études et Entreprise</h2>
-                </div>
-                <div class="grid md:grid-cols-2 gap-10">
-                    <div>
-                        <h3 class="text-lg font-bold mb-4 text-purple-600 border-b-2 border-purple-100 pb-2">1. University Life</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Infrastructure and student life:</p>
-                        <ul class="space-y-2 text-sm">
-                            <li>🏢 <b>L'amphi:</b> Large lecture hall</li>
-                            <li>📚 <b>La bibliothèque:</b> Library</li>
-                            <li>🍽️ <b>Le Resto U:</b> Student restaurant</li>
-                            <li>🎓 <b>La licence:</b> 3-year degree</li>
-                        </ul>
+        <div id="unit10" class="tab-content space-y-8">
+            <div class="grammar-card border-orange-500">
+                <h2 class="text-2xl font-black text-orange-600 mb-6 underline">Grammaire: Passé Composé (Vacances)</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-5 bg-orange-50 rounded-2xl">
+                        <h4 class="font-bold mb-2">Rule A: AVOIR</h4>
+                        <p class="text-xs mb-4 text-slate-600 italic">Used for 95% of verbs (Manger, Visiter, Dormir...)</p>
+                        <p class="text-sm font-mono font-bold">J'ai mangé<br>Tu as visité<br>Il a dormi</p>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-bold mb-4 text-purple-600 border-b-2 border-purple-100 pb-2">2. Professional World</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Office tasks and careers:</p>
-                        <ul class="space-y-2 text-sm">
-                            <li>💻 <b>Le télétravail:</b> Remote work</li>
-                            <li>🤝 <b>Une réunion:</b> A meeting</li>
-                            <li>📑 <b>Un stage:</b> An internship</li>
-                            <li>📧 <b>Écrire un mail:</b> Write an email</li>
-                        </ul>
+                    <div class="p-5 bg-slate-900 text-white rounded-2xl">
+                        <h4 class="font-bold mb-2 text-orange-400">Rule B: ÊTRE</h4>
+                        <p class="text-xs mb-4 text-slate-400 italic">Movement verbs (La Maison d'Être)</p>
+                        <p class="text-sm font-mono font-bold">Je suis allé(e)<br>Je suis parti(e)<br>Nous sommes arrivés</p>
                     </div>
                 </div>
             </div>
@@ -169,46 +122,47 @@
     </main>
 
     <section id="quizSection" class="mt-20">
-        <div class="bg-slate-900 text-white p-10 rounded-[3rem] shadow-2xl overflow-hidden relative">
-            <div id="quizIntro">
-                <h2 class="text-4xl font-black mb-4">Le Grand Examen <span class="text-blue-500">60Q</span></h2>
-                <p class="text-slate-400 mb-8 max-w-md">Test your mastery of Units 7 through 10. You will see 60 questions covering every detail from the lessons above.</p>
-                <button onclick="startQuiz()" class="bg-blue-600 text-white px-10 py-4 rounded-2xl font-black hover:bg-blue-500 transition">Commencer</button>
+        <div class="bg-slate-900 text-white p-12 rounded-[4rem] shadow-2xl relative overflow-hidden">
+            <div id="quizIntro" class="text-center py-10">
+                <h2 class="text-6xl font-black mb-6">EXAMEN <span class="text-blue-500 italic">60Q</span></h2>
+                <p class="text-slate-400 mb-10 text-lg">Full detail exam covering Units 7 to 10 Grammar and Vocabulary.</p>
+                <button onclick="startQuiz()" class="bg-blue-600 px-16 py-6 rounded-3xl font-black text-2xl hover:bg-blue-500 transition shadow-2xl shadow-blue-900/40 active:scale-95">START NOW</button>
             </div>
 
             <div id="quizBody" class="hidden">
                 <div class="flex justify-between items-center mb-10">
-                    <span id="qCount" class="bg-blue-600 px-4 py-1 rounded-full text-xs font-black uppercase">Question 1/60</span>
-                    <span id="liveScore" class="text-blue-400 font-bold">Score: 0</span>
+                    <span id="qCount" class="bg-blue-600 px-8 py-2 rounded-full text-sm font-black tracking-widest">QUESTION 1/60</span>
+                    <span id="liveScore" class="text-3xl font-bold text-blue-400 italic">0</span>
                 </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full mb-10">
-                    <div id="pBar" class="bg-blue-500 h-full w-0 transition-all"></div>
+                <div class="w-full bg-slate-800 h-3 rounded-full mb-12">
+                    <div id="pBar" class="bg-blue-500 h-full w-0 transition-all duration-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
                 </div>
-                <h3 id="qText" class="text-2xl font-bold mb-10 text-center"></h3>
-                <div id="options" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <h3 id="qText" class="text-3xl md:text-4xl font-black mb-12 text-center leading-tight"></h3>
+                <div id="options" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
                 
-                <div id="feedback" class="hidden mt-10 p-6 bg-slate-800 rounded-2xl border border-slate-700 animate-pulse">
-                    <p id="fact" class="text-sm text-blue-400"></p>
-                    <button onclick="nextQuestion()" class="w-full mt-4 bg-white text-slate-900 py-4 rounded-xl font-bold">Continuer</button>
+                <div id="feedback" class="hidden mt-12 p-10 bg-slate-800 rounded-[3rem] border-2 border-slate-700 animate-pulse">
+                    <p id="fact" class="text-xl text-blue-300 font-bold mb-6 text-center"></p>
+                    <button onclick="nextQuestion()" class="w-full bg-white text-slate-900 py-6 rounded-2xl font-black text-xl hover:bg-blue-50 transition active:scale-95">NEXT <i class="fas fa-arrow-right ml-2"></i></button>
                 </div>
             </div>
 
-            <div id="resultView" class="hidden text-center py-10">
-                <h2 class="text-5xl font-black mb-4">Terminé !</h2>
-                <p id="finalScore" class="text-2xl text-blue-400 font-bold mb-8"></p>
-                <button onclick="location.reload()" class="bg-white text-slate-900 px-10 py-4 rounded-xl font-bold">Back to Lessons</button>
+            <div id="resultView" class="hidden text-center py-20">
+                <div class="text-9xl mb-10">🏆</div>
+                <h2 class="text-6xl font-black mb-6 italic">FINISHED!</h2>
+                <p id="finalScore" class="text-4xl text-blue-400 font-bold mb-12"></p>
+                <button onclick="location.reload()" class="bg-white text-slate-900 px-16 py-6 rounded-3xl font-black text-2xl shadow-xl">STUDY AGAIN</button>
             </div>
         </div>
     </section>
 </div>
 
 <script>
-    // 60 QUESTION DATABASE
+    // FULL 60 QUESTIONS - NO REDUCTION
     const QUESTIONS = [
         // UNIT 7: LOGEMENT (1-15)
+        {q: "Le chat est ____ la table (On).", a: ["Sous", "Dans", "Sur"], c: 2, f: "Sur (On) - Unit 7 Grammar"},
         {q: "Où prépare-t-on le repas ?", a: ["La chambre", "La cuisine", "Le salon"], c: 1, f: "La cuisine (Unit 7)"},
-        {q: "On monte aux étages avec l'___.", a: ["Avion", "Escalier", "Ascenseur"], c: 2, f: "L'ascenseur (Unit 7)"},
-        {q: "La personne qui vit à côté est le ___.", a: ["Vendeur", "Voisin", "Client"], c: 1, f: "Le voisin (Unit 7)"},
+        {q: "Ma chambre est en face ___ salon (De + Le).", a: ["du", "de la", "des"], c: 0, f: "Contracted Article: DU"},
         {q: "Le plombier répare une ___ d'eau.", a: ["Porte", "Fuite", "Fenêtre"], c: 1, f: "Une fuite (Unit 7)"},
         {q: "Un studio a ___ pièce(s).", a: ["Une", "Trois", "Cinq"], c: 0, f: "Une pièce (Unit 7)"},
         {q: "L'___ répare la lumière.", a: ["Électricien", "Serrurier", "Boucher"], c: 0, f: "L'électricien (Unit 7)"},
@@ -220,48 +174,48 @@
         {q: "On se lave dans la salle de ___.", a: ["Séjour", "Sport", "Bains"], c: 2, f: "Salle de bains (Unit 7)"},
         {q: "Le garage est pour garer la ___.", a: ["Vélo", "Voiture", "Salade"], c: 1, f: "La voiture (Unit 7)"},
         {q: "Un immeuble très haut est un ___.", a: ["Gratte-ciel", "Studio", "Cave"], c: 0, f: "Gratte-ciel (Unit 7)"},
-        {q: "Les meubles sont dans le ___.", a: ["Ciel", "Logement", "Moteur"], c: 1, f: "Logement (Unit 7)"},
+        {q: "On monte aux étages avec l'___.", a: ["Avion", "Escalier", "Ascenseur"], c: 2, f: "L'ascenseur (Unit 7)"},
 
-        // UNIT 8: SANTE (16-30)
-        {q: "J'ai mal à la ___ (Head).", a: ["Main", "Tête", "Jambe"], c: 1, f: "La tête (Unit 8)"},
+        // UNIT 8: SANTE & PHARMACY (16-30)
+        {q: "C'est ___ voiture (My - Feminine).", a: ["Mon", "Ma", "Mes"], c: 1, f: "Ma + Feminine word"},
+        {q: "J'ai mal ___ dents (Plural).", a: ["au", "à la", "aux"], c: 2, f: "Aux + Plural Body Part"},
         {q: "Le médecin donne une ___.", a: ["Carte", "Ordonnance", "Pomme"], c: 1, f: "L'ordonnance (Unit 8)"},
         {q: "Le sucre est très ___.", a: ["Gras", "Sucré", "Salé"], c: 1, f: "Sucré (Unit 8)"},
-        {q: "On respire avec les ___.", a: ["Pieds", "Poumons", "Dents"], c: 1, f: "Les poumons (Unit 8)"},
-        {q: "J'ai de la ___ (39°C).", a: ["Fièvre", "Soif", "Faim"], c: 0, f: "La fièvre (Unit 8)"},
+        {q: "___ ce médicament ! (Take! - Command)", a: ["Prends", "Prenez", "Prend"], c: 1, f: "Imperative Mode: Prenez"},
         {q: "Le coeur bat dans la ___.", a: ["Tête", "Main", "Poitrine"], c: 2, f: "La poitrine (Unit 8)"},
         {q: "Le sport est bon pour la ___.", a: ["Télé", "Santé", "Voiture"], c: 1, f: "La santé (Unit 8)"},
-        {q: "Le yaourt est un produit ___.", a: ["Laitier", "Sucré", "Viande"], c: 0, f: "Produit laitier (Unit 8)"},
+        {q: "C'est ___ oreille (Starts with vowel).", a: ["Ma", "Mon", "Mes"], c: 1, f: "Use Mon for vowels even if Feminine"},
         {q: "J'ai mal ___ ventre (M).", a: ["à la", "au", "aux"], c: 1, f: "Masculin (au) (Unit 8)"},
         {q: "On court avec les ___.", a: ["Bras", "Jambes", "Oreilles"], c: 1, f: "Les jambes (Unit 8)"},
         {q: "Le dentiste soigne les ___.", a: ["Yeux", "Dents", "Mains"], c: 1, f: "Les dents (Unit 8)"},
         {q: "Boire de l'___ est sain.", a: ["Vin", "Eau", "Café"], c: 1, f: "L'eau (Unit 8)"},
         {q: "La grippe est une ___.", a: ["Fruit", "Maladie", "Couleur"], c: 1, f: "Maladie (Unit 8)"},
         {q: "Les carottes sont des ___.", a: ["Fruits", "Légumes", "Sucres"], c: 1, f: "Légumes (Unit 8)"},
-        {q: "Le dos est ___ du corps.", a: ["Devant", "Derrière"], c: 1, f: "Derrière (Unit 8)"},
+        {q: "J'ai de la ___ (39°C).", a: ["Fièvre", "Soif", "Faim"], c: 0, f: "La fièvre (Unit 8)"},
 
         // UNIT 9: VACANCES (31-45)
+        {q: "Hier, je ___ allé au camping.", a: ["ai", "suis", "es"], c: 1, f: "Aller uses ÊTRE in Passé Composé"},
         {q: "En été, il fait ___.", a: ["Froid", "Chaud", "Gris"], c: 1, f: "Chaud (Unit 9)"},
-        {q: "Un canard est un ___.", a: ["Poisson", "Oiseau", "Insecte"], c: 1, f: "Oiseau (Unit 9)"},
-        {q: "On dort sous une tente au ___.", a: ["Hôtel", "Camping", "Bureau"], c: 1, f: "Le camping (Unit 9)"},
+        {q: "Nous ___ mangé au restaurant.", a: ["sommes", "avons", "ont"], c: 1, f: "Manger uses AVOIR"},
         {q: "La vache vit à la ___.", a: ["Ville", "Mer", "Campagne"], c: 2, f: "La campagne (Unit 9)"},
         {q: "On nage dans la ___.", a: ["Forêt", "Mer", "Montagne"], c: 1, f: "La mer (Unit 9)"},
         {q: "Le cheval est un ___.", a: ["Animal", "Fruit", "Maison"], c: 0, f: "L'animal (Unit 9)"},
         {q: "Une île est entourée d'___.", a: ["Eau", "Sable", "Feu"], c: 0, f: "L'eau (Unit 9)"},
         {q: "Faire de la ___ en forêt.", a: ["Cuisine", "Randonnée", "Sieste"], c: 1, f: "La randonnée (Unit 9)"},
-        {q: "Le soleil fait ___ la peau.", a: ["Pleurer", "Bronzer", "Dormir"], c: 1, f: "Bronzer (Unit 9)"},
+        {q: "Elle ___ partie en vacances.", a: ["a", "est", "es"], c: 1, f: "Partir uses ÊTRE (House of Être)"},
         {q: "La forêt a beaucoup d'___.", a: ["Avions", "Arbres", "Murs"], c: 1, f: "Les arbres (Unit 9)"},
         {q: "On fait du ski à la ___.", a: ["Montagne", "Plage", "Piscine"], c: 0, f: "La montagne (Unit 9)"},
         {q: "Voyager avec une ___.", a: ["Valise", "Cuisine", "Table"], c: 0, f: "La valise (Unit 9)"},
-        {q: "La Seine est un ___.", a: ["Lac", "Fleuve", "Océan"], c: 1, f: "Le fleuve (Unit 9)"},
+        {q: "Tu ___ visité le musée.", a: ["es", "as", "est"], c: 1, f: "Visiter uses AVOIR"},
         {q: "Le mouton donne de la ___.", a: ["Laine", "Glace", "Fer"], c: 0, f: "La laine (Unit 9)"},
         {q: "Prendre des photos avec un ___.", a: ["Livre", "Appareil", "Stylo"], c: 1, f: "L'appareil photo (Unit 9)"},
 
         // UNIT 10: PRO/UNI (46-60)
-        {q: "Où étudient les étudiants ?", a: ["L'université", "Le garage", "La mer"], c: 0, f: "L'université (Unit 10)"},
-        {q: "On mange au ___ (Uni cafe).", a: ["Resto U", "Gymnase", "Amphi"], c: 0, f: "Le Resto U (Unit 10)"},
+        {q: "Il ___ étudier pour réussir.", a: ["faut", "va", "es"], c: 0, f: "Il faut (Obligation)"},
+        {q: "Demain, je ___ travailler.", a: ["suis", "vais", "as"], c: 1, f: "Futur Proche: Aller + Infinitive"},
         {q: "Écrire un ___ professionnel.", a: ["Mail", "Poème", "Conte"], c: 0, f: "Le mail (Unit 10)"},
         {q: "Une réunion avec des ___.", a: ["Enfants", "Collègues", "Animaux"], c: 1, f: "Les collègues (Unit 10)"},
-        {q: "Travailler chez soi : le ___.", a: ["Télétravail", "Sport", "Voyage"], c: 1, f: "Le télétravail (Unit 10)"},
+        {q: "Travailler chez soi : le ___.", a: ["Télétravail", "Sport", "Voyage"], c: 0, f: "Le télétravail (Unit 10)"},
         {q: "Un stage sert à apprendre un ___.", a: ["Jeu", "Métier", "Sport"], c: 1, f: "Le métier (Unit 10)"},
         {q: "Le diplôme après 3 ans : la ___.", a: ["Licence", "Voiture", "Fête"], c: 0, f: "La licence (Unit 10)"},
         {q: "On emprunte des livres à la ___.", a: ["Bibliothèque", "Banque", "Piscine"], c: 0, f: "La bibliothèque (Unit 10)"},
@@ -270,7 +224,7 @@
         {q: "Le bureau est pour ___.", a: ["Dormir", "Travailler", "Cuisiner"], c: 1, f: "Travailler (Unit 10)"},
         {q: "Gagner un ___ chaque mois.", a: ["Salaire", "Match", "Prix"], c: 0, f: "Le salaire (Unit 10)"},
         {q: "Le CV présente mon ___.", a: ["Parcours", "Famille", "Maison"], c: 0, f: "Le parcours (Unit 10)"},
-        {q: "L'ordinateur est pour le ___.", a: ["Jardin", "Travail", "Garage"], c: 1, f: "Le travail (Unit 10)"},
+        {q: "Où étudient les étudiants ?", a: ["L'université", "Le garage", "La mer"], c: 0, f: "L'université (Unit 10)"},
         {q: "L'amphi est pour les ___.", a: ["Cours", "Sports", "Douches"], c: 0, f: "Les cours (Unit 10)"}
     ];
 
@@ -279,13 +233,12 @@
 
     function openTab(unit) {
         document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-        document.querySelectorAll('.unit-btn').forEach(btn => btn.classList.remove('active', 'bg-white', 'shadow-sm'));
-        document.querySelectorAll('.unit-btn').forEach(btn => btn.classList.add('text-slate-500'));
-        
+        document.querySelectorAll('.unit-btn').forEach(btn => {
+            btn.classList.remove('active', 'bg-white', 'shadow-md', 'text-blue-600');
+            btn.classList.add('text-slate-500');
+        });
         document.getElementById(unit).classList.add('active');
-        const activeBtn = event.currentTarget;
-        activeBtn.classList.add('active', 'bg-white', 'shadow-sm');
-        activeBtn.classList.remove('text-slate-500');
+        event.currentTarget.classList.add('active', 'bg-white', 'shadow-md', 'text-blue-600');
     }
 
     function startQuiz() {
@@ -298,8 +251,7 @@
 
     function renderQuestion() {
         const qData = QUESTIONS[currentQ];
-        document.getElementById('qCount').innerText = `Question ${currentQ + 1}/60`;
-        document.getElementById('liveScore').innerText = `Score: ${score}`;
+        document.getElementById('qCount').innerText = `QUESTION ${currentQ + 1}/60`;
         document.getElementById('pBar').style.width = `${(currentQ / 60) * 100}%`;
         document.getElementById('qText').innerText = qData.q;
         document.getElementById('feedback').classList.add('hidden');
@@ -309,7 +261,7 @@
         
         qData.a.forEach((opt, i) => {
             const btn = document.createElement('button');
-            btn.className = "w-full text-left p-6 rounded-2xl border-2 border-slate-700 bg-slate-800 text-white font-bold transition-all hover:bg-slate-700";
+            btn.className = "w-full text-left p-8 rounded-[2rem] border-2 border-slate-700 bg-slate-800 text-white font-black text-lg transition-all hover:bg-slate-700 active:scale-95";
             btn.innerText = opt;
             btn.onclick = () => {
                 document.querySelectorAll('#options button').forEach(b => b.disabled = true);
@@ -320,6 +272,7 @@
                     btn.classList.add('wrong');
                     document.querySelectorAll('#options button')[qData.c].classList.add('correct');
                 }
+                document.getElementById('liveScore').innerText = score;
                 document.getElementById('fact').innerText = qData.f;
                 document.getElementById('feedback').classList.remove('hidden');
             };
@@ -334,7 +287,7 @@
         } else {
             document.getElementById('quizBody').classList.add('hidden');
             document.getElementById('resultView').classList.remove('hidden');
-            document.getElementById('finalScore').innerText = `Score Final: ${score} / 60`;
+            document.getElementById('finalScore').innerText = `TOTAL: ${score} / 60`;
         }
     }
 </script>
