@@ -550,8 +550,160 @@ body::before {
   #quizSection { padding: 2rem 1.5rem; }
   .q-text { font-size: 1.5rem; }
 }
+
+
+/* ======== AUTH OVERLAY ======== */
+#authOverlay{position:fixed;inset:0;z-index:9999;background:#0a0a10;display:flex;align-items:center;justify-content:center;padding:1rem}
+#authOverlay::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(108,99,255,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(108,99,255,0.06) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.auth-box{background:#16161d;border:1px solid #2a2a38;border-radius:2.5rem;padding:3rem 2.5rem;width:100%;max-width:440px;position:relative;z-index:1;animation:fadeUp .5s ease}
+.auth-logo{text-align:center;margin-bottom:2rem}
+.auth-logo h2{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;font-style:italic;color:var(--text);letter-spacing:-1px}
+.auth-logo h2 span{color:var(--accent)}
+.auth-logo p{color:var(--muted);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;margin-top:.4rem}
+.auth-tabs{display:flex;background:#0e0e12;border-radius:1.5rem;padding:4px;margin-bottom:2rem}
+.auth-tab-btn{flex:1;padding:.75rem;border:none;border-radius:1.2rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .3s;background:transparent;color:var(--muted)}
+.auth-tab-btn.active{background:var(--accent);color:white;box-shadow:0 4px 15px rgba(108,99,255,.4)}
+.auth-form{display:none}
+.auth-form.active{display:block;animation:fadeUp .3s ease}
+.auth-field{margin-bottom:1.2rem}
+.auth-field label{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:.5rem}
+.auth-field input{width:100%;padding:.9rem 1.2rem;background:#0e0e12;border:1px solid #2a2a38;border-radius:1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s}
+.auth-field input:focus{border-color:var(--accent)}
+.auth-field input.err{border-color:var(--accent2) !important}
+.auth-submit{width:100%;padding:1rem;background:var(--accent);color:white;border:none;border-radius:1.2rem;font-family:'DM Sans',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:.5rem}
+.auth-submit:hover{background:#5a52d5;transform:translateY(-2px);box-shadow:0 10px 30px rgba(108,99,255,.4)}
+.auth-msg{padding:.8rem 1.2rem;border-radius:.8rem;font-size:.82rem;font-weight:600;margin-top:1rem;display:none}
+.auth-msg.err{background:rgba(255,107,107,.15);border:1px solid rgba(255,107,107,.4);color:#ff9999;display:block}
+.auth-msg.ok{background:rgba(67,233,123,.15);border:1px solid rgba(67,233,123,.4);color:#7affa0;display:block}
+.auth-divider{text-align:center;color:var(--muted);font-size:.75rem;margin:.8rem 0}
+.auth-link{color:var(--accent);cursor:pointer;font-weight:700}
+.auth-link:hover{text-decoration:underline}
+
+/* ======== USER BAR ======== */
+#userBar{display:none;position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(14,14,18,.97);backdrop-filter:blur(12px);border-bottom:1px solid #2a2a38;padding:.6rem 2rem;justify-content:space-between;align-items:center}
+#userBar.show{display:flex}
+body.has-bar .wrap{padding-top:4rem}
+.ub-left{display:flex;align-items:center;gap:.8rem}
+.u-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#a78bfa);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:white;flex-shrink:0}
+.u-name{font-weight:700;font-size:.88rem}
+.u-role{font-size:.68rem;color:var(--muted)}
+.u-pts{background:rgba(249,202,36,.15);border:1px solid rgba(249,202,36,.3);color:var(--accent4);padding:.25rem .8rem;border-radius:50px;font-size:.72rem;font-weight:700}
+.ub-right{display:flex;gap:.5rem;align-items:center}
+.ub-btn{padding:.38rem .9rem;border-radius:50px;font-size:.75rem;font-weight:700;cursor:pointer;border:1px solid #2a2a38;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;transition:all .2s}
+.ub-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ub-btn.logout:hover{border-color:var(--accent2);color:var(--accent2)}
+
+/* ======== PROFILE PANEL ======== */
+.profile-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+@media(max-width:700px){.profile-cards{grid-template-columns:1fr 1fr}}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:1.5rem;padding:1.3rem;text-align:center}
+.pc-val{font-family:'Fraunces',serif;font-size:2rem;font-weight:900}
+.pc-lbl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:.3rem}
+.hist-item{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:1rem;margin-bottom:.5rem;font-size:.85rem}
+.hist-score{font-weight:700;color:var(--accent4)}
+.hist-date{font-size:.72rem;color:var(--muted)}
+.hist-mode{font-size:.7rem;padding:.2rem .6rem;border-radius:50px;background:rgba(108,99,255,.15);color:var(--accent)}
+.empty-state{text-align:center;padding:3rem;color:var(--muted);font-size:.9rem}
+
+/* ======== LEADERBOARD ======== */
+.lb-row{display:flex;align-items:center;gap:1rem;padding:.9rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:1.2rem;margin-bottom:.5rem;transition:all .2s}
+.lb-row.me{border-color:var(--accent);background:rgba(108,99,255,.08)}
+.lb-row:hover{transform:translateX(3px)}
+.lb-rank{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:900;min-width:32px;color:var(--muted)}
+.lb-rank.r1{color:#f9ca24}
+.lb-rank.r2{color:#c0c0c0}
+.lb-rank.r3{color:#cd7f32}
+.lb-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#a78bfa);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:white;flex-shrink:0}
+.lb-info{flex:1}
+.lb-name{font-weight:700;font-size:.9rem}
+.lb-sub{font-size:.7rem;color:var(--muted)}
+.lb-pts{font-weight:700;color:var(--accent4);font-size:1rem}
+
+/* ======== ADMIN PANEL ======== */
+.admin-user-row{display:flex;align-items:center;gap:1rem;padding:.8rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:1rem;margin-bottom:.5rem}
+.admin-user-row .au-name{flex:1;font-weight:600}
+.admin-user-row .au-pts{color:var(--accent4);font-weight:700;min-width:60px;text-align:right}
+.del-btn{padding:.3rem .8rem;border-radius:50px;background:rgba(255,107,107,.15);border:1px solid rgba(255,107,107,.3);color:var(--accent2);font-size:.72rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.del-btn:hover{background:rgba(255,107,107,.3)}
+.admin-badge{background:rgba(255,107,107,.15);border:1px solid rgba(255,107,107,.3);color:var(--accent2);padding:.2rem .6rem;border-radius:50px;font-size:.65rem;font-weight:700}
+
 </style>
 </head>
+<body>
+<!-- ══════════════ AUTH OVERLAY ══════════════ -->
+<div id="authOverlay">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <h2>ÉDITO <span>FRANÇAIS</span></h2>
+      <p>A1 Master Suite · Pharmacy Major</p>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab-btn active" id="atLogin" onclick="switchAuth('login')">Sign In</button>
+      <button class="auth-tab-btn" id="atReg" onclick="switchAuth('register')">Register</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="loginForm" class="auth-form active">
+      <div class="auth-field">
+        <label><i class="fas fa-user" style="margin-right:5px"></i>Username</label>
+        <input type="text" id="liUser" placeholder="Your username" autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <div class="auth-field">
+        <label><i class="fas fa-lock" style="margin-right:5px"></i>Password</label>
+        <input type="password" id="liPass" placeholder="Your password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="auth-submit" onclick="doLogin()"><i class="fas fa-sign-in-alt" style="margin-right:8px"></i>Sign In</button>
+      <div class="auth-msg" id="loginMsg"></div>
+      <p class="auth-divider">No account? <span class="auth-link" onclick="switchAuth('register')">Register here →</span></p>
+      <p style="text-align:center;font-size:.7rem;color:var(--muted);margin-top:.5rem">
+        Admin login: username <b style="color:var(--accent)">admin</b> / password <b style="color:var(--accent)">admin123</b>
+      </p>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="registerForm" class="auth-form">
+      <div class="auth-field">
+        <label><i class="fas fa-id-card" style="margin-right:5px"></i>Full Name</label>
+        <input type="text" id="rgName" placeholder="e.g. Sophie Martin">
+      </div>
+      <div class="auth-field">
+        <label><i class="fas fa-at" style="margin-right:5px"></i>Username</label>
+        <input type="text" id="rgUser" placeholder="Choose a username (no spaces)">
+      </div>
+      <div class="auth-field">
+        <label><i class="fas fa-lock" style="margin-right:5px"></i>Password</label>
+        <input type="password" id="rgPass" placeholder="Min. 6 characters">
+      </div>
+      <div class="auth-field">
+        <label><i class="fas fa-check-circle" style="margin-right:5px"></i>Confirm Password</label>
+        <input type="password" id="rgPass2" placeholder="Repeat your password" onkeydown="if(event.key==='Enter')doRegister()">
+      </div>
+      <button class="auth-submit" onclick="doRegister()"><i class="fas fa-user-plus" style="margin-right:8px"></i>Create Account</button>
+      <div class="auth-msg" id="registerMsg"></div>
+      <p class="auth-divider">Already registered? <span class="auth-link" onclick="switchAuth('login')">Sign in →</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ USER TOP BAR ══════════════ -->
+<div id="userBar">
+  <div class="ub-left">
+    <div class="u-avatar" id="ubAvatar">?</div>
+    <div>
+      <div class="u-name" id="ubName">Guest</div>
+      <div class="u-role" id="ubRole">Student</div>
+    </div>
+    <div class="u-pts" id="ubPts">⭐ 0 pts</div>
+  </div>
+  <div class="ub-right">
+    <button class="ub-btn" onclick="navToTab('profile')"><i class="fas fa-chart-bar"></i> Stats</button>
+    <button class="ub-btn" onclick="navToTab('leaderboard')"><i class="fas fa-trophy"></i> Ranking</button>
+    <button class="ub-btn" id="adminNavBtn" style="display:none" onclick="navToTab('adminpanel')"><i class="fas fa-shield-alt"></i> Admin</button>
+    <button class="ub-btn logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+</div>
+
+<div class="wrap">
 <body>
 <div class="wrap">
 
@@ -582,6 +734,9 @@ body::before {
   <button class="tab-btn" onclick="openTab('unit12', this)">Unit 12</button>
   <button class="tab-btn" onclick="openTab('flashcards', this)">🃏 Flashcards</button>
   <button class="tab-btn" onclick="openTab('conjugator', this)">⚡ Conjugator</button>
+  <button class="tab-btn" onclick="navToTab('profile')">👤 Profile</button>
+  <button class="tab-btn" onclick="navToTab('leaderboard')">🏆 Ranking</button>
+  <button class="tab-btn" id="adminTabBtn" style="display:none" onclick="navToTab('adminpanel')">🛡️ Admin</button>
 </nav>
 
 <!-- ============ UNIT 7 ============ -->
@@ -1264,9 +1419,98 @@ body::before {
 
 </div><!-- end wrap -->
 
+
+<!-- ══════════════ PROFILE PANEL ══════════════ -->
+<div id="profile" class="panel">
+  <div class="unit-header">
+    <div class="unit-icon">👤</div>
+    <div>
+      <div class="section-title" style="margin:0;font-size:1.5rem">My Profile <span class="badge badge-blue" id="profileBadge">Student</span></div>
+      <div class="unit-desc" id="profileSubtitle">Your learning statistics and history</div>
+    </div>
+  </div>
+
+  <div class="profile-cards">
+    <div class="pc"><div class="pc-val" id="pTotalPts" style="color:var(--accent4)">0</div><div class="pc-lbl">Total Points</div></div>
+    <div class="pc"><div class="pc-val" id="pExamsTaken" style="color:var(--accent)">0</div><div class="pc-lbl">Exams Taken</div></div>
+    <div class="pc"><div class="pc-val" id="pBestScore" style="color:var(--accent3)">—</div><div class="pc-lbl">Best Score</div></div>
+    <div class="pc"><div class="pc-val" id="pAvgScore" style="color:var(--accent2)">—</div><div class="pc-lbl">Average %</div></div>
+  </div>
+
+  <div class="g-card blue">
+    <h3>📊 Score History</h3>
+    <p class="sub">Your last 10 exam results</p>
+    <div id="historyList"><div class="empty-state"><i class="fas fa-clipboard-list" style="font-size:2rem;display:block;margin-bottom:.8rem"></i>No exams taken yet. Start the exam to track your progress!</div></div>
+  </div>
+
+  <div class="g-card green" style="margin-top:1.5rem">
+    <h3>🏅 Achievements</h3>
+    <p class="sub">Unlock badges by completing exams</p>
+    <div id="achievementsList" style="display:flex;flex-wrap:wrap;gap:.8rem;margin-top:.8rem"></div>
+  </div>
+</div>
+
+<!-- ══════════════ LEADERBOARD PANEL ══════════════ -->
+<div id="leaderboard" class="panel">
+  <div class="unit-header">
+    <div class="unit-icon">🏆</div>
+    <div>
+      <div class="section-title" style="margin:0;font-size:1.5rem">Class Ranking <span class="badge badge-yellow">Live</span></div>
+      <div class="unit-desc">Sorted by total points — updated after each exam</div>
+    </div>
+  </div>
+
+  <div class="g-card yellow">
+    <h3>🥇 Top Students</h3>
+    <p class="sub">All registered users ranked by total points</p>
+    <div id="lbList" style="margin-top:1rem"><div class="empty-state">No other users yet. Invite classmates!</div></div>
+  </div>
+</div>
+
+<!-- ══════════════ ADMIN PANEL ══════════════ -->
+<div id="adminpanel" class="panel">
+  <div class="unit-header">
+    <div class="unit-icon">🛡️</div>
+    <div>
+      <div class="section-title" style="margin:0;font-size:1.5rem">Admin Panel <span class="badge badge-red">Admin Only</span></div>
+      <div class="unit-desc">Manage all registered users and their data</div>
+    </div>
+  </div>
+
+  <div class="g-card red">
+    <h3>👥 All Users</h3>
+    <p class="sub">View and manage all registered accounts</p>
+    <div id="adminUserList" style="margin-top:1rem"></div>
+  </div>
+
+  <div class="g-card blue" style="margin-top:1.5rem">
+    <h3>📈 Database Stats</h3>
+    <p class="sub">Overall platform statistics</p>
+    <div class="profile-cards" style="margin-top:1rem">
+      <div class="pc"><div class="pc-val" id="adTotalUsers" style="color:var(--accent)">0</div><div class="pc-lbl">Total Users</div></div>
+      <div class="pc"><div class="pc-val" id="adTotalExams" style="color:var(--accent4)">0</div><div class="pc-lbl">Exams Taken</div></div>
+      <div class="pc"><div class="pc-val" id="adTopScore" style="color:var(--accent3)">—</div><div class="pc-lbl">Top Score</div></div>
+      <div class="pc"><div class="pc-val" id="adAvgScore" style="color:var(--accent2)">—</div><div class="pc-lbl">Platform Avg</div></div>
+    </div>
+  </div>
+
+  <div class="g-card yellow" style="margin-top:1.5rem">
+    <h3>⚠️ Danger Zone</h3>
+    <p class="sub">Irreversible actions — use with care</p>
+    <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap">
+      <button onclick="adminResetAllScores()" style="padding:.7rem 1.5rem;border-radius:1rem;background:rgba(255,107,107,.15);border:1px solid rgba(255,107,107,.3);color:var(--accent2);font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.85rem">🔄 Reset All Scores</button>
+      <button onclick="adminExportData()" style="padding:.7rem 1.5rem;border-radius:1rem;background:rgba(67,233,123,.1);border:1px solid rgba(67,233,123,.3);color:var(--accent3);font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.85rem">📤 Export Data (JSON)</button>
+    </div>
+  </div>
+</div>
+
+</div>
 <script>
 // ========== TAB LOGIC ==========
 function openTab(id, btn) {
+  if (id === 'profile') { setTimeout(renderProfile, 50); }
+  if (id === 'leaderboard') { setTimeout(renderLeaderboard, 50); }
+  if (id === 'adminpanel') { setTimeout(renderAdmin, 50); }
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -1723,6 +1967,9 @@ function showResult() {
   else grade = '💪 Courage ! Relis les leçons et réessaie !';
   
   document.getElementById('gradeMsg').textContent = grade;
+  // Save score to DB
+  const modeLabel = quizMode === 'all' ? 'Full Exam (90Q)' : quizMode === 'grammar' ? 'Grammar (30Q)' : 'Vocabulary (30Q)';
+  saveQuizScore(score, quizQuestions.length, modeLabel);
   setTimeout(() => {
     document.getElementById('resultBarFill').style.width = pct + '%';
   }, 300);
@@ -1737,6 +1984,364 @@ function restartQuiz() {
 
 // Init conjugator on tab open
 document.querySelector('[onclick*="conjugator"]').addEventListener('click', ()=> setTimeout(conjugate, 100));
+
+
+// ╔══════════════════════════════════════════╗
+// ║   DATABASE — localStorage backend        ║
+// ╚══════════════════════════════════════════╝
+
+const DB = {
+  // ── users store ──────────────────────────
+  getUsers() {
+    try { return JSON.parse(localStorage.getItem('ef_users') || '[]'); } catch { return []; }
+  },
+  saveUsers(users) {
+    localStorage.setItem('ef_users', JSON.stringify(users));
+  },
+  findUser(username) {
+    return this.getUsers().find(u => u.username.toLowerCase() === username.toLowerCase());
+  },
+  registerUser(name, username, password) {
+    const users = this.getUsers();
+    if (users.find(u => u.username.toLowerCase() === username.toLowerCase())) return {ok:false, msg:'Username already taken.'};
+    if (username.trim().length < 3) return {ok:false, msg:'Username must be at least 3 characters.'};
+    if (password.length < 6) return {ok:false, msg:'Password must be at least 6 characters.'};
+    const user = {
+      id: 'u_' + Date.now(),
+      name: name.trim(),
+      username: username.trim(),
+      password: this._hash(password),
+      role: 'student',
+      totalPoints: 0,
+      examCount: 0,
+      bestScore: null,
+      scores: [],
+      joinedAt: new Date().toISOString()
+    };
+    users.push(user);
+    this.saveUsers(users);
+    return {ok:true, user};
+  },
+  loginUser(username, password) {
+    // Admin hardcoded
+    if (username === 'admin' && password === 'admin123') {
+      return {ok:true, user:{id:'admin', name:'Administrator', username:'admin', role:'admin', totalPoints:9999, examCount:0, bestScore:null, scores:[], joinedAt:new Date().toISOString()}};
+    }
+    const user = this.findUser(username);
+    if (!user) return {ok:false, msg:'Username not found.'};
+    if (user.password !== this._hash(password)) return {ok:false, msg:'Wrong password.'};
+    return {ok:true, user};
+  },
+  updateUser(updatedUser) {
+    if (updatedUser.id === 'admin') return;
+    const users = this.getUsers();
+    const idx = users.findIndex(u => u.id === updatedUser.id);
+    if (idx !== -1) { users[idx] = updatedUser; this.saveUsers(users); }
+  },
+  deleteUser(userId) {
+    const users = this.getUsers().filter(u => u.id !== userId);
+    this.saveUsers(users);
+  },
+  saveScore(userId, scoreData) {
+    if (userId === 'admin') return;
+    const users = this.getUsers();
+    const idx = users.findIndex(u => u.id === userId);
+    if (idx === -1) return;
+    const u = users[idx];
+    u.scores = u.scores || [];
+    u.scores.unshift(scoreData);
+    if (u.scores.length > 20) u.scores = u.scores.slice(0, 20);
+    u.examCount = (u.examCount || 0) + 1;
+    const pct = Math.round((scoreData.score / scoreData.total) * 100);
+    u.totalPoints = (u.totalPoints || 0) + scoreData.score;
+    if (u.bestScore === null || pct > u.bestScore) u.bestScore = pct;
+    users[idx] = u;
+    this.saveUsers(users);
+    return users[idx];
+  },
+  resetAllScores() {
+    const users = this.getUsers().map(u => ({...u, totalPoints:0, examCount:0, bestScore:null, scores:[]}));
+    this.saveUsers(users);
+  },
+  _hash(str) {
+    // Simple deterministic hash (not cryptographic, but fine for client-side demo)
+    let h = 0;
+    for (let i = 0; i < str.length; i++) { h = (Math.imul(31, h) + str.charCodeAt(i)) | 0; }
+    return 'h' + Math.abs(h).toString(16);
+  }
+};
+
+// ── Session ──────────────────────────────────
+const Session = {
+  get()    { try { return JSON.parse(sessionStorage.getItem('ef_session')); } catch { return null; } },
+  set(u)   { sessionStorage.setItem('ef_session', JSON.stringify(u)); },
+  clear()  { sessionStorage.removeItem('ef_session'); }
+};
+
+// ╔══════════════════════════════════════════╗
+// ║   AUTH LOGIC                             ║
+// ╚══════════════════════════════════════════╝
+let currentUser = null;
+
+function switchAuth(tab) {
+  document.getElementById('loginForm').classList.toggle('active', tab === 'login');
+  document.getElementById('registerForm').classList.toggle('active', tab === 'register');
+  document.getElementById('atLogin').classList.toggle('active', tab === 'login');
+  document.getElementById('atReg').classList.toggle('active', tab === 'register');
+  document.getElementById('loginMsg').className = 'auth-msg';
+  document.getElementById('registerMsg').className = 'auth-msg';
+}
+
+function doLogin() {
+  const username = document.getElementById('liUser').value.trim();
+  const password = document.getElementById('liPass').value;
+  const msg = document.getElementById('loginMsg');
+  if (!username || !password) { showAuthMsg(msg, 'err', 'Please fill in all fields.'); return; }
+  const result = DB.loginUser(username, password);
+  if (!result.ok) { showAuthMsg(msg, 'err', result.msg); return; }
+  loginSuccess(result.user);
+}
+
+function doRegister() {
+  const name = document.getElementById('rgName').value.trim();
+  const username = document.getElementById('rgUser').value.trim();
+  const pass = document.getElementById('rgPass').value;
+  const pass2 = document.getElementById('rgPass2').value;
+  const msg = document.getElementById('registerMsg');
+  if (!name || !username || !pass || !pass2) { showAuthMsg(msg, 'err', 'Please fill in all fields.'); return; }
+  if (pass !== pass2) { showAuthMsg(msg, 'err', 'Passwords do not match.'); return; }
+  if (/\s/.test(username)) { showAuthMsg(msg, 'err', 'Username cannot contain spaces.'); return; }
+  const result = DB.registerUser(name, username, pass);
+  if (!result.ok) { showAuthMsg(msg, 'err', result.msg); return; }
+  showAuthMsg(msg, 'ok', '✅ Account created! Signing you in…');
+  setTimeout(() => loginSuccess(result.user), 800);
+}
+
+function showAuthMsg(el, type, text) {
+  el.textContent = text;
+  el.className = 'auth-msg ' + type;
+}
+
+function loginSuccess(user) {
+  currentUser = user;
+  Session.set(user);
+  document.getElementById('authOverlay').style.display = 'none';
+  document.getElementById('userBar').classList.add('show');
+  document.body.classList.add('has-bar');
+  updateUserBar();
+  if (user.role === 'admin') {
+    document.getElementById('adminNavBtn').style.display = 'inline-flex';
+  }
+}
+
+function doLogout() {
+  currentUser = null;
+  Session.clear();
+  document.getElementById('userBar').classList.remove('show');
+  document.body.classList.remove('has-bar');
+  document.getElementById('authOverlay').style.display = 'flex';
+  document.getElementById('liUser').value = '';
+  document.getElementById('liPass').value = '';
+  document.getElementById('loginMsg').className = 'auth-msg';
+  document.getElementById('adminNavBtn').style.display = 'none';
+  switchAuth('login');
+}
+
+function updateUserBar() {
+  if (!currentUser) return;
+  // Pull fresh data from DB (unless admin)
+  const fresh = currentUser.id === 'admin' ? currentUser : (DB.findUser(currentUser.username) || currentUser);
+  currentUser = fresh;
+  Session.set(fresh);
+  document.getElementById('ubAvatar').textContent = fresh.name.charAt(0).toUpperCase();
+  document.getElementById('ubName').textContent = fresh.name;
+  document.getElementById('ubRole').textContent = fresh.role === 'admin' ? '🛡️ Administrator' : '📚 Student';
+  document.getElementById('ubPts').textContent = '⭐ ' + (fresh.totalPoints || 0) + ' pts';
+}
+
+function navToTab(id) {
+  const btn = document.querySelector(`.tab-btn[onclick*="${id}"]`);
+  openTab(id, btn);
+  document.querySelector('.wrap').scrollIntoView({behavior:'smooth'});
+  if (id === 'profile') renderProfile();
+  if (id === 'leaderboard') renderLeaderboard();
+  if (id === 'adminpanel') renderAdmin();
+}
+
+// ╔══════════════════════════════════════════╗
+// ║   PROFILE PANEL                          ║
+// ╚══════════════════════════════════════════╝
+function renderProfile() {
+  if (!currentUser) return;
+  const u = currentUser.id === 'admin' ? currentUser : (DB.findUser(currentUser.username) || currentUser);
+
+  document.getElementById('profileBadge').textContent = u.role === 'admin' ? '🛡️ Admin' : '📚 Student';
+  document.getElementById('profileSubtitle').textContent = `${u.name} · Joined ${new Date(u.joinedAt).toLocaleDateString()}`;
+  document.getElementById('pTotalPts').textContent = u.totalPoints || 0;
+  document.getElementById('pExamsTaken').textContent = u.examCount || 0;
+  document.getElementById('pBestScore').textContent = u.bestScore !== null ? u.bestScore + '%' : '—';
+
+  const scores = u.scores || [];
+  const avg = scores.length ? Math.round(scores.reduce((a,s) => a + Math.round((s.score/s.total)*100), 0) / scores.length) : null;
+  document.getElementById('pAvgScore').textContent = avg !== null ? avg + '%' : '—';
+
+  // History list
+  const hl = document.getElementById('historyList');
+  if (!scores.length) {
+    hl.innerHTML = '<div class="empty-state"><i class="fas fa-clipboard-list" style="font-size:2rem;display:block;margin-bottom:.8rem"></i>No exams yet. Start the exam below!</div>';
+  } else {
+    hl.innerHTML = scores.slice(0,10).map(s => {
+      const pct = Math.round((s.score/s.total)*100);
+      const col = pct >= 80 ? 'var(--accent3)' : pct >= 60 ? 'var(--accent4)' : 'var(--accent2)';
+      return `<div class="hist-item">
+        <div>
+          <span class="hist-mode">${s.mode}</span>
+          <span style="margin-left:.5rem;font-size:.8rem;color:var(--muted)">${new Date(s.date).toLocaleDateString()}</span>
+        </div>
+        <div class="hist-score" style="color:${col}">${s.score}/${s.total} (${pct}%)</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Achievements
+  const al = document.getElementById('achievementsList');
+  const ach = [];
+  if ((u.examCount||0) >= 1) ach.push({icon:'🎯', label:'First Exam', col:'var(--accent)'});
+  if ((u.examCount||0) >= 5) ach.push({icon:'🔥', label:'5 Exams', col:'var(--accent2)'});
+  if ((u.examCount||0) >= 10) ach.push({icon:'💎', label:'10 Exams', col:'#a78bfa'});
+  if ((u.bestScore||0) >= 70) ach.push({icon:'✅', label:'70%+ Score', col:'var(--accent3)'});
+  if ((u.bestScore||0) >= 90) ach.push({icon:'🌟', label:'90%+ Score', col:'var(--accent4)'});
+  if ((u.totalPoints||0) >= 50) ach.push({icon:'⭐', label:'50 Points', col:'var(--accent4)'});
+  if ((u.totalPoints||0) >= 200) ach.push({icon:'🏆', label:'200 Points', col:'var(--accent4)'});
+
+  if (!ach.length) {
+    al.innerHTML = '<span style="color:var(--muted);font-size:.85rem">Complete exams to unlock achievements!</span>';
+  } else {
+    al.innerHTML = ach.map(a => `<div style="padding:.6rem 1.2rem;border-radius:50px;background:rgba(255,255,255,.05);border:1px solid var(--border);font-size:.82rem;font-weight:700;color:${a.col}">${a.icon} ${a.label}</div>`).join('');
+  }
+}
+
+// ╔══════════════════════════════════════════╗
+// ║   LEADERBOARD                            ║
+// ╚══════════════════════════════════════════╝
+function renderLeaderboard() {
+  const users = DB.getUsers()
+    .filter(u => u.role !== 'admin')
+    .sort((a,b) => (b.totalPoints||0) - (a.totalPoints||0));
+
+  const ll = document.getElementById('lbList');
+  if (!users.length) { ll.innerHTML = '<div class="empty-state">No students registered yet.</div>'; return; }
+
+  const rankClass = {1:'r1',2:'r2',3:'r3'};
+  const rankEmoji = {1:'🥇',2:'🥈',3:'🥉'};
+  ll.innerHTML = users.map((u, i) => {
+    const rank = i + 1;
+    const isMe = currentUser && u.username === currentUser.username;
+    const avg = u.scores && u.scores.length ? Math.round(u.scores.reduce((a,s) => a + Math.round((s.score/s.total)*100), 0) / u.scores.length) : null;
+    return `<div class="lb-row${isMe?' me':''}">
+      <div class="lb-rank ${rankClass[rank]||''}">${rankEmoji[rank]||rank}</div>
+      <div class="lb-av">${u.name.charAt(0).toUpperCase()}</div>
+      <div class="lb-info">
+        <div class="lb-name">${u.name} ${isMe?'<span style="color:var(--accent);font-size:.7rem">(You)</span>':''}</div>
+        <div class="lb-sub">${u.examCount||0} exams · avg ${avg !== null ? avg+'%' : 'n/a'}</div>
+      </div>
+      <div class="lb-pts">⭐ ${u.totalPoints||0}</div>
+    </div>`;
+  }).join('');
+}
+
+// ╔══════════════════════════════════════════╗
+// ║   ADMIN PANEL                            ║
+// ╚══════════════════════════════════════════╝
+function renderAdmin() {
+  if (!currentUser || currentUser.role !== 'admin') return;
+  const users = DB.getUsers();
+  const ul = document.getElementById('adminUserList');
+
+  if (!users.length) { ul.innerHTML = '<div class="empty-state">No users registered yet.</div>'; }
+  else {
+    ul.innerHTML = users.map(u => {
+      const avg = u.scores && u.scores.length ? Math.round(u.scores.reduce((a,s) => a + Math.round((s.score/s.total)*100), 0) / u.scores.length) : null;
+      return `<div class="admin-user-row">
+        <div class="lb-av" style="width:32px;height:32px;font-size:.75rem">${u.name.charAt(0).toUpperCase()}</div>
+        <div class="au-name">
+          <strong>${u.name}</strong>
+          <span style="color:var(--muted);font-size:.75rem;margin-left:.5rem">@${u.username}</span>
+        </div>
+        <div style="font-size:.75rem;color:var(--muted);min-width:80px">${u.examCount||0} exams · avg ${avg!==null?avg+'%':'n/a'}</div>
+        <div class="au-pts">⭐ ${u.totalPoints||0}</div>
+        <button class="del-btn" onclick="adminDeleteUser('${u.id}','${u.name}')"><i class="fas fa-trash"></i> Delete</button>
+      </div>`;
+    }).join('');
+  }
+
+  // Stats
+  const allScores = users.flatMap(u => u.scores || []);
+  const totalExams = allScores.length;
+  const topScore = users.reduce((m,u) => Math.max(m, u.bestScore||0), 0);
+  const platformAvg = totalExams ? Math.round(allScores.reduce((a,s) => a + Math.round((s.score/s.total)*100), 0) / totalExams) : null;
+
+  document.getElementById('adTotalUsers').textContent = users.length;
+  document.getElementById('adTotalExams').textContent = totalExams;
+  document.getElementById('adTopScore').textContent = topScore ? topScore + '%' : '—';
+  document.getElementById('adAvgScore').textContent = platformAvg !== null ? platformAvg + '%' : '—';
+}
+
+function adminDeleteUser(id, name) {
+  if (!confirm(`Delete user "${name}"? This cannot be undone.`)) return;
+  DB.deleteUser(id);
+  renderAdmin();
+}
+
+function adminResetAllScores() {
+  if (!confirm('Reset ALL scores for ALL users? This cannot be undone.')) return;
+  DB.resetAllScores();
+  renderAdmin();
+  alert('All scores reset.');
+}
+
+function adminExportData() {
+  const data = { users: DB.getUsers(), exportedAt: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'edito_database_' + Date.now() + '.json';
+  a.click();
+}
+
+// ╔══════════════════════════════════════════╗
+// ║   QUIZ — SAVE SCORE AFTER FINISH        ║
+// ╚══════════════════════════════════════════╝
+function saveQuizScore(score, total, mode) {
+  if (!currentUser || currentUser.id === 'admin') return;
+  const scoreData = {
+    score, total, mode,
+    date: new Date().toISOString(),
+    pct: Math.round((score/total)*100)
+  };
+  const updated = DB.saveScore(currentUser.id, scoreData);
+  if (updated) {
+    currentUser = updated;
+    Session.set(updated);
+    updateUserBar();
+  }
+}
+
+// ── Auto-restore session on load ─────────────
+(function initApp() {
+  const saved = Session.get();
+  if (saved) {
+    // Re-validate user still exists in DB
+    const fresh = saved.id === 'admin' ? saved : DB.findUser(saved.username);
+    if (fresh) {
+      loginSuccess(fresh);
+      return;
+    }
+  }
+  // Show auth overlay
+  document.getElementById('authOverlay').style.display = 'flex';
+})();
+
 </script>
 </body>
 </html>
