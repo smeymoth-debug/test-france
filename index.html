@@ -1,295 +1,1742 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Édito A1: Full Master Suite</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; background-color: #f8fafc; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .grammar-card { background: #ffffff; border-left: 5px solid #3b82f6; padding: 2rem; border-radius: 1.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); margin-bottom: 2rem; }
-        .correct { background-color: #10b981 !important; color: white; border-color: #059669 !important; }
-        .wrong { background-color: #ef4444 !important; color: white; border-color: #b91c1c !important; }
-        .btn-unit { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Édito Français A1 — Master Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,700;1,900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e12;
+  --surface: #16161d;
+  --card: #1c1c26;
+  --border: #2a2a38;
+  --accent: #6c63ff;
+  --accent2: #ff6b6b;
+  --accent3: #43e97b;
+  --accent4: #f9ca24;
+  --text: #e8e8f0;
+  --muted: #7a7a9a;
+  --correct: #43e97b;
+  --wrong: #ff6b6b;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND GRID */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(108,99,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108,99,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; position: relative; z-index: 1; }
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5rem 3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: 'FR';
+  position: absolute;
+  right: -1rem;
+  top: -2rem;
+  font-family: 'Fraunces', serif;
+  font-size: 10rem;
+  font-weight: 900;
+  color: rgba(108,99,255,0.04);
+  pointer-events: none;
+  user-select: none;
+}
+.logo { font-family: 'Fraunces', serif; }
+.logo h1 { font-size: 3.5rem; font-weight: 900; font-style: italic; color: var(--text); line-height: 1; letter-spacing: -2px; }
+.logo h1 span { color: var(--accent); }
+.logo p { color: var(--muted); font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-top: 0.5rem; }
+
+.cta-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 1px;
+}
+.cta-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(108,99,255,0.4); }
+
+/* STATS BAR */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.stat-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.stat-icon { font-size: 1.5rem; }
+.stat-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+.stat-value { font-size: 1.4rem; font-weight: 700; font-family: 'Fraunces', serif; }
+
+/* TABS NAV */
+.tabs-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  padding: 0.5rem;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 1rem;
+  z-index: 50;
+}
+.tab-btn {
+  flex: 1;
+  min-width: 80px;
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 1.5rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: transparent;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.tab-btn.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 8px 20px rgba(108,99,255,0.4);
+}
+.tab-btn:not(.active):hover { background: var(--border); color: var(--text); }
+
+/* TAB PANELS */
+.panel { display: none; animation: fadeUp 0.4s ease; }
+.panel.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+/* GRAMMAR SECTION TITLE */
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.badge {
+  font-size: 0.7rem;
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  vertical-align: middle;
+}
+.badge-blue { background: rgba(108,99,255,0.2); color: var(--accent); }
+.badge-green { background: rgba(67,233,123,0.15); color: var(--accent3); }
+.badge-red { background: rgba(255,107,107,0.15); color: var(--accent2); }
+.badge-yellow { background: rgba(249,202,36,0.15); color: var(--accent4); }
+
+/* GRAMMAR CARD */
+.g-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.g-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 5px;
+  height: 100%;
+  border-radius: 5px 0 0 5px;
+}
+.g-card.blue::before { background: var(--accent); }
+.g-card.green::before { background: var(--accent3); }
+.g-card.red::before { background: var(--accent2); }
+.g-card.yellow::before { background: var(--accent4); }
+.g-card.purple::before { background: #bf79ff; }
+
+.g-card h3 {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+.g-card p.sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+/* GRID LAYOUTS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+@media(max-width: 650px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* TABLE */
+.g-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+.g-table th {
+  background: rgba(108,99,255,0.15);
+  color: var(--accent);
+  padding: 0.7rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.g-table th:first-child { border-radius: 0.8rem 0 0 0; }
+.g-table th:last-child { border-radius: 0 0.8rem 0 0; }
+.g-table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.g-table tr:last-child td { border-bottom: none; }
+.g-table tr:hover td { background: rgba(255,255,255,0.02); }
+.hl { color: var(--accent4); font-weight: 700; }
+
+/* CHIPS */
+.chip-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+.chip {
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.chip.accent { border-color: var(--accent); color: var(--accent); background: rgba(108,99,255,0.1); }
+.chip.green { border-color: var(--accent3); color: var(--accent3); background: rgba(67,233,123,0.08); }
+.chip.yellow { border-color: var(--accent4); color: var(--accent4); background: rgba(249,202,36,0.08); }
+.chip.red { border-color: var(--accent2); color: var(--accent2); background: rgba(255,107,107,0.08); }
+
+/* EXAMPLE BOX */
+.ex-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  font-size: 0.88rem;
+}
+.ex-box .ex-line { margin-bottom: 0.4rem; color: var(--muted); }
+.ex-box .ex-line strong { color: var(--text); }
+.ex-box .ex-line .hi { color: var(--accent4); font-weight: 700; }
+.ex-box .ex-line .trans { color: var(--muted); font-style: italic; }
+
+/* ALERT BOX */
+.alert {
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+}
+.alert-red { background: rgba(255,107,107,0.1); border: 1px solid rgba(255,107,107,0.3); color: #ff9999; }
+.alert-blue { background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.3); color: #a9a4ff; }
+.alert-green { background: rgba(67,233,123,0.1); border: 1px solid rgba(67,233,123,0.3); color: #7affa0; }
+.alert-yellow { background: rgba(249,202,36,0.1); border: 1px solid rgba(249,202,36,0.3); color: #fcd84a; }
+
+/* FLASHCARD SECTION */
+.flashcard-area { margin-top: 2rem; }
+.flashcard-wrap {
+  perspective: 1000px;
+  height: 220px;
+  margin: 1.5rem 0;
+  cursor: pointer;
+}
+.flashcard {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+.card-front {
+  background: linear-gradient(135deg, rgba(108,99,255,0.2), rgba(108,99,255,0.05));
+  border: 2px solid rgba(108,99,255,0.3);
+}
+.card-back {
+  background: linear-gradient(135deg, rgba(67,233,123,0.2), rgba(67,233,123,0.05));
+  border: 2px solid rgba(67,233,123,0.3);
+  transform: rotateY(180deg);
+}
+.card-face .fr-word { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 900; font-style: italic; color: var(--text); }
+.card-face .hint { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-top: 0.5rem; }
+.card-face .en-word { font-size: 1.6rem; font-weight: 700; color: var(--accent3); }
+.card-face .example { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-top: 0.5rem; }
+.fc-controls { display: flex; gap: 1rem; justify-content: center; }
+.fc-btn {
+  padding: 0.7rem 2rem;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.fc-btn:hover { background: var(--accent); border-color: var(--accent); }
+.fc-counter { text-align: center; font-size: 0.82rem; color: var(--muted); margin-bottom: 0.8rem; }
+
+/* CONJUGATION TOOL */
+.conj-tool { background: var(--card); border: 1px solid var(--border); border-radius: 2rem; padding: 2rem; }
+.verb-input {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.verb-input select, .verb-input input {
+  flex: 1;
+  min-width: 140px;
+  padding: 0.9rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+}
+.verb-input select:focus, .verb-input input:focus { border-color: var(--accent); }
+.go-btn {
+  padding: 0.9rem 1.8rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+.go-btn:hover { background: #5a52d5; }
+.conj-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+}
+.conj-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.2rem;
+  background: var(--surface);
+  border-radius: 0.8rem;
+  border: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+.conj-row .pronoun { color: var(--muted); min-width: 80px; }
+.conj-row .form { font-weight: 700; color: var(--text); }
+
+/* QUIZ */
+#quizSection {
+  margin-top: 3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3rem;
+  padding: 3rem;
+  overflow: hidden;
+  position: relative;
+}
+#quizSection::before {
+  content: 'QUIZ';
+  position: absolute;
+  right: -1rem;
+  bottom: -2rem;
+  font-family: 'Fraunces', serif;
+  font-size: 8rem;
+  font-weight: 900;
+  color: rgba(108,99,255,0.04);
+  pointer-events: none;
+}
+
+.quiz-intro { text-align: center; padding: 3rem 0; }
+.quiz-intro h2 { font-family: 'Fraunces', serif; font-size: 4rem; font-weight: 900; font-style: italic; margin-bottom: 1rem; }
+.quiz-intro p { color: var(--muted); margin-bottom: 2rem; }
+.quiz-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 600px; margin: 0 auto 2.5rem; }
+.mode-card {
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  background: var(--card);
+}
+.mode-card:hover, .mode-card.selected { border-color: var(--accent); background: rgba(108,99,255,0.1); }
+.mode-card .m-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.mode-card .m-title { font-weight: 700; font-size: 0.9rem; }
+.mode-card .m-sub { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+
+.quiz-body { display: none; }
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.q-counter { background: var(--accent); color: white; padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 700; font-size: 0.82rem; letter-spacing: 1px; }
+.live-score { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; color: var(--accent); }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 10px; margin-bottom: 2.5rem; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #a78bfa); transition: width 0.5s ease; width: 0%; }
+
+.q-text {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  line-height: 1.3;
+  color: var(--text);
+}
+.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+@media(max-width: 550px) { .options-grid { grid-template-columns: 1fr; } }
+.opt-btn {
+  padding: 1.2rem 1.8rem;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 1.5rem;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.opt-btn:hover:not(:disabled) { border-color: var(--accent); background: rgba(108,99,255,0.1); transform: translateY(-2px); }
+.opt-btn.correct { background: rgba(67,233,123,0.2) !important; border-color: var(--correct) !important; color: var(--correct) !important; }
+.opt-btn.wrong { background: rgba(255,107,107,0.2) !important; border-color: var(--wrong) !important; color: var(--wrong) !important; }
+
+.feedback-box {
+  display: none;
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+}
+.feedback-box.show { display: block; }
+.feedback-fact { color: var(--accent); font-weight: 700; font-size: 1rem; margin-bottom: 1rem; }
+.next-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 1.2rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+.next-btn:hover { background: #5a52d5; transform: translateY(-2px); }
+
+.result-view { display: none; text-align: center; padding: 4rem 0; }
+.result-trophy { font-size: 6rem; margin-bottom: 1.5rem; display: block; animation: bounce 1s infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.result-title { font-family: 'Fraunces', serif; font-size: 3.5rem; font-weight: 900; font-style: italic; margin-bottom: 1rem; }
+.result-score { font-size: 2rem; color: var(--accent); font-weight: 700; margin-bottom: 2rem; }
+.result-grade { font-size: 1rem; color: var(--muted); margin-bottom: 2rem; }
+.result-bar { width: 100%; max-width: 400px; margin: 0 auto 2rem; background: var(--border); border-radius: 10px; height: 12px; overflow: hidden; }
+.result-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent), var(--accent3)); transition: width 1.5s ease; }
+.restart-btn {
+  padding: 1rem 3rem;
+  background: white;
+  color: #0e0e12;
+  border: none;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.3s;
+}
+.restart-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(255,255,255,0.2); }
+
+/* UNIT HEADER */
+.unit-header {
+  padding: 2rem 2.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.unit-icon { font-size: 2.5rem; }
+.unit-desc { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+  .header { flex-direction: column; text-align: center; padding: 2rem; gap: 1.5rem; }
+  .header::after { font-size: 5rem; }
+  .logo h1 { font-size: 2.5rem; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .quiz-modes { grid-template-columns: 1fr; }
+  .conj-grid { grid-template-columns: 1fr; }
+  #quizSection { padding: 2rem 1.5rem; }
+  .q-text { font-size: 1.5rem; }
+}
+</style>
 </head>
-<body class="pb-20">
+<body>
+<div class="wrap">
 
-<div class="max-w-6xl mx-auto px-4 py-8">
-    <header class="bg-white p-10 rounded-[3rem] shadow-xl border border-slate-200 mb-10 flex flex-col md:flex-row justify-between items-center">
-        <div>
-            <h1 class="text-5xl font-black tracking-tighter text-slate-900 italic">ÉDITO <span class="text-blue-600 underline decoration-blue-200 underline-offset-8">FRANÇAIS</span></h1>
-            <p class="text-slate-500 font-bold mt-4 uppercase tracking-[0.2em] text-xs">Pharmacy Major • Advanced Study Suite • 60Q Exam</p>
-        </div>
-        <div class="mt-8 md:mt-0">
-            <button onclick="window.scrollTo(0, document.getElementById('quizSection').offsetTop)" class="bg-blue-600 text-white px-10 py-5 rounded-[2rem] font-black shadow-2xl shadow-blue-200 hover:bg-blue-700 hover:-translate-y-1 transition active:scale-95">
-                <i class="fas fa-play mr-2"></i> START 60Q EXAM
-            </button>
-        </div>
-    </header>
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <h1>ÉDITO <span>FRANÇAIS</span></h1>
+    <p>Pharmacy Major &bull; A1 Master Suite &bull; Units 7–12</p>
+  </div>
+  <button class="cta-btn" onclick="scrollToQuiz()"><i class="fas fa-bolt" style="margin-right:6px"></i> START EXAM</button>
+</header>
 
-    <nav class="flex flex-wrap gap-3 mb-12 bg-slate-200/40 p-3 rounded-[2rem] backdrop-blur-md sticky top-4 z-50">
-        <button onclick="openTab('unit7')" class="unit-btn active flex-1 py-4 rounded-2xl font-black text-sm bg-white shadow-md text-blue-600">UNIT 7</button>
-        <button onclick="openTab('unit8')" class="unit-btn flex-1 py-4 rounded-2xl font-black text-sm text-slate-500 hover:bg-white/60">UNIT 8</button>
-        <button onclick="openTab('unit9')" class="unit-btn flex-1 py-4 rounded-2xl font-black text-sm text-slate-500 hover:bg-white/60">UNIT 9</button>
-        <button onclick="openTab('unit10')" class="unit-btn flex-1 py-4 rounded-2xl font-black text-sm text-slate-500 hover:bg-white/60">UNIT 10</button>
-    </nav>
-
-    <main id="lessonContent">
-        <div id="unit7" class="tab-content active space-y-8">
-            <div class="grammar-card">
-                <h2 class="text-2xl font-black text-blue-600 mb-6 underline">Grammaire: Localisation et Prépositions</h2>
-                <div class="grid md:grid-cols-2 gap-10">
-                    <div>
-                        <h3 class="font-bold text-lg mb-4">1. Articles Contractés (Specifics)</h3>
-                        <p class="text-sm mb-4 italic">Essential for floors and locations:</p>
-                        <ul class="space-y-2 text-sm">
-                            <li class="p-2 bg-blue-50 rounded-lg border-l-4 border-blue-400"><b>À + Le = AU</b> (Je suis au premier étage)</li>
-                            <li class="p-2 bg-blue-50 rounded-lg border-l-4 border-blue-400"><b>À + Les = AUX</b> (Je parle aux voisins)</li>
-                            <li class="p-2 bg-slate-50 rounded-lg border-l-4 border-slate-400"><b>De + Le = DU</b> (En face du salon)</li>
-                            <li class="p-2 bg-slate-50 rounded-lg border-l-4 border-slate-400"><b>De + Les = DES</b> (Près des chambres)</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-4">2. Prépositions de Lieu</h3>
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">Sur (On)</div>
-                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">Sous (Under)</div>
-                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">Devant (Front)</div>
-                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">Derrière (Behind)</div>
-                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">À droite de</div>
-                            <div class="p-3 border rounded-xl bg-white shadow-sm font-bold">À gauche de</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="unit8" class="tab-content space-y-8">
-            <div class="grammar-card border-green-500">
-                <h2 class="text-2xl font-black text-green-600 mb-6 underline">Grammaire: Possession et Conseil</h2>
-                <div class="grid md:grid-cols-2 gap-10">
-                    <div>
-                        <h3 class="font-bold text-lg mb-4">1. Adjectifs Possessifs (Complete)</h3>
-                        <table class="w-full text-sm border-collapse">
-                            <thead><tr class="bg-green-50">
-                                <th class="p-2 border">Owner</th><th class="p-2 border">Masc</th><th class="p-2 border">Fem</th><th class="p-2 border">Plural</th>
-                            </tr></thead>
-                            <tbody class="text-center">
-                                <tr><td class="p-2 border">Je</td><td class="p-2 border font-bold">Mon</td><td class="p-2 border font-bold">Ma</td><td class="p-2 border font-bold">Mes</td></tr>
-                                <tr><td class="p-2 border">Tu</td><td class="p-2 border font-bold">Ton</td><td class="p-2 border font-bold">Ta</td><td class="p-2 border font-bold">Tes</td></tr>
-                                <tr><td class="p-2 border">Il/Elle</td><td class="p-2 border font-bold">Son</td><td class="p-2 border font-bold">Sa</td><td class="p-2 border font-bold">Ses</td></tr>
-                            </tbody>
-                        </table>
-                        <p class="text-[10px] text-red-500 mt-2 font-bold uppercase">Note: If the Fem. word starts with a vowel, use 'Mon' (e.g., Mon oreille).</p>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-4 text-green-700 italic">Pharmacy Special: L'Impératif</h3>
-                        <p class="text-sm mb-3">Used for patient instructions:</p>
-                        <div class="p-4 bg-green-900 text-white rounded-2xl text-xs font-mono">
-                            <p class="mb-2 underline text-green-300">// Give Advice:</p>
-                            <p>Prenez un comprimé ! (Take a pill)</p>
-                            <p>Dormez huit heures ! (Sleep 8 hours)</p>
-                            <p>Ne mangez pas de sucre ! (Don't eat sugar)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="unit10" class="tab-content space-y-8">
-            <div class="grammar-card border-orange-500">
-                <h2 class="text-2xl font-black text-orange-600 mb-6 underline">Grammaire: Passé Composé (Vacances)</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="p-5 bg-orange-50 rounded-2xl">
-                        <h4 class="font-bold mb-2">Rule A: AVOIR</h4>
-                        <p class="text-xs mb-4 text-slate-600 italic">Used for 95% of verbs (Manger, Visiter, Dormir...)</p>
-                        <p class="text-sm font-mono font-bold">J'ai mangé<br>Tu as visité<br>Il a dormi</p>
-                    </div>
-                    <div class="p-5 bg-slate-900 text-white rounded-2xl">
-                        <h4 class="font-bold mb-2 text-orange-400">Rule B: ÊTRE</h4>
-                        <p class="text-xs mb-4 text-slate-400 italic">Movement verbs (La Maison d'Être)</p>
-                        <p class="text-sm font-mono font-bold">Je suis allé(e)<br>Je suis parti(e)<br>Nous sommes arrivés</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <section id="quizSection" class="mt-20">
-        <div class="bg-slate-900 text-white p-12 rounded-[4rem] shadow-2xl relative overflow-hidden">
-            <div id="quizIntro" class="text-center py-10">
-                <h2 class="text-6xl font-black mb-6">EXAMEN <span class="text-blue-500 italic">60Q</span></h2>
-                <p class="text-slate-400 mb-10 text-lg">Full detail exam covering Units 7 to 10 Grammar and Vocabulary.</p>
-                <button onclick="startQuiz()" class="bg-blue-600 px-16 py-6 rounded-3xl font-black text-2xl hover:bg-blue-500 transition shadow-2xl shadow-blue-900/40 active:scale-95">START NOW</button>
-            </div>
-
-            <div id="quizBody" class="hidden">
-                <div class="flex justify-between items-center mb-10">
-                    <span id="qCount" class="bg-blue-600 px-8 py-2 rounded-full text-sm font-black tracking-widest">QUESTION 1/60</span>
-                    <span id="liveScore" class="text-3xl font-bold text-blue-400 italic">0</span>
-                </div>
-                <div class="w-full bg-slate-800 h-3 rounded-full mb-12">
-                    <div id="pBar" class="bg-blue-500 h-full w-0 transition-all duration-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
-                </div>
-                <h3 id="qText" class="text-3xl md:text-4xl font-black mb-12 text-center leading-tight"></h3>
-                <div id="options" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-                
-                <div id="feedback" class="hidden mt-12 p-10 bg-slate-800 rounded-[3rem] border-2 border-slate-700 animate-pulse">
-                    <p id="fact" class="text-xl text-blue-300 font-bold mb-6 text-center"></p>
-                    <button onclick="nextQuestion()" class="w-full bg-white text-slate-900 py-6 rounded-2xl font-black text-xl hover:bg-blue-50 transition active:scale-95">NEXT <i class="fas fa-arrow-right ml-2"></i></button>
-                </div>
-            </div>
-
-            <div id="resultView" class="hidden text-center py-20">
-                <div class="text-9xl mb-10">🏆</div>
-                <h2 class="text-6xl font-black mb-6 italic">FINISHED!</h2>
-                <p id="finalScore" class="text-4xl text-blue-400 font-bold mb-12"></p>
-                <button onclick="location.reload()" class="bg-white text-slate-900 px-16 py-6 rounded-3xl font-black text-2xl shadow-xl">STUDY AGAIN</button>
-            </div>
-        </div>
-    </section>
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-pill"><div class="stat-icon">📚</div><div><div class="stat-label">Units</div><div class="stat-value" style="color:var(--accent)">6</div></div></div>
+  <div class="stat-pill"><div class="stat-icon">📝</div><div><div class="stat-label">Questions</div><div class="stat-value" style="color:var(--accent4)">90</div></div></div>
+  <div class="stat-pill"><div class="stat-icon">🃏</div><div><div class="stat-label">Flashcards</div><div class="stat-value" style="color:var(--accent3)">48</div></div></div>
+  <div class="stat-pill"><div class="stat-icon">⚡</div><div><div class="stat-label">Conjugator</div><div class="stat-value" style="color:var(--accent2)">Live</div></div></div>
 </div>
 
+<!-- TABS NAV -->
+<nav class="tabs-nav">
+  <button class="tab-btn active" onclick="openTab('unit7', this)">Unit 7</button>
+  <button class="tab-btn" onclick="openTab('unit8', this)">Unit 8</button>
+  <button class="tab-btn" onclick="openTab('unit9', this)">Unit 9</button>
+  <button class="tab-btn" onclick="openTab('unit10', this)">Unit 10</button>
+  <button class="tab-btn" onclick="openTab('unit11', this)">Unit 11</button>
+  <button class="tab-btn" onclick="openTab('unit12', this)">Unit 12</button>
+  <button class="tab-btn" onclick="openTab('flashcards', this)">🃏 Flashcards</button>
+  <button class="tab-btn" onclick="openTab('conjugator', this)">⚡ Conjugator</button>
+</nav>
+
+<!-- ============ UNIT 7 ============ -->
+<div id="unit7" class="panel active">
+  <div class="unit-header">
+    <div class="unit-icon">🏠</div>
+    <div>
+      <div class="section-title" style="margin:0;font-size:1.5rem">Unité 7 — Le Logement <span class="badge badge-blue">Grammar</span></div>
+      <div class="unit-desc">Housing, rooms, location prepositions, floors, tradespeople</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="g-card blue">
+      <h3>Articles Contractés</h3>
+      <p class="sub">Preposition + Definite Article contractions</p>
+      <table class="g-table">
+        <thead><tr><th>Formula</th><th>Result</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>À + Le</td><td class="hl">AU</td><td>Je suis <span class="hl">au</span> premier étage</td></tr>
+          <tr><td>À + Les</td><td class="hl">AUX</td><td>Je parle <span class="hl">aux</span> voisins</td></tr>
+          <tr><td>De + Le</td><td class="hl">DU</td><td>En face <span class="hl">du</span> salon</td></tr>
+          <tr><td>De + Les</td><td class="hl">DES</td><td>Près <span class="hl">des</span> chambres</td></tr>
+          <tr><td>À + La</td><td class="hl">À LA</td><td>Je vais <span class="hl">à la</span> cuisine</td></tr>
+          <tr><td>À + L'</td><td class="hl">À L'</td><td>Je monte <span class="hl">à l'</span>étage</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="g-card green">
+      <h3>Prépositions de Lieu</h3>
+      <p class="sub">Spatial prepositions for describing location</p>
+      <div class="chip-grid">
+        <span class="chip accent">Sur — On</span>
+        <span class="chip accent">Sous — Under</span>
+        <span class="chip green">Devant — In front of</span>
+        <span class="chip green">Derrière — Behind</span>
+        <span class="chip yellow">À droite de — Right of</span>
+        <span class="chip yellow">À gauche de — Left of</span>
+        <span class="chip red">En face de — Facing</span>
+        <span class="chip red">À côté de — Next to</span>
+        <span class="chip accent">Entre — Between</span>
+        <span class="chip green">Au fond de — At the back of</span>
+        <span class="chip yellow">Près de — Near</span>
+        <span class="chip red">Loin de — Far from</span>
+      </div>
+      <div class="ex-box">
+        <div class="ex-line"><span class="hi">Le livre</span> est sur la table. <span class="trans">(The book is on the table)</span></div>
+        <div class="ex-line">Ma chambre est <span class="hi">à côté du</span> salon. <span class="trans">(Next to the living room)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="g-card yellow">
+      <h3>Les Pièces de la Maison</h3>
+      <p class="sub">Rooms & spaces in a home</p>
+      <table class="g-table">
+        <thead><tr><th>French</th><th>English</th><th>Gender</th></tr></thead>
+        <tbody>
+          <tr><td>La chambre</td><td>Bedroom</td><td>Fem.</td></tr>
+          <tr><td>La cuisine</td><td>Kitchen</td><td>Fem.</td></tr>
+          <tr><td>Le salon / séjour</td><td>Living room</td><td>Masc.</td></tr>
+          <tr><td>La salle de bains</td><td>Bathroom</td><td>Fem.</td></tr>
+          <tr><td>Les toilettes</td><td>Toilet / WC</td><td>Fem.pl.</td></tr>
+          <tr><td>Le couloir</td><td>Hallway</td><td>Masc.</td></tr>
+          <tr><td>Le garage</td><td>Garage</td><td>Masc.</td></tr>
+          <tr><td>Le grenier</td><td>Attic</td><td>Masc.</td></tr>
+          <tr><td>La cave</td><td>Cellar / Basement</td><td>Fem.</td></tr>
+          <tr><td>Le balcon</td><td>Balcony</td><td>Masc.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="g-card red">
+      <h3>Les Étages &amp; Corps de Métier</h3>
+      <p class="sub">Floors and home professionals</p>
+      <table class="g-table">
+        <thead><tr><th>Étage</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td>Le rez-de-chaussée (RDC)</td><td>Ground floor</td></tr>
+          <tr><td>Le premier étage</td><td>1st floor</td></tr>
+          <tr><td>Le deuxième étage</td><td>2nd floor</td></tr>
+          <tr><td>Le sous-sol</td><td>Basement</td></tr>
+        </tbody>
+      </table>
+      <div class="chip-grid" style="margin-top:1rem">
+        <span class="chip red">L'électricien 🔌</span>
+        <span class="chip red">Le plombier 🪠</span>
+        <span class="chip red">Le serrurier 🔑</span>
+        <span class="chip red">Le peintre 🎨</span>
+        <span class="chip red">Le chauffagiste 🔥</span>
+      </div>
+      <div class="alert alert-blue" style="margin-top:1rem">
+        <i class="fas fa-lightbulb"></i>
+        <span>Un <strong>loyer</strong> = monthly rent. Une <strong>fuite</strong> = a water leak. Un <strong>ascenseur</strong> = elevator.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-card purple">
+    <h3>Il y a / Il n'y a pas de — Describing what's in a space</h3>
+    <p class="sub">Existence structure — essential for describing an apartment</p>
+    <div class="grid-2">
+      <div class="ex-box">
+        <div class="ex-line"><strong>Affirmative:</strong></div>
+        <div class="ex-line"><span class="hi">Il y a</span> un balcon. <span class="trans">(There is a balcony)</span></div>
+        <div class="ex-line"><span class="hi">Il y a</span> deux chambres. <span class="trans">(There are 2 bedrooms)</span></div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-line"><strong>Negative:</strong></div>
+        <div class="ex-line"><span class="hi">Il n'y a pas de</span> garage. <span class="trans">(There is no garage)</span></div>
+        <div class="ex-line"><span class="hi">Il n'y a pas d'</span>ascenseur. <span class="trans">(No elevator)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ UNIT 8 ============ -->
+<div id="unit8" class="panel">
+  <div class="unit-header">
+    <div class="unit-icon">💊</div>
+    <div>
+      <div class="section-title" style="margin:0;font-size:1.5rem">Unité 8 — Santé &amp; Pharmacie <span class="badge badge-green">Grammar</span></div>
+      <div class="unit-desc">Health, body, possessives, imperative, pharmacy vocabulary</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="g-card green">
+      <h3>Adjectifs Possessifs — Complete Table</h3>
+      <p class="sub">Agreement depends on the NOUN (not the owner)</p>
+      <table class="g-table">
+        <thead><tr><th>Owner</th><th>Masc. Sg.</th><th>Fem. Sg.</th><th>Plural</th></tr></thead>
+        <tbody>
+          <tr><td>Je (I)</td><td class="hl">mon</td><td class="hl">ma</td><td class="hl">mes</td></tr>
+          <tr><td>Tu (You)</td><td class="hl">ton</td><td class="hl">ta</td><td class="hl">tes</td></tr>
+          <tr><td>Il/Elle</td><td class="hl">son</td><td class="hl">sa</td><td class="hl">ses</td></tr>
+          <tr><td>Nous</td><td class="hl">notre</td><td class="hl">notre</td><td class="hl">nos</td></tr>
+          <tr><td>Vous</td><td class="hl">votre</td><td class="hl">votre</td><td class="hl">vos</td></tr>
+          <tr><td>Ils/Elles</td><td class="hl">leur</td><td class="hl">leur</td><td class="hl">leurs</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-red">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span><strong>Exception:</strong> If feminine noun starts with a VOWEL, use <strong>mon/ton/son</strong>: <em>mon oreille, ton amie, son idée</em></span>
+      </div>
+    </div>
+    <div class="g-card red">
+      <h3>L'Impératif — Commands</h3>
+      <p class="sub">Used for patient instructions in pharmacy</p>
+      <table class="g-table">
+        <thead><tr><th>Pronoun</th><th>-ER verb</th><th>-IR verb</th><th>-RE verb</th></tr></thead>
+        <tbody>
+          <tr><td>Tu</td><td class="hl">Mange !</td><td class="hl">Finis !</td><td class="hl">Prends !</td></tr>
+          <tr><td>Nous</td><td class="hl">Mangeons !</td><td class="hl">Finissons !</td><td class="hl">Prenons !</td></tr>
+          <tr><td>Vous</td><td class="hl">Mangez !</td><td class="hl">Finissez !</td><td class="hl">Prenez !</td></tr>
+        </tbody>
+      </table>
+      <div class="ex-box" style="margin-top:1rem">
+        <div class="ex-line"><span class="hi">Prenez</span> ce médicament ! <span class="trans">(Take this medicine!)</span></div>
+        <div class="ex-line"><span class="hi">Ne mangez pas</span> de sucre ! <span class="trans">(Don't eat sugar!)</span></div>
+        <div class="ex-line"><span class="hi">Dormez</span> huit heures ! <span class="trans">(Sleep 8 hours!)</span></div>
+        <div class="ex-line"><span class="hi">Buvez</span> beaucoup d'eau ! <span class="trans">(Drink lots of water!)</span></div>
+      </div>
+      <div class="alert alert-yellow">
+        <i class="fas fa-info-circle"></i>
+        <span>-ER verbs drop the <strong>-s</strong> for Tu form: <em>Parle !</em> (not parles)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="g-card yellow">
+      <h3>Le Corps Humain</h3>
+      <p class="sub">Body parts + avoir mal à construction</p>
+      <table class="g-table">
+        <thead><tr><th>French</th><th>English</th><th>Avoir mal…</th></tr></thead>
+        <tbody>
+          <tr><td>La tête</td><td>Head</td><td class="hl">mal à la tête</td></tr>
+          <tr><td>Le ventre</td><td>Stomach</td><td class="hl">mal au ventre</td></tr>
+          <tr><td>Les dents (f.)</td><td>Teeth</td><td class="hl">mal aux dents</td></tr>
+          <tr><td>La gorge</td><td>Throat</td><td class="hl">mal à la gorge</td></tr>
+          <tr><td>Le dos</td><td>Back</td><td class="hl">mal au dos</td></tr>
+          <tr><td>Les jambes (f.)</td><td>Legs</td><td class="hl">mal aux jambes</td></tr>
+          <tr><td>L'oreille (f.)</td><td>Ear</td><td class="hl">mal à l'oreille</td></tr>
+          <tr><td>Les yeux (m.)</td><td>Eyes</td><td class="hl">mal aux yeux</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="g-card blue">
+      <h3>Vocabulaire Santé</h3>
+      <p class="sub">Essential medical &amp; pharmacy terms</p>
+      <div class="chip-grid">
+        <span class="chip accent">L'ordonnance 📋</span>
+        <span class="chip accent">Le médicament 💊</span>
+        <span class="chip green">La fièvre 🌡️</span>
+        <span class="chip green">La grippe 🤧</span>
+        <span class="chip yellow">Le comprimé 💊</span>
+        <span class="chip yellow">Le sirop 🍶</span>
+        <span class="chip red">La douleur 😣</span>
+        <span class="chip red">Le cabinet médical 🏥</span>
+        <span class="chip accent">La mutuelle 🛡️</span>
+        <span class="chip green">L'allergie 🌿</span>
+        <span class="chip yellow">La tension 💉</span>
+        <span class="chip red">L'infirmier/-ière 👩‍⚕️</span>
+      </div>
+      <div class="ex-box" style="margin-top:1rem">
+        <div class="ex-line">J'ai <span class="hi">de la fièvre</span>. <span class="trans">(I have a fever)</span></div>
+        <div class="ex-line">Je suis <span class="hi">allergique</span> à la pénicilline. <span class="trans">(I'm allergic to penicillin)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ UNIT 9 ============ -->
+<div id="unit9" class="panel">
+  <div class="unit-header">
+    <div class="unit-icon">🏕️</div>
+    <div>
+      <div class="section-title" style="margin:0;font-size:1.5rem">Unité 9 — Vacances &amp; Nature <span class="badge badge-yellow">Grammar</span></div>
+      <div class="unit-desc">Passé composé, holidays, nature, countryside vocabulary</div>
+    </div>
+  </div>
+
+  <div class="g-card blue">
+    <h3>Le Passé Composé — Complete Rules</h3>
+    <p class="sub">Past tense for completed actions</p>
+    <div class="grid-2">
+      <div>
+        <div class="alert alert-blue" style="margin-bottom:1rem"><i class="fas fa-cube"></i> <strong>Formula:</strong> Subject + Auxiliary (AVOIR / ÊTRE) + Past Participle</div>
+        <div class="ex-box">
+          <div class="ex-line"><strong>Past Participle Rules:</strong></div>
+          <div class="ex-line">-ER → <span class="hi">-é</span> : manger → <span class="hi">mangé</span></div>
+          <div class="ex-line">-IR → <span class="hi">-i</span> : finir → <span class="hi">fini</span></div>
+          <div class="ex-line">-RE → <span class="hi">-u</span> : vendre → <span class="hi">vendu</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="ex-box">
+          <div class="ex-line"><strong>AVOIR (most verbs):</strong></div>
+          <div class="ex-line">J'<span class="hi">ai</span> mangé — I ate</div>
+          <div class="ex-line">Tu <span class="hi">as</span> visité — You visited</div>
+          <div class="ex-line">Il <span class="hi">a</span> dormi — He slept</div>
+          <div class="ex-line">Nous <span class="hi">avons</span> vu — We saw</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:1.5rem">
+      <h4 style="font-weight:700;margin-bottom:0.8rem">🏠 La Maison d'Être — 17 verbs using ÊTRE</h4>
+      <div class="chip-grid">
+        <span class="chip green">aller / venir</span>
+        <span class="chip green">partir / arriver</span>
+        <span class="chip green">sortir / rentrer</span>
+        <span class="chip green">naître / mourir</span>
+        <span class="chip green">monter / descendre</span>
+        <span class="chip green">entrer / retourner</span>
+        <span class="chip green">passer / rester</span>
+        <span class="chip green">tomber / devenir</span>
+        <span class="chip green">se lever / se coucher (reflexive)</span>
+      </div>
+      <div class="alert alert-green" style="margin-top:1rem">
+        <i class="fas fa-star"></i>
+        <span>With ÊTRE, past participle <strong>agrees with the subject</strong>: Elle est partie<strong>e</strong>, Ils sont arrivé<strong>s</strong></span>
+      </div>
+      <div class="ex-box" style="margin-top:1rem">
+        <div class="ex-line">Elle <span class="hi">est allée</span> à la mer. <span class="trans">(She went to the sea)</span></div>
+        <div class="ex-line">Ils <span class="hi">sont partis</span> tôt. <span class="trans">(They left early)</span></div>
+        <div class="ex-line">Je <span class="hi">suis resté(e)</span> à l'hôtel. <span class="trans">(I stayed at the hotel)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="g-card yellow">
+      <h3>Vocabulaire — La Nature</h3>
+      <p class="sub">Nature &amp; countryside vocabulary</p>
+      <table class="g-table">
+        <thead><tr><th>French</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td>La montagne</td><td>Mountain</td></tr>
+          <tr><td>La mer / la plage</td><td>Sea / Beach</td></tr>
+          <tr><td>La forêt</td><td>Forest</td></tr>
+          <tr><td>La campagne</td><td>Countryside</td></tr>
+          <tr><td>Le lac</td><td>Lake</td></tr>
+          <tr><td>La rivière / le fleuve</td><td>River</td></tr>
+          <tr><td>L'île (f.)</td><td>Island</td></tr>
+          <tr><td>La colline</td><td>Hill</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="g-card red">
+      <h3>Activités de Vacances</h3>
+      <p class="sub">Holiday activities + animals</p>
+      <div class="chip-grid">
+        <span class="chip red">La randonnée 🥾</span>
+        <span class="chip red">Le camping ⛺</span>
+        <span class="chip red">La baignade 🏊</span>
+        <span class="chip red">Le ski ⛷️</span>
+        <span class="chip red">La pêche 🎣</span>
+        <span class="chip red">Le vélo 🚴</span>
+        <span class="chip accent">La vache 🐄</span>
+        <span class="chip accent">Le cheval 🐴</span>
+        <span class="chip accent">Le mouton 🐑</span>
+        <span class="chip accent">La chèvre 🐐</span>
+      </div>
+      <div class="ex-box" style="margin-top:1rem">
+        <div class="ex-line">Le week-end dernier, je <span class="hi">suis allé(e)</span> faire de la randonnée.</div>
+        <div class="ex-line">Nous <span class="hi">avons visité</span> une ferme avec des vaches et des moutons.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ UNIT 10 ============ -->
+<div id="unit10" class="panel">
+  <div class="unit-header">
+    <div class="unit-icon">🎓</div>
+    <div>
+      <div class="section-title" style="margin:0;font-size:1.5rem">Unité 10 — Études &amp; Travail <span class="badge badge-red">Grammar</span></div>
+      <div class="unit-desc">University, work, futur proche, obligation with il faut</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="g-card blue">
+      <h3>Le Futur Proche</h3>
+      <p class="sub">Near future: ALLER + Infinitive</p>
+      <table class="g-table">
+        <thead><tr><th>Subject</th><th>ALLER</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Je</td><td class="hl">vais</td><td>Je vais travailler</td></tr>
+          <tr><td>Tu</td><td class="hl">vas</td><td>Tu vas étudier</td></tr>
+          <tr><td>Il/Elle</td><td class="hl">va</td><td>Il va partir</td></tr>
+          <tr><td>Nous</td><td class="hl">allons</td><td>Nous allons manger</td></tr>
+          <tr><td>Vous</td><td class="hl">allez</td><td>Vous allez réussir</td></tr>
+          <tr><td>Ils/Elles</td><td class="hl">vont</td><td>Ils vont arriver</td></tr>
+        </tbody>
+      </table>
+      <div class="ex-box" style="margin-top:1rem">
+        <div class="ex-line">Je <span class="hi">vais passer</span> un examen demain. <span class="trans">(I am going to take an exam tomorrow)</span></div>
+        <div class="ex-line"><span class="hi">Negative:</span> Je ne <span class="hi">vais</span> pas <span class="hi">travailler</span> ce soir.</div>
+      </div>
+    </div>
+    <div class="g-card green">
+      <h3>Il faut / Il ne faut pas</h3>
+      <p class="sub">Expressing obligation and prohibition</p>
+      <div class="ex-box">
+        <div class="ex-line"><span class="hi">Il faut</span> + infinitive = one must / it is necessary to</div>
+        <div class="ex-line"><span class="hi">Il faut</span> étudier pour réussir. <span class="trans">(One must study to succeed)</span></div>
+        <div class="ex-line"><span class="hi">Il ne faut pas</span> fumer. <span class="trans">(One must not smoke)</span></div>
+      </div>
+      <div style="margin-top:1.2rem">
+        <h4 style="font-weight:700;margin-bottom:0.8rem;font-size:0.9rem">Degrees of Obligation</h4>
+        <div class="chip-grid">
+          <span class="chip red">Il faut (must)</span>
+          <span class="chip yellow">Devoir (must/have to)</span>
+          <span class="chip green">Pouvoir (can/may)</span>
+          <span class="chip accent">Vouloir (want to)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="g-card yellow">
+      <h3>Le Monde du Travail</h3>
+      <p class="sub">Professional vocabulary</p>
+      <table class="g-table">
+        <thead><tr><th>French</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td>Le CV (curriculum vitae)</td><td>Résumé</td></tr>
+          <tr><td>Le stage</td><td>Internship</td></tr>
+          <tr><td>Le salaire</td><td>Salary</td></tr>
+          <tr><td>Le télétravail</td><td>Remote work</td></tr>
+          <tr><td>Le collègue</td><td>Colleague</td></tr>
+          <tr><td>La réunion</td><td>Meeting</td></tr>
+          <tr><td>Le directeur</td><td>Director / Manager</td></tr>
+          <tr><td>L'entretien (m.)</td><td>Job interview</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="g-card red">
+      <h3>La Vie Universitaire</h3>
+      <p class="sub">University life vocabulary</p>
+      <table class="g-table">
+        <thead><tr><th>French</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td>L'amphi (m.)</td><td>Lecture hall</td></tr>
+          <tr><td>La bibliothèque</td><td>Library</td></tr>
+          <tr><td>La licence</td><td>Bachelor's degree</td></tr>
+          <tr><td>Le master</td><td>Master's degree</td></tr>
+          <tr><td>L'examen (m.)</td><td>Exam</td></tr>
+          <tr><td>Les cours (m.)</td><td>Classes / Courses</td></tr>
+          <tr><td>La bourse</td><td>Scholarship</td></tr>
+          <tr><td>Le campus</td><td>Campus</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ UNIT 11 ============ -->
+<div id="unit11" class="panel">
+  <div class="unit-header">
+    <div class="unit-icon">🛒</div>
+    <div>
+      <div class="section-title" style="margin:0;font-size:1.5rem">Unité 11 — Shopping &amp; Alimentation <span class="badge badge-blue">Grammar</span></div>
+      <div class="unit-desc">Partitive articles, food, quantities, shopping expressions</div>
+    </div>
+  </div>
+
+  <div class="g-card blue">
+    <h3>Les Articles Partitifs</h3>
+    <p class="sub">Expressing an unspecified quantity — "some"</p>
+    <div class="grid-2">
+      <div>
+        <table class="g-table">
+          <thead><tr><th>Type</th><th>Article</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Masc. sing.</td><td class="hl">du</td><td>Je mange <span class="hl">du</span> pain</td></tr>
+            <tr><td>Fem. sing.</td><td class="hl">de la</td><td>Je bois <span class="hl">de la</span> limonade</td></tr>
+            <tr><td>Vowel start</td><td class="hl">de l'</td><td>Je prends <span class="hl">de l'</span>eau</td></tr>
+            <tr><td>Plural</td><td class="hl">des</td><td>Je mange <span class="hl">des</span> légumes</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="alert alert-red">
+          <i class="fas fa-times-circle"></i>
+          <span>After NEGATIVE: du/de la/des → <strong>de / d'</strong><br>Je ne mange <strong>pas de</strong> viande.<br>Il n'y a <strong>pas d'</strong>eau.</span>
+        </div>
+        <div class="ex-box" style="margin-top:0.8rem">
+          <div class="ex-line">Tu veux <span class="hi">du</span> café ? <span class="trans">(Some coffee?)</span></div>
+          <div class="ex-line">Non merci, je ne prends <span class="hi">pas de</span> café. <span class="trans">(No coffee for me)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="g-card green">
+      <h3>Les Quantités</h3>
+      <p class="sub">Quantity expressions (always followed by <em>de</em>)</p>
+      <div class="chip-grid">
+        <span class="chip green">Un kilo de</span>
+        <span class="chip green">Un litre de</span>
+        <span class="chip green">Une bouteille de</span>
+        <span class="chip green">Un paquet de</span>
+        <span class="chip green">Une tranche de</span>
+        <span class="chip green">Beaucoup de</span>
+        <span class="chip green">Un peu de</span>
+        <span class="chip green">Assez de</span>
+        <span class="chip green">Trop de</span>
+        <span class="chip green">Un verre de</span>
+      </div>
+      <div class="ex-box" style="margin-top:1rem">
+        <div class="ex-line">Je voudrais <span class="hi">un kilo de</span> tomates. <span class="trans">(a kilo of tomatoes)</span></div>
+        <div class="ex-line">Il y a <span class="hi">trop de</span> sucre. <span class="trans">(too much sugar)</span></div>
+      </div>
+    </div>
+    <div class="g-card yellow">
+      <h3>Alimentation — Food Groups</h3>
+      <p class="sub">Food categories &amp; common items</p>
+      <table class="g-table">
+        <thead><tr><th>Category</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td>Les légumes</td><td>carotte, tomate, poivron</td></tr>
+          <tr><td>Les fruits</td><td>pomme, banane, fraise</td></tr>
+          <tr><td>La viande</td><td>poulet, bœuf, agneau</td></tr>
+          <tr><td>Les produits laitiers</td><td>fromage, yaourt, lait</td></tr>
+          <tr><td>Les céréales</td><td>pain, riz, pâtes</td></tr>
+          <tr><td>Les boissons</td><td>eau, café, jus de fruit</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ UNIT 12 ============ -->
+<div id="unit12" class="panel">
+  <div class="unit-header">
+    <div class="unit-icon">🗺️</div>
+    <div>
+      <div class="section-title" style="margin:0;font-size:1.5rem">Unité 12 — Transport &amp; Ville <span class="badge badge-red">Grammar</span></div>
+      <div class="unit-desc">City navigation, transport modes, giving directions</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="g-card red">
+      <h3>Donner des Directions</h3>
+      <p class="sub">Giving and asking for directions</p>
+      <div class="chip-grid">
+        <span class="chip red">Tournez à droite</span>
+        <span class="chip red">Tournez à gauche</span>
+        <span class="chip red">Allez tout droit</span>
+        <span class="chip red">Prenez la rue…</span>
+        <span class="chip accent">C'est à 100 mètres</span>
+        <span class="chip accent">C'est en face de</span>
+        <span class="chip accent">C'est au bout de la rue</span>
+        <span class="chip accent">Traversez le pont</span>
+      </div>
+      <div class="ex-box" style="margin-top:1rem">
+        <div class="ex-line"><strong>Asking:</strong> Excusez-moi, <span class="hi">pour aller à</span> la gare ?</div>
+        <div class="ex-line"><strong>Answering:</strong> <span class="hi">Allez tout droit</span>, puis <span class="hi">tournez</span> à droite.</div>
+      </div>
+    </div>
+    <div class="g-card purple">
+      <h3>Les Moyens de Transport</h3>
+      <p class="sub">Transport vocabulary + prepositions</p>
+      <table class="g-table">
+        <thead><tr><th>Transport</th><th>Préposition</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Le train 🚄</td><td class="hl">en train</td><td>Je voyage en train</td></tr>
+          <tr><td>Le métro 🚇</td><td class="hl">en métro</td><td>Je prends le métro</td></tr>
+          <tr><td>Le bus 🚌</td><td class="hl">en bus</td><td>Je vais en bus</td></tr>
+          <tr><td>La voiture 🚗</td><td class="hl">en voiture</td><td>Il vient en voiture</td></tr>
+          <tr><td>Le vélo 🚴</td><td class="hl">à vélo</td><td>Elle va à vélo</td></tr>
+          <tr><td>À pied 🚶</td><td class="hl">à pied</td><td>On marche à pied</td></tr>
+          <tr><td>L'avion ✈️</td><td class="hl">en avion</td><td>Nous partons en avion</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-blue" style="margin-top:1rem">
+        <i class="fas fa-info-circle"></i>
+        <span>Use <strong>en</strong> for enclosed transport, <strong>à</strong> for open/human-powered transport</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-card blue">
+    <h3>Les Lieux de la Ville</h3>
+    <p class="sub">City places vocabulary</p>
+    <div class="grid-3">
+      <div class="chip-grid" style="flex-direction:column">
+        <span class="chip accent">La mairie (Town hall)</span>
+        <span class="chip accent">La gare (Train station)</span>
+        <span class="chip accent">L'aéroport (Airport)</span>
+        <span class="chip accent">La poste (Post office)</span>
+      </div>
+      <div class="chip-grid" style="flex-direction:column">
+        <span class="chip green">Le marché (Market)</span>
+        <span class="chip green">La boulangerie (Bakery)</span>
+        <span class="chip green">La pharmacie (Pharmacy)</span>
+        <span class="chip green">L'épicerie (Grocery)</span>
+      </div>
+      <div class="chip-grid" style="flex-direction:column">
+        <span class="chip yellow">Le musée (Museum)</span>
+        <span class="chip yellow">La piscine (Pool)</span>
+        <span class="chip yellow">Le cinéma (Cinema)</span>
+        <span class="chip yellow">L'hôpital (Hospital)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FLASHCARDS ============ -->
+<div id="flashcards" class="panel">
+  <div class="section-title">🃏 Flashcards <span class="badge badge-blue">Interactive</span></div>
+
+  <div style="display:flex;gap:0.7rem;margin-bottom:1.5rem;flex-wrap:wrap">
+    <button class="fc-btn" onclick="loadDeck('logement')">🏠 Logement</button>
+    <button class="fc-btn" onclick="loadDeck('sante')">💊 Santé</button>
+    <button class="fc-btn" onclick="loadDeck('vacances')">🏕️ Vacances</button>
+    <button class="fc-btn" onclick="loadDeck('travail')">🎓 Travail</button>
+    <button class="fc-btn" onclick="loadDeck('nourriture')">🛒 Nourriture</button>
+    <button class="fc-btn" onclick="loadDeck('ville')">🗺️ Ville</button>
+    <button class="fc-btn" onclick="loadDeck('verbes')">⚡ Verbes Clés</button>
+    <button class="fc-btn" onclick="loadDeck('grammaire')">📖 Grammaire</button>
+  </div>
+
+  <div class="g-card blue">
+    <div class="fc-counter" id="fcCounter">Deck: Logement — Card 1 / 8</div>
+    <div class="flashcard-wrap" onclick="flipCard()">
+      <div class="flashcard" id="flashcard">
+        <div class="card-face card-front">
+          <div class="fr-word" id="fcFront">Le loyer</div>
+          <div class="hint">👆 Click to reveal</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="en-word" id="fcBack">Rent (monthly payment)</div>
+          <div class="example" id="fcEx">Mon loyer est de 500 euros par mois.</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-controls">
+      <button class="fc-btn" onclick="prevCard()"><i class="fas fa-chevron-left"></i> Prev</button>
+      <button class="fc-btn" onclick="flipCard()">🔄 Flip</button>
+      <button class="fc-btn" onclick="nextCard()">Next <i class="fas fa-chevron-right"></i></button>
+      <button class="fc-btn" onclick="shuffleDeck()">🔀 Shuffle</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONJUGATOR ============ -->
+<div id="conjugator" class="panel">
+  <div class="section-title">⚡ Conjugueur <span class="badge badge-green">Live Tool</span></div>
+  <p style="color:var(--muted);margin-bottom:1.5rem;font-size:0.88rem">Select a tense and verb to see full conjugation instantly</p>
+  
+  <div class="conj-tool">
+    <div class="verb-input">
+      <select id="verbSel">
+        <option value="etre">être (to be)</option>
+        <option value="avoir">avoir (to have)</option>
+        <option value="aller">aller (to go)</option>
+        <option value="faire">faire (to do)</option>
+        <option value="prendre">prendre (to take)</option>
+        <option value="venir">venir (to come)</option>
+        <option value="parler">parler (to speak)</option>
+        <option value="manger">manger (to eat)</option>
+        <option value="finir">finir (to finish)</option>
+        <option value="vouloir">vouloir (to want)</option>
+        <option value="pouvoir">pouvoir (can)</option>
+        <option value="devoir">devoir (must)</option>
+        <option value="dormir">dormir (to sleep)</option>
+        <option value="sortir">sortir (to go out)</option>
+        <option value="mettre">mettre (to put)</option>
+      </select>
+      <select id="tenseSel">
+        <option value="present">Présent</option>
+        <option value="passe">Passé Composé</option>
+        <option value="futur">Futur Proche</option>
+        <option value="imperatif">Impératif</option>
+      </select>
+      <button class="go-btn" onclick="conjugate()">Conjugate ⚡</button>
+    </div>
+    <div id="conjResult" class="conj-grid"></div>
+    <div id="conjNote" class="alert alert-blue" style="margin-top:1rem;display:none"></div>
+  </div>
+</div>
+
+<!-- ============ QUIZ SECTION ============ -->
+<section id="quizSection">
+  <div id="quizIntro" class="quiz-intro">
+    <h2>EXAMEN <span style="color:var(--accent)">90Q</span></h2>
+    <p>Complete exam covering Units 7–12 · Grammar &amp; Vocabulary</p>
+    <div class="quiz-modes">
+      <div class="mode-card selected" onclick="selectMode(this,'all')" data-mode="all">
+        <div class="m-icon">📚</div>
+        <div class="m-title">Full Exam</div>
+        <div class="m-sub">All 90 questions</div>
+      </div>
+      <div class="mode-card" onclick="selectMode(this,'grammar')" data-mode="grammar">
+        <div class="m-icon">📖</div>
+        <div class="m-title">Grammar Only</div>
+        <div class="m-sub">30 questions</div>
+      </div>
+      <div class="mode-card" onclick="selectMode(this,'vocab')" data-mode="vocab">
+        <div class="m-icon">🗂️</div>
+        <div class="m-title">Vocabulary</div>
+        <div class="m-sub">30 questions</div>
+      </div>
+    </div>
+    <button class="cta-btn" onclick="startQuiz()" style="font-size:1.1rem;padding:1.2rem 3rem">
+      <i class="fas fa-play" style="margin-right:8px"></i> START NOW
+    </button>
+  </div>
+
+  <div id="quizBody" class="quiz-body">
+    <div class="quiz-header">
+      <span class="q-counter" id="qCount">Q 1 / 90</span>
+      <span class="live-score" id="liveScore">0</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="pBar"></div></div>
+    <p class="q-text" id="qText"></p>
+    <div class="options-grid" id="options"></div>
+    <div class="feedback-box" id="feedback">
+      <p class="feedback-fact" id="fact"></p>
+      <button class="next-btn" onclick="nextQuestion()">NEXT <i class="fas fa-arrow-right" style="margin-left:6px"></i></button>
+    </div>
+  </div>
+
+  <div id="resultView" class="result-view">
+    <span class="result-trophy">🏆</span>
+    <div class="result-title">TERMINÉ !</div>
+    <div class="result-score" id="finalScore"></div>
+    <div class="result-grade" id="gradeMsg"></div>
+    <div class="result-bar"><div class="result-bar-fill" id="resultBarFill"></div></div>
+    <button class="restart-btn" onclick="restartQuiz()">🔄 Study Again</button>
+  </div>
+</section>
+
+</div><!-- end wrap -->
+
 <script>
-    // FULL 60 QUESTIONS - NO REDUCTION
-    const QUESTIONS = [
-        // UNIT 7: LOGEMENT (1-15)
-        {q: "Le chat est ____ la table (On).", a: ["Sous", "Dans", "Sur"], c: 2, f: "Sur (On) - Unit 7 Grammar"},
-        {q: "Où prépare-t-on le repas ?", a: ["La chambre", "La cuisine", "Le salon"], c: 1, f: "La cuisine (Unit 7)"},
-        {q: "Ma chambre est en face ___ salon (De + Le).", a: ["du", "de la", "des"], c: 0, f: "Contracted Article: DU"},
-        {q: "Le plombier répare une ___ d'eau.", a: ["Porte", "Fuite", "Fenêtre"], c: 1, f: "Une fuite (Unit 7)"},
-        {q: "Un studio a ___ pièce(s).", a: ["Une", "Trois", "Cinq"], c: 0, f: "Une pièce (Unit 7)"},
-        {q: "L'___ répare la lumière.", a: ["Électricien", "Serrurier", "Boucher"], c: 0, f: "L'électricien (Unit 7)"},
-        {q: "On dort dans la ___.", a: ["Salle de bain", "Chambre", "Cuisine"], c: 1, f: "La chambre (Unit 7)"},
-        {q: "Le rez-de-chaussée est le niveau ___.", a: ["Zéro", "Un", "Dix"], c: 0, f: "RDC (Unit 7)"},
-        {q: "Le loyer est le prix de l'___.", a: ["Appartement", "Billet", "Livre"], c: 0, f: "Le loyer (Unit 7)"},
-        {q: "J'ai perdu mes clés ! J'appelle le ___.", a: ["Dentiste", "Serrurier", "Pilote"], c: 1, f: "Le serrurier (Unit 7)"},
-        {q: "Un balcon est à l'___ de la maison.", a: ["Intérieur", "Extérieur"], c: 1, f: "Extérieur (Unit 7)"},
-        {q: "On se lave dans la salle de ___.", a: ["Séjour", "Sport", "Bains"], c: 2, f: "Salle de bains (Unit 7)"},
-        {q: "Le garage est pour garer la ___.", a: ["Vélo", "Voiture", "Salade"], c: 1, f: "La voiture (Unit 7)"},
-        {q: "Un immeuble très haut est un ___.", a: ["Gratte-ciel", "Studio", "Cave"], c: 0, f: "Gratte-ciel (Unit 7)"},
-        {q: "On monte aux étages avec l'___.", a: ["Avion", "Escalier", "Ascenseur"], c: 2, f: "L'ascenseur (Unit 7)"},
+// ========== TAB LOGIC ==========
+function openTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
 
-        // UNIT 8: SANTE & PHARMACY (16-30)
-        {q: "C'est ___ voiture (My - Feminine).", a: ["Mon", "Ma", "Mes"], c: 1, f: "Ma + Feminine word"},
-        {q: "J'ai mal ___ dents (Plural).", a: ["au", "à la", "aux"], c: 2, f: "Aux + Plural Body Part"},
-        {q: "Le médecin donne une ___.", a: ["Carte", "Ordonnance", "Pomme"], c: 1, f: "L'ordonnance (Unit 8)"},
-        {q: "Le sucre est très ___.", a: ["Gras", "Sucré", "Salé"], c: 1, f: "Sucré (Unit 8)"},
-        {q: "___ ce médicament ! (Take! - Command)", a: ["Prends", "Prenez", "Prend"], c: 1, f: "Imperative Mode: Prenez"},
-        {q: "Le coeur bat dans la ___.", a: ["Tête", "Main", "Poitrine"], c: 2, f: "La poitrine (Unit 8)"},
-        {q: "Le sport est bon pour la ___.", a: ["Télé", "Santé", "Voiture"], c: 1, f: "La santé (Unit 8)"},
-        {q: "C'est ___ oreille (Starts with vowel).", a: ["Ma", "Mon", "Mes"], c: 1, f: "Use Mon for vowels even if Feminine"},
-        {q: "J'ai mal ___ ventre (M).", a: ["à la", "au", "aux"], c: 1, f: "Masculin (au) (Unit 8)"},
-        {q: "On court avec les ___.", a: ["Bras", "Jambes", "Oreilles"], c: 1, f: "Les jambes (Unit 8)"},
-        {q: "Le dentiste soigne les ___.", a: ["Yeux", "Dents", "Mains"], c: 1, f: "Les dents (Unit 8)"},
-        {q: "Boire de l'___ est sain.", a: ["Vin", "Eau", "Café"], c: 1, f: "L'eau (Unit 8)"},
-        {q: "La grippe est une ___.", a: ["Fruit", "Maladie", "Couleur"], c: 1, f: "Maladie (Unit 8)"},
-        {q: "Les carottes sont des ___.", a: ["Fruits", "Légumes", "Sucres"], c: 1, f: "Légumes (Unit 8)"},
-        {q: "J'ai de la ___ (39°C).", a: ["Fièvre", "Soif", "Faim"], c: 0, f: "La fièvre (Unit 8)"},
+function scrollToQuiz() {
+  document.getElementById('quizSection').scrollIntoView({behavior:'smooth'});
+}
 
-        // UNIT 9: VACANCES (31-45)
-        {q: "Hier, je ___ allé au camping.", a: ["ai", "suis", "es"], c: 1, f: "Aller uses ÊTRE in Passé Composé"},
-        {q: "En été, il fait ___.", a: ["Froid", "Chaud", "Gris"], c: 1, f: "Chaud (Unit 9)"},
-        {q: "Nous ___ mangé au restaurant.", a: ["sommes", "avons", "ont"], c: 1, f: "Manger uses AVOIR"},
-        {q: "La vache vit à la ___.", a: ["Ville", "Mer", "Campagne"], c: 2, f: "La campagne (Unit 9)"},
-        {q: "On nage dans la ___.", a: ["Forêt", "Mer", "Montagne"], c: 1, f: "La mer (Unit 9)"},
-        {q: "Le cheval est un ___.", a: ["Animal", "Fruit", "Maison"], c: 0, f: "L'animal (Unit 9)"},
-        {q: "Une île est entourée d'___.", a: ["Eau", "Sable", "Feu"], c: 0, f: "L'eau (Unit 9)"},
-        {q: "Faire de la ___ en forêt.", a: ["Cuisine", "Randonnée", "Sieste"], c: 1, f: "La randonnée (Unit 9)"},
-        {q: "Elle ___ partie en vacances.", a: ["a", "est", "es"], c: 1, f: "Partir uses ÊTRE (House of Être)"},
-        {q: "La forêt a beaucoup d'___.", a: ["Avions", "Arbres", "Murs"], c: 1, f: "Les arbres (Unit 9)"},
-        {q: "On fait du ski à la ___.", a: ["Montagne", "Plage", "Piscine"], c: 0, f: "La montagne (Unit 9)"},
-        {q: "Voyager avec une ___.", a: ["Valise", "Cuisine", "Table"], c: 0, f: "La valise (Unit 9)"},
-        {q: "Tu ___ visité le musée.", a: ["es", "as", "est"], c: 1, f: "Visiter uses AVOIR"},
-        {q: "Le mouton donne de la ___.", a: ["Laine", "Glace", "Fer"], c: 0, f: "La laine (Unit 9)"},
-        {q: "Prendre des photos avec un ___.", a: ["Livre", "Appareil", "Stylo"], c: 1, f: "L'appareil photo (Unit 9)"},
+// ========== FLASHCARD DATA ==========
+const DECKS = {
+  logement: [
+    {fr:'Le loyer', en:'Rent (monthly)', ex:'Mon loyer est de 500 euros.'},
+    {fr:'Une fuite', en:'A leak', ex:'Il y a une fuite d\'eau dans la cuisine.'},
+    {fr:'Le rez-de-chaussée', en:'Ground floor', ex:'Mon appartement est au rez-de-chaussée.'},
+    {fr:'L\'ascenseur', en:'Elevator / Lift', ex:'L\'ascenseur est en panne.'},
+    {fr:'Le plombier', en:'Plumber', ex:'J\'appelle le plombier pour la fuite.'},
+    {fr:'L\'électricien', en:'Electrician', ex:'L\'électricien répare la lumière.'},
+    {fr:'Le serrurier', en:'Locksmith', ex:'J\'ai perdu mes clés — j\'appelle le serrurier.'},
+    {fr:'En face de', en:'Facing / Opposite', ex:'La pharmacie est en face de la mairie.'}
+  ],
+  sante: [
+    {fr:'L\'ordonnance', en:'Prescription', ex:'Le médecin écrit une ordonnance.'},
+    {fr:'Le comprimé', en:'Tablet / Pill', ex:'Prenez deux comprimés par jour.'},
+    {fr:'La fièvre', en:'Fever', ex:'J\'ai de la fièvre (39°C).'},
+    {fr:'La grippe', en:'The flu', ex:'Je suis malade — j\'ai la grippe.'},
+    {fr:'La douleur', en:'Pain', ex:'J\'ai une douleur au ventre.'},
+    {fr:'L\'allergie', en:'Allergy', ex:'Je suis allergique aux arachides.'},
+    {fr:'Le sirop', en:'Syrup (medicine)', ex:'Ce sirop est pour la toux.'},
+    {fr:'La tension', en:'Blood pressure', ex:'Le médecin mesure ma tension.'}
+  ],
+  vacances: [
+    {fr:'La randonnée', en:'Hiking', ex:'Nous faisons de la randonnée en forêt.'},
+    {fr:'La valise', en:'Suitcase', ex:'J\'ai fait ma valise hier soir.'},
+    {fr:'L\'hébergement', en:'Accommodation', ex:'Quel hébergement avez-vous réservé ?'},
+    {fr:'La camping', en:'Camping', ex:'Je fais du camping à la montagne.'},
+    {fr:'L\'appareil photo', en:'Camera', ex:'Je prends des photos avec mon appareil photo.'},
+    {fr:'La baignade', en:'Swimming (in nature)', ex:'La baignade est interdite ici.'},
+    {fr:'Le patrimoine', en:'Heritage', ex:'Paris a un riche patrimoine historique.'},
+    {fr:'Le séjour', en:'Stay / Trip', ex:'Mon séjour en France est merveilleux.'}
+  ],
+  travail: [
+    {fr:'Le stage', en:'Internship', ex:'Je cherche un stage en pharmacie.'},
+    {fr:'Le salaire', en:'Salary', ex:'Mon salaire est de 2000 euros par mois.'},
+    {fr:'L\'entretien', en:'Job interview', ex:'J\'ai un entretien demain matin.'},
+    {fr:'Le télétravail', en:'Remote work', ex:'Je fais du télétravail trois jours par semaine.'},
+    {fr:'La réunion', en:'Meeting', ex:'La réunion commence à 9 heures.'},
+    {fr:'Le CV', en:'Résumé / CV', ex:'J\'envoie mon CV à l\'entreprise.'},
+    {fr:'La licence', en:'Bachelor\'s degree', ex:'J\'obtiens ma licence en juin.'},
+    {fr:'L\'amphi', en:'Lecture hall', ex:'Le cours a lieu dans l\'amphi A.'}
+  ],
+  nourriture: [
+    {fr:'Les légumes', en:'Vegetables', ex:'Je mange beaucoup de légumes.'},
+    {fr:'La viande', en:'Meat', ex:'Je ne mange pas de viande rouge.'},
+    {fr:'La boulangerie', en:'Bakery', ex:'Je vais à la boulangerie chaque matin.'},
+    {fr:'Le marché', en:'Market (food)', ex:'Les légumes au marché sont frais.'},
+    {fr:'La recette', en:'Recipe', ex:'Quelle est la recette de ce plat ?'},
+    {fr:'Les produits laitiers', en:'Dairy products', ex:'Le fromage est un produit laitier.'},
+    {fr:'Le repas', en:'Meal', ex:'Le repas en famille est important.'},
+    {fr:'Les céréales', en:'Cereals / Grains', ex:'Le pain est fait de céréales.'}
+  ],
+  ville: [
+    {fr:'La mairie', en:'Town hall', ex:'La mairie est fermée le dimanche.'},
+    {fr:'La gare', en:'Train station', ex:'Le train part de la gare à 8h.'},
+    {fr:'Le carrefour', en:'Crossroads / Intersection', ex:'Tournez à gauche au carrefour.'},
+    {fr:'Le quartier', en:'Neighbourhood', ex:'J\'habite dans un beau quartier.'},
+    {fr:'La piscine municipale', en:'Public swimming pool', ex:'La piscine municipale ouvre à 7h.'},
+    {fr:'L\'arrêt de bus', en:'Bus stop', ex:'L\'arrêt de bus est en face.'},
+    {fr:'La rue piétonne', en:'Pedestrian street', ex:'La rue piétonne est animée le week-end.'},
+    {fr:'Le syndicat d\'initiative', en:'Tourist office', ex:'Le syndicat d\'initiative donne des cartes.'}
+  ],
+  verbes: [
+    {fr:'Prendre', en:'To take', ex:'Je prends le bus tous les jours.'},
+    {fr:'Partir', en:'To leave / depart', ex:'Nous partons en vacances demain.'},
+    {fr:'Revenir', en:'To come back', ex:'Elle revient de Paris lundi.'},
+    {fr:'S\'installer', en:'To settle / move in', ex:'Il s\'installe dans un nouveau appartement.'},
+    {fr:'Réserver', en:'To book / reserve', ex:'J\'ai réservé un hôtel pour le week-end.'},
+    {fr:'Chercher', en:'To look for', ex:'Je cherche un stage en pharmacie.'},
+    {fr:'Présenter', en:'To present / introduce', ex:'Il présente son CV au directeur.'},
+    {fr:'Guérir', en:'To heal / cure', ex:'Le médecin aide le patient à guérir.'}
+  ],
+  grammaire: [
+    {fr:'AU (À + Le)', en:'Contracted article', ex:'Je vais au supermarché.'},
+    {fr:'DU (De + Le)', en:'Contracted article', ex:'Je viens du cinéma.'},
+    {fr:'Mon / Ma / Mes', en:'My (possessive)', ex:'Mon père, ma mère, mes parents.'},
+    {fr:'Il faut + infinitif', en:'One must + verb', ex:'Il faut étudier pour réussir.'},
+    {fr:'Être allé(e)', en:'Went (passé composé)', ex:'Je suis allé au marché hier.'},
+    {fr:'Avoir mangé', en:'Ate (passé composé)', ex:'J\'ai mangé une pomme ce matin.'},
+    {fr:'Aller + infinitif', en:'Going to + verb (futur proche)', ex:'Je vais travailler demain.'},
+    {fr:'Du / de la / de l\'', en:'Partitive articles', ex:'Je bois du café et de l\'eau.'}
+  ]
+};
 
-        // UNIT 10: PRO/UNI (46-60)
-        {q: "Il ___ étudier pour réussir.", a: ["faut", "va", "es"], c: 0, f: "Il faut (Obligation)"},
-        {q: "Demain, je ___ travailler.", a: ["suis", "vais", "as"], c: 1, f: "Futur Proche: Aller + Infinitive"},
-        {q: "Écrire un ___ professionnel.", a: ["Mail", "Poème", "Conte"], c: 0, f: "Le mail (Unit 10)"},
-        {q: "Une réunion avec des ___.", a: ["Enfants", "Collègues", "Animaux"], c: 1, f: "Les collègues (Unit 10)"},
-        {q: "Travailler chez soi : le ___.", a: ["Télétravail", "Sport", "Voyage"], c: 0, f: "Le télétravail (Unit 10)"},
-        {q: "Un stage sert à apprendre un ___.", a: ["Jeu", "Métier", "Sport"], c: 1, f: "Le métier (Unit 10)"},
-        {q: "Le diplôme après 3 ans : la ___.", a: ["Licence", "Voiture", "Fête"], c: 0, f: "La licence (Unit 10)"},
-        {q: "On emprunte des livres à la ___.", a: ["Bibliothèque", "Banque", "Piscine"], c: 0, f: "La bibliothèque (Unit 10)"},
-        {q: "Le chef de l'entreprise est le ___.", a: ["Stagiaire", "Directeur", "Voisin"], c: 1, f: "Le directeur (Unit 10)"},
-        {q: "Chercher un emploi = chercher du ___.", a: ["Temps", "Travail", "Cadeau"], c: 1, f: "Le travail (Unit 10)"},
-        {q: "Le bureau est pour ___.", a: ["Dormir", "Travailler", "Cuisiner"], c: 1, f: "Travailler (Unit 10)"},
-        {q: "Gagner un ___ chaque mois.", a: ["Salaire", "Match", "Prix"], c: 0, f: "Le salaire (Unit 10)"},
-        {q: "Le CV présente mon ___.", a: ["Parcours", "Famille", "Maison"], c: 0, f: "Le parcours (Unit 10)"},
-        {q: "Où étudient les étudiants ?", a: ["L'université", "Le garage", "La mer"], c: 0, f: "L'université (Unit 10)"},
-        {q: "L'amphi est pour les ___.", a: ["Cours", "Sports", "Douches"], c: 0, f: "Les cours (Unit 10)"}
-    ];
+let currentDeck = [...DECKS.logement];
+let currentDeckName = 'Logement';
+let fcIndex = 0;
+let fcFlipped = false;
 
-    let currentQ = 0;
-    let score = 0;
+function loadDeck(name) {
+  currentDeck = [...DECKS[name]];
+  currentDeckName = name.charAt(0).toUpperCase() + name.slice(1);
+  fcIndex = 0;
+  fcFlipped = false;
+  showCard();
+}
 
-    function openTab(unit) {
-        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-        document.querySelectorAll('.unit-btn').forEach(btn => {
-            btn.classList.remove('active', 'bg-white', 'shadow-md', 'text-blue-600');
-            btn.classList.add('text-slate-500');
-        });
-        document.getElementById(unit).classList.add('active');
-        event.currentTarget.classList.add('active', 'bg-white', 'shadow-md', 'text-blue-600');
+function showCard() {
+  const card = currentDeck[fcIndex];
+  document.getElementById('fcFront').textContent = card.fr;
+  document.getElementById('fcBack').textContent = card.en;
+  document.getElementById('fcEx').textContent = card.ex;
+  document.getElementById('fcCounter').textContent = `Deck: ${currentDeckName} — Card ${fcIndex+1} / ${currentDeck.length}`;
+  const fc = document.getElementById('flashcard');
+  fc.classList.remove('flipped');
+  fcFlipped = false;
+}
+
+function flipCard() {
+  const fc = document.getElementById('flashcard');
+  fcFlipped = !fcFlipped;
+  fc.classList.toggle('flipped', fcFlipped);
+}
+
+function nextCard() {
+  fcIndex = (fcIndex + 1) % currentDeck.length;
+  showCard();
+}
+
+function prevCard() {
+  fcIndex = (fcIndex - 1 + currentDeck.length) % currentDeck.length;
+  showCard();
+}
+
+function shuffleDeck() {
+  for(let i = currentDeck.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
+  }
+  fcIndex = 0;
+  showCard();
+}
+
+// ========== CONJUGATOR ==========
+const CONJUGATIONS = {
+  etre: {
+    present: {forms:['suis','es','est','sommes','êtes','sont'], note:'Être is the most irregular verb in French!'},
+    passe: {forms:['ai été','as été','a été','avons été','avez été','ont été'], note:'Être uses AVOIR as auxiliary in Passé Composé'},
+    futur: {forms:['vais être','vas être','va être','allons être','allez être','vont être'], note:'Futur Proche: aller + infinitif'},
+    imperatif: {forms:['Sois !','—','—','Soyons !','Soyez !','—'], note:'Irregular imperative forms'}
+  },
+  avoir: {
+    present: {forms:['ai','as','a','avons','avez','ont'], note:'Avoir is the auxiliary for most passé composé verbs'},
+    passe: {forms:['ai eu','as eu','a eu','avons eu','avez eu','ont eu'], note:''},
+    futur: {forms:['vais avoir','vas avoir','va avoir','allons avoir','allez avoir','vont avoir'], note:''},
+    imperatif: {forms:['Aie !','—','—','Ayons !','Ayez !','—'], note:'Irregular imperative'}
+  },
+  aller: {
+    present: {forms:['vais','vas','va','allons','allez','vont'], note:'Aller is irregular but uses ÊTRE in passé composé'},
+    passe: {forms:['suis allé(e)','es allé(e)','est allé(e)','sommes allé(e)s','êtes allé(e)s','sont allé(e)s'], note:'Agreement with subject required!'},
+    futur: {forms:['vais aller','vas aller','va aller','allons aller','allez aller','vont aller'], note:''},
+    imperatif: {forms:['Va !','—','—','Allons !','Allez !','—'], note:'Irregular: Va (not Vas) for Tu'}
+  },
+  faire: {
+    present: {forms:['fais','fais','fait','faisons','faites','font'], note:'Faire is highly irregular — memorize all forms!'},
+    passe: {forms:['ai fait','as fait','a fait','avons fait','avez fait','ont fait'], note:'Past participle: fait (irregular)'},
+    futur: {forms:['vais faire','vas faire','va faire','allons faire','allez faire','vont faire'], note:''},
+    imperatif: {forms:['Fais !','—','—','Faisons !','Faites !','—'], note:''}
+  },
+  prendre: {
+    present: {forms:['prends','prends','prend','prenons','prenez','prennent'], note:'Note the double -nn- in ils form'},
+    passe: {forms:['ai pris','as pris','a pris','avons pris','avez pris','ont pris'], note:'Irregular past participle: pris'},
+    futur: {forms:['vais prendre','vas prendre','va prendre','allons prendre','allez prendre','vont prendre'], note:''},
+    imperatif: {forms:['Prends !','—','—','Prenons !','Prenez !','—'], note:''}
+  },
+  venir: {
+    present: {forms:['viens','viens','vient','venons','venez','viennent'], note:'Venir uses ÊTRE in passé composé'},
+    passe: {forms:['suis venu(e)','es venu(e)','est venu(e)','sommes venu(e)s','êtes venu(e)s','sont venu(e)s'], note:'Agreement with subject!'},
+    futur: {forms:['vais venir','vas venir','va venir','allons venir','allez venir','vont venir'], note:''},
+    imperatif: {forms:['Viens !','—','—','Venons !','Venez !','—'], note:''}
+  },
+  parler: {
+    present: {forms:['parle','parles','parle','parlons','parlez','parlent'], note:'Regular -ER verb pattern'},
+    passe: {forms:['ai parlé','as parlé','a parlé','avons parlé','avez parlé','ont parlé'], note:'-ER past participle: remove -er, add -é'},
+    futur: {forms:['vais parler','vas parler','va parler','allons parler','allez parler','vont parler'], note:''},
+    imperatif: {forms:['Parle !','—','—','Parlons !','Parlez !','—'], note:'Tu form: drop the -s for -ER verbs'}
+  },
+  manger: {
+    present: {forms:['mange','manges','mange','mangeons','mangez','mangent'], note:'Mangeons keeps -e- before -ons for spelling'},
+    passe: {forms:['ai mangé','as mangé','a mangé','avons mangé','avez mangé','ont mangé'], note:'Regular -ER pattern'},
+    futur: {forms:['vais manger','vas manger','va manger','allons manger','allez manger','vont manger'], note:''},
+    imperatif: {forms:['Mange !','—','—','Mangeons !','Mangez !','—'], note:''}
+  },
+  finir: {
+    present: {forms:['finis','finis','finit','finissons','finissez','finissent'], note:'Regular -IR verb: add -iss- in plural forms'},
+    passe: {forms:['ai fini','as fini','a fini','avons fini','avez fini','ont fini'], note:'-IR past participle: remove -ir, add -i'},
+    futur: {forms:['vais finir','vas finir','va finir','allons finir','allez finir','vont finir'], note:''},
+    imperatif: {forms:['Finis !','—','—','Finissons !','Finissez !','—'], note:''}
+  },
+  vouloir: {
+    present: {forms:['veux','veux','veut','voulons','voulez','veulent'], note:'Modal verb — followed by infinitive'},
+    passe: {forms:['ai voulu','as voulu','a voulu','avons voulu','avez voulu','ont voulu'], note:'Past participle: voulu'},
+    futur: {forms:['vais vouloir','vas vouloir','va vouloir','allons vouloir','allez vouloir','vont vouloir'], note:''},
+    imperatif: {forms:['Veuille !','—','—','Veuillons !','Veuillez !','—'], note:'Formal: Veuillez accepter = Please accept'}
+  },
+  pouvoir: {
+    present: {forms:['peux','peux','peut','pouvons','pouvez','peuvent'], note:'Modal: can / to be able to'},
+    passe: {forms:['ai pu','as pu','a pu','avons pu','avez pu','ont pu'], note:'Irregular past participle: pu'},
+    futur: {forms:['vais pouvoir','vas pouvoir','va pouvoir','allons pouvoir','allez pouvoir','vont pouvoir'], note:''},
+    imperatif: {forms:['—','—','—','—','—','—'], note:'Pouvoir has NO imperative form'}
+  },
+  devoir: {
+    present: {forms:['dois','dois','doit','devons','devez','doivent'], note:'Must / have to — obligation modal'},
+    passe: {forms:['ai dû','as dû','a dû','avons dû','avez dû','ont dû'], note:'Irregular past participle: dû (note circumflex)'},
+    futur: {forms:['vais devoir','vas devoir','va devoir','allons devoir','allez devoir','vont devoir'], note:''},
+    imperatif: {forms:['—','—','—','—','—','—'], note:'Devoir has NO imperative form'}
+  },
+  dormir: {
+    present: {forms:['dors','dors','dort','dormons','dormez','dorment'], note:'-MIR verb: drop -mir in singular, keep in plural'},
+    passe: {forms:['ai dormi','as dormi','a dormi','avons dormi','avez dormi','ont dormi'], note:'Past participle: dormi'},
+    futur: {forms:['vais dormir','vas dormir','va dormir','allons dormir','allez dormir','vont dormir'], note:''},
+    imperatif: {forms:['Dors !','—','—','Dormons !','Dormez !','—'], note:''}
+  },
+  sortir: {
+    present: {forms:['sors','sors','sort','sortons','sortez','sortent'], note:'Sortir uses ÊTRE in passé composé'},
+    passe: {forms:['suis sorti(e)','es sorti(e)','est sorti(e)','sommes sorti(e)s','êtes sorti(e)s','sont sorti(e)s'], note:'Agreement required!'},
+    futur: {forms:['vais sortir','vas sortir','va sortir','allons sortir','allez sortir','vont sortir'], note:''},
+    imperatif: {forms:['Sors !','—','—','Sortons !','Sortez !','—'], note:''}
+  },
+  mettre: {
+    present: {forms:['mets','mets','met','mettons','mettez','mettent'], note:'Note: no -d in il met'},
+    passe: {forms:['ai mis','as mis','a mis','avons mis','avez mis','ont mis'], note:'Irregular past participle: mis'},
+    futur: {forms:['vais mettre','vas mettre','va mettre','allons mettre','allez mettre','vont mettre'], note:''},
+    imperatif: {forms:['Mets !','—','—','Mettons !','Mettez !','—'], note:''}
+  }
+};
+
+const PRONOUNS = ['Je','Tu','Il/Elle','Nous','Vous','Ils/Elles'];
+
+function conjugate() {
+  const verb = document.getElementById('verbSel').value;
+  const tense = document.getElementById('tenseSel').value;
+  const data = CONJUGATIONS[verb][tense];
+  const res = document.getElementById('conjResult');
+  const note = document.getElementById('conjNote');
+  res.innerHTML = '';
+  data.forms.forEach((form, i) => {
+    const row = document.createElement('div');
+    row.className = 'conj-row';
+    row.innerHTML = `<span class="pronoun">${PRONOUNS[i]}</span><span class="form">${form}</span>`;
+    res.appendChild(row);
+  });
+  if(data.note) {
+    note.innerHTML = `<i class="fas fa-lightbulb" style="margin-right:8px"></i>${data.note}`;
+    note.style.display = 'flex';
+  } else {
+    note.style.display = 'none';
+  }
+}
+
+// Auto-conjugate on load
+conjugate();
+
+// ========== QUIZ DATA — 90 QUESTIONS ==========
+const ALL_QUESTIONS = [
+  // UNIT 7 — 15 questions
+  {q:"La chaise est ___ la table (Under).", a:["Sous","Sur","Dans","Devant"], c:0, f:"Sous = under | Unit 7 Prepositions", cat:"grammar"},
+  {q:"Où prépare-t-on les repas ?", a:["La chambre","Le salon","La cuisine","Le grenier"], c:2, f:"La cuisine = kitchen | Unit 7", cat:"vocab"},
+  {q:"Ma chambre est en face ___ salon (De + Le).", a:["du","de la","des","à"], c:0, f:"De + Le = DU (contracted article)", cat:"grammar"},
+  {q:"J'ai perdu mes clés → j'appelle le ___.", a:["Plombier","Électricien","Serrurier","Dentiste"], c:2, f:"Le serrurier = locksmith | Unit 7", cat:"vocab"},
+  {q:"Un studio est un appartement avec ___ pièce(s).", a:["Une","Trois","Cinq","Dix"], c:0, f:"Un studio = 1 pièce | Unit 7", cat:"vocab"},
+  {q:"Le niveau 0 d'un immeuble = le ___.", a:["Deuxième étage","Premier étage","Rez-de-chaussée","Grenier"], c:2, f:"RDC = ground floor | Unit 7", cat:"vocab"},
+  {q:"Je vais ___ premier étage (À + Le).", a:["au","à la","à l'","aux"], c:0, f:"À + Le = AU | contracted article", cat:"grammar"},
+  {q:"Il y a une fuite → j'appelle le ___.", a:["Serrurier","Plombier","Peintre","Boucher"], c:1, f:"Le plombier = plumber | Unit 7", cat:"vocab"},
+  {q:"On monte les étages avec l'___.", a:["Escalier","Ascenseur","Couloir","Balcon"], c:1, f:"L'ascenseur = elevator | Unit 7", cat:"vocab"},
+  {q:"La bibliothèque est ___ côté de la salle.", a:["à","au","en","de"], c:0, f:"À côté de = next to | Unit 7", cat:"grammar"},
+  {q:"___ y a un balcon dans l'appartement.", a:["Il","Ce","Ils","Elles"], c:0, f:"Il y a = there is | Unit 7", cat:"grammar"},
+  {q:"On range les voitures dans le ___.", a:["Grenier","Couloir","Garage","Balcon"], c:2, f:"Le garage = garage | Unit 7", cat:"vocab"},
+  {q:"La salle de bain est ___ du couloir.", a:["près","devant","au fond","à côté"], c:2, f:"Au fond de = at the back of | Unit 7", cat:"grammar"},
+  {q:"Je parle ___ voisins (À + Les).", a:["à la","aux","du","de la"], c:1, f:"À + Les = AUX | contracted article", cat:"grammar"},
+  {q:"Un gratte-ciel est un immeuble très ___.", a:["Petit","Haut","Large","Ancien"], c:1, f:"Gratte-ciel = skyscraper, très haut | Unit 7", cat:"vocab"},
+
+  // UNIT 8 — 15 questions
+  {q:"C'est ___ voiture de Marie (feminine noun).", a:["Mon","Ma","Mes","Son"], c:1, f:"Ma + feminine noun | possessive adjective", cat:"grammar"},
+  {q:"J'ai mal ___ dents (Plural body part).", a:["au","à la","aux","à l'"], c:2, f:"Aux + plural = aux dents | Unit 8", cat:"grammar"},
+  {q:"Le médecin donne une ___ pour le médicament.", a:["Ordonnance","Valise","Lettre","Carte"], c:0, f:"L'ordonnance = prescription | Unit 8", cat:"vocab"},
+  {q:"___ ce médicament ! (You formal - command)", a:["Prends","Prenez","Prend","Prendre"], c:1, f:"Imperative vous: Prenez ! | Unit 8", cat:"grammar"},
+  {q:"C'est ___ oreille (feminine, starts with vowel).", a:["Ma","Mon","Mes","Son"], c:1, f:"Vowel rule: use MON even for feminine! | Unit 8", cat:"grammar"},
+  {q:"J'ai mal ___ ventre (masculine).", a:["à la","aux","au","à l'"], c:2, f:"Au ventre (masculine) | Unit 8", cat:"grammar"},
+  {q:"J'ai 39°C → J'ai de la ___.", a:["Toux","Fièvre","Faim","Soif"], c:1, f:"La fièvre = fever | Unit 8", cat:"vocab"},
+  {q:"___ tu soif ? Non, mais j'ai faim.", a:["As","Es","A","Ai"], c:0, f:"Avoir soif = to be thirsty | Unit 8", cat:"grammar"},
+  {q:"Le dentiste soigne les ___.", a:["Yeux","Jambes","Dents","Oreilles"], c:2, f:"Les dents = teeth | Unit 8", cat:"vocab"},
+  {q:"C'est ___ ami (masculine, starts with vowel).", a:["Ma","Mon","Mes","Son"], c:1, f:"Mon ami = my friend (masc.) | Unit 8", cat:"grammar"},
+  {q:"Ne ___ pas de sucre ! (command - vous)", a:["Mange","Manges","Mangez","Mangeons"], c:2, f:"Negative imperative: Ne mangez pas | Unit 8", cat:"grammar"},
+  {q:"Le sirop est un médicament pour la ___.", a:["Jambe","Toux","Fièvre","Vue"], c:1, f:"Le sirop pour la toux = cough syrup | Unit 8", cat:"vocab"},
+  {q:"C'est ___ maison (notre + plural noun).", a:["Notre","Nos","Son","Ses"], c:1, f:"Nos + plural noun | nous possessive", cat:"grammar"},
+  {q:"Le cardiologue soigne le ___.", a:["Pied","Cœur","Foie","Rein"], c:1, f:"Cardiologue = heart specialist | Unit 8", cat:"vocab"},
+  {q:"Je suis ___ à la pénicilline.", a:["Allergique","Fatigué","Guéri","Soigné"], c:0, f:"Allergique à = allergic to | Unit 8", cat:"vocab"},
+
+  // UNIT 9 — 15 questions
+  {q:"Hier, je ___ allé(e) à la plage.", a:["ai","suis","es","est"], c:1, f:"Aller → ÊTRE in passé composé | Unit 9", cat:"grammar"},
+  {q:"Nous ___ mangé au restaurant hier.", a:["sommes","avons","sont","ont"], c:1, f:"Manger → AVOIR | Unit 9", cat:"grammar"},
+  {q:"Elle ___ partie tôt ce matin.", a:["a","est","ai","es"], c:1, f:"Partir → ÊTRE | Maison d'Être | Unit 9", cat:"grammar"},
+  {q:"On fait du ski à la ___.", a:["Mer","Plage","Montagne","Campagne"], c:2, f:"La montagne = mountain | Unit 9", cat:"vocab"},
+  {q:"La vache vit à la ___.", a:["Ville","Mer","Montagne","Campagne"], c:3, f:"La campagne = countryside | Unit 9", cat:"vocab"},
+  {q:"Ils ___ arrivés hier soir (ÊTRE verb).", a:["ont","ai","sont","est"], c:2, f:"Arriver → ÊTRE, ils → sont | Unit 9", cat:"grammar"},
+  {q:"La randonnée se fait en ___.", a:["Forêt","Mer","Bureau","Cuisine"], c:0, f:"La randonnée en forêt ou montagne | Unit 9", cat:"vocab"},
+  {q:"Elle est partie → agreement: partie has ___ extra letter.", a:["e","s","es","None"], c:0, f:"ÊTRE agreement: elle → add -e | Unit 9", cat:"grammar"},
+  {q:"Je ___ visité le musée. (Visiter → AVOIR)", a:["suis","es","ai","est"], c:2, f:"Visiter uses AVOIR | Unit 9", cat:"grammar"},
+  {q:"Les îles sont entourées d'___.", a:["Forêts","Eau","Montagne","Neige"], c:1, f:"L'île est entourée d'eau | Unit 9", cat:"vocab"},
+  {q:"Tu ___ resté(e) à l'hôtel.", a:["as","es","ai","est"], c:1, f:"Rester → ÊTRE | tu → es | Unit 9", cat:"grammar"},
+  {q:"Ils ___ partis → 's' because:", a:["Subject is ils (plural)","Subject is elle","Past participle agrees with avoir","No agreement needed"], c:0, f:"ÊTRE agreement: ils → add -s | Unit 9", cat:"grammar"},
+  {q:"Prendre des photos avec un ___ photo.", a:["Livre","Appareil","Stylo","Cahier"], c:1, f:"L'appareil photo = camera | Unit 9", cat:"vocab"},
+  {q:"Le mouton donne de la ___.", a:["Glace","Laine","Lait","Soie"], c:1, f:"La laine = wool | Unit 9", cat:"vocab"},
+  {q:"Nous ___ allés au camping. (Aller → ÊTRE)", a:["avons","sommes","sont","ont"], c:1, f:"Aller → ÊTRE | nous → sommes | Unit 9", cat:"grammar"},
+
+  // UNIT 10 — 15 questions
+  {q:"Il ___ étudier pour réussir. (Obligation)", a:["va","doit","faut","dois"], c:2, f:"Il faut + infinitif = one must | Unit 10", cat:"grammar"},
+  {q:"Demain, je ___ travailler. (Futur proche)", a:["suis","vais","es","ai"], c:1, f:"Futur proche: aller + infinitif | Unit 10", cat:"grammar"},
+  {q:"Une réunion avec des ___.", a:["Enfants","Voisins","Collègues","Animaux"], c:2, f:"Les collègues = colleagues | Unit 10", cat:"vocab"},
+  {q:"Travailler chez soi = le ___.", a:["Télétravail","Stage","Bureau","Congé"], c:0, f:"Le télétravail = remote work | Unit 10", cat:"vocab"},
+  {q:"Demain, tu ___ passer ton examen.", a:["vais","vas","va","allez"], c:1, f:"Futur proche tu: tu vas + infinitif | Unit 10", cat:"grammar"},
+  {q:"Nous ___ aller au cours demain.", a:["vais","vas","allons","vont"], c:2, f:"Futur proche nous: allons | Unit 10", cat:"grammar"},
+  {q:"Le diplôme après 3 ans à l'université : la ___.", a:["Master","Licence","Bourse","Thèse"], c:1, f:"La licence = Bachelor's degree | Unit 10", cat:"vocab"},
+  {q:"On emprunte des livres à la ___.", a:["Piscine","Banque","Bibliothèque","Boulangerie"], c:2, f:"La bibliothèque = library | Unit 10", cat:"vocab"},
+  {q:"Il ___ pas manger avant l'opération.", a:["ne faut","faut ne","ne dois","dois ne"], c:0, f:"Il ne faut pas = one must not | Unit 10", cat:"grammar"},
+  {q:"Le chef de l'entreprise est le ___.", a:["Stagiaire","Directeur","Voisin","Étudiant"], c:1, f:"Le directeur = manager/director | Unit 10", cat:"vocab"},
+  {q:"Ils ___ partir bientôt. (Futur proche)", a:["vont","vais","vas","va"], c:0, f:"Futur proche ils: vont + infinitif | Unit 10", cat:"grammar"},
+  {q:"Gagner de l'argent chaque mois = recevoir un ___.", a:["Prix","Salaire","Match","Bourse"], c:1, f:"Le salaire = salary | Unit 10", cat:"vocab"},
+  {q:"___ faut travailler dur.", a:["Je","Il","Ce","On"], c:1, f:"Il faut = impersonal obligation | Unit 10", cat:"grammar"},
+  {q:"Je vais ___ mon CV pour l'entretien.", a:["manger","préparer","dormir","jouer"], c:1, f:"Préparer mon CV = to prepare my CV | Unit 10", cat:"vocab"},
+  {q:"L'amphi est pour écouter les ___.", a:["Sports","Cours","Repas","Films"], c:1, f:"Les cours en amphi | Unit 10", cat:"vocab"},
+
+  // UNIT 11 — 15 questions
+  {q:"Je mange ___ pain (Masc. partitive).", a:["de la","du","des","de l'"], c:1, f:"Du + masculine noun | partitive | Unit 11", cat:"grammar"},
+  {q:"Elle boit ___ eau (vowel partitive).", a:["du","de la","de l'","des"], c:2, f:"De l' + vowel | partitive | Unit 11", cat:"grammar"},
+  {q:"Il ne mange pas ___ viande (negative).", a:["de la","du","de","des"], c:2, f:"After negative: pas de (no article) | Unit 11", cat:"grammar"},
+  {q:"Un kilo ___ tomates.", a:["de","du","des","de la"], c:0, f:"Quantity expressions + de (no article) | Unit 11", cat:"grammar"},
+  {q:"Les carottes sont des ___.", a:["Fruits","Légumes","Sucres","Viandes"], c:1, f:"Les légumes = vegetables | Unit 11", cat:"vocab"},
+  {q:"Je prends ___ café le matin (masculine).", a:["de la","de l'","du","des"], c:2, f:"Du café (masculine) | Unit 11", cat:"grammar"},
+  {q:"On achète le pain à la ___.", a:["Pharmacie","Boulangerie","Librairie","Bibliothèque"], c:1, f:"La boulangerie = bakery | Unit 11", cat:"vocab"},
+  {q:"Je voudrais ___ tranche de jambon.", a:["une","un","de la","du"], c:0, f:"Une tranche de = a slice of | Unit 11", cat:"grammar"},
+  {q:"Trop ___ sucre est mauvais pour la santé.", a:["du","de","des","de la"], c:1, f:"Trop de (quantity + de, no article) | Unit 11", cat:"grammar"},
+  {q:"Le fromage est un produit ___.", a:["Végétal","Laitier","Céréalier","Sucré"], c:1, f:"Produit laitier = dairy product | Unit 11", cat:"vocab"},
+  {q:"Je mange ___ légumes (plural partitive).", a:["du","de la","des","de l'"], c:2, f:"Des + plural | partitive | Unit 11", cat:"grammar"},
+  {q:"Il n'y a plus ___ lait dans le frigo.", a:["du","de","des","de la"], c:1, f:"Négation: plus de (no article) | Unit 11", cat:"grammar"},
+  {q:"Acheter ___ litre de lait.", a:["un","une","de","du"], c:0, f:"Un litre de = one litre of | Unit 11", cat:"grammar"},
+  {q:"Les pâtes, le riz, le pain = des ___.", a:["Légumes","Fruits","Céréales","Viandes"], c:2, f:"Les céréales = cereals/grains | Unit 11", cat:"vocab"},
+  {q:"Je voudrais ___ bouteille d'eau.", a:["une","un","des","du"], c:0, f:"Une bouteille de = a bottle of | Unit 11", cat:"grammar"},
+
+  // UNIT 12 — 15 questions
+  {q:"Je vais à l'école ___ vélo (open transport).", a:["en","à","par","avec"], c:1, f:"À vélo = by bike (open transport uses à) | Unit 12", cat:"grammar"},
+  {q:"Je prends le métro → ___ métro.", a:["à","en","par","avec"], c:1, f:"En métro (enclosed transport) | Unit 12", cat:"grammar"},
+  {q:"Allez ___ droit pour 100 mètres.", a:["tous","tout","toux","toute"], c:1, f:"Tout droit = straight ahead | Unit 12", cat:"vocab"},
+  {q:"La gare est où les trains ___.", a:["Atterrissent","Naviguent","Arrivent","Volent"], c:2, f:"La gare = train station | Unit 12", cat:"vocab"},
+  {q:"Tournez ___ gauche au carrefour.", a:["à","en","de","sur"], c:0, f:"Tourner à gauche = turn left | Unit 12", cat:"vocab"},
+  {q:"La mairie est le bâtiment de la ___ publique.", a:["Administration","Santé","Education","Justice"], c:0, f:"La mairie = town hall / city administration | Unit 12", cat:"vocab"},
+  {q:"Je voyage Paris-Lyon ___ train.", a:["à","en","par","sur"], c:1, f:"En train (enclosed transport uses en) | Unit 12", cat:"grammar"},
+  {q:"Excusez-moi, ___ aller à la pharmacie ?", a:["pour","pour peut","pour pouvoir","aller"], c:0, f:"Pour aller à... = to get to... | Unit 12", cat:"grammar"},
+  {q:"On marche → on va ___.", a:["en voiture","en bus","à pied","en avion"], c:2, f:"À pied = on foot | Unit 12", cat:"vocab"},
+  {q:"Le ___ est dans la rue devant la maison.", a:["Trottoir","Rivière","Champ","Grenier"], c:0, f:"Le trottoir = pavement / sidewalk | Unit 12", cat:"vocab"},
+  {q:"Je vais aux États-Unis ___ avion.", a:["à","en","par","avec"], c:1, f:"En avion (enclosed transport) | Unit 12", cat:"grammar"},
+  {q:"C'est ___ au bout de la rue.", a:["directement","là","juste","à gauche"], c:2, f:"Juste au bout de la rue = just at the end of the street | Unit 12", cat:"vocab"},
+  {q:"L'arrêt de bus est ___ l'hôtel.", a:["derrière","devant","sous","entre"], c:1, f:"Devant = in front of | Unit 12", cat:"vocab"},
+  {q:"On achète le ticket ___ distributeur automatique.", a:["au","à la","aux","du"], c:0, f:"Au distributeur (À + Le = AU) | Unit 12", cat:"grammar"},
+  {q:"Pour aller vite, je prends le métro ou ___.", a:["Le cheval","Le train","La piscine","L'escalier"], c:1, f:"Le train = fast transport | Unit 12", cat:"vocab"}
+];
+
+let quizQuestions = [];
+let currentQ = 0;
+let score = 0;
+let quizMode = 'all';
+
+function selectMode(el, mode) {
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  quizMode = mode;
+}
+
+function startQuiz() {
+  if(quizMode === 'grammar') {
+    quizQuestions = ALL_QUESTIONS.filter(q => q.cat === 'grammar');
+    quizQuestions = quizQuestions.slice(0, 30);
+  } else if(quizMode === 'vocab') {
+    quizQuestions = ALL_QUESTIONS.filter(q => q.cat === 'vocab');
+    quizQuestions = quizQuestions.slice(0, 30);
+  } else {
+    quizQuestions = [...ALL_QUESTIONS];
+    // Shuffle
+    for(let i=quizQuestions.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [quizQuestions[i],quizQuestions[j]]=[quizQuestions[j],quizQuestions[i]];
     }
+  }
+  document.getElementById('quizIntro').style.display = 'none';
+  document.getElementById('quizBody').style.display = 'block';
+  currentQ = 0;
+  score = 0;
+  renderQuestion();
+}
 
-    function startQuiz() {
-        document.getElementById('quizIntro').classList.add('hidden');
-        document.getElementById('quizBody').classList.remove('hidden');
-        currentQ = 0;
-        score = 0;
-        renderQuestion();
-    }
+function renderQuestion() {
+  const qData = quizQuestions[currentQ];
+  const total = quizQuestions.length;
+  document.getElementById('qCount').textContent = `Q ${currentQ+1} / ${total}`;
+  document.getElementById('pBar').style.width = `${(currentQ/total)*100}%`;
+  document.getElementById('qText').textContent = qData.q;
+  document.getElementById('feedback').classList.remove('show');
 
-    function renderQuestion() {
-        const qData = QUESTIONS[currentQ];
-        document.getElementById('qCount').innerText = `QUESTION ${currentQ + 1}/60`;
-        document.getElementById('pBar').style.width = `${(currentQ / 60) * 100}%`;
-        document.getElementById('qText').innerText = qData.q;
-        document.getElementById('feedback').classList.add('hidden');
-        
-        const optGrid = document.getElementById('options');
-        optGrid.innerHTML = "";
-        
-        qData.a.forEach((opt, i) => {
-            const btn = document.createElement('button');
-            btn.className = "w-full text-left p-8 rounded-[2rem] border-2 border-slate-700 bg-slate-800 text-white font-black text-lg transition-all hover:bg-slate-700 active:scale-95";
-            btn.innerText = opt;
-            btn.onclick = () => {
-                document.querySelectorAll('#options button').forEach(b => b.disabled = true);
-                if(i === qData.c) {
-                    btn.classList.add('correct');
-                    score++;
-                } else {
-                    btn.classList.add('wrong');
-                    document.querySelectorAll('#options button')[qData.c].classList.add('correct');
-                }
-                document.getElementById('liveScore').innerText = score;
-                document.getElementById('fact').innerText = qData.f;
-                document.getElementById('feedback').classList.remove('hidden');
-            };
-            optGrid.appendChild(btn);
-        });
-    }
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  qData.a.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => {
+      document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+      if(i === qData.c) {
+        btn.classList.add('correct');
+        score++;
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.opt-btn')[qData.c].classList.add('correct');
+      }
+      document.getElementById('liveScore').textContent = score;
+      document.getElementById('fact').textContent = '💡 ' + qData.f;
+      document.getElementById('feedback').classList.add('show');
+    };
+    opts.appendChild(btn);
+  });
+}
 
-    function nextQuestion() {
-        currentQ++;
-        if(currentQ < QUESTIONS.length) {
-            renderQuestion();
-        } else {
-            document.getElementById('quizBody').classList.add('hidden');
-            document.getElementById('resultView').classList.remove('hidden');
-            document.getElementById('finalScore').innerText = `TOTAL: ${score} / 60`;
-        }
-    }
+function nextQuestion() {
+  currentQ++;
+  if(currentQ < quizQuestions.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('quizBody').style.display = 'none';
+  document.getElementById('resultView').style.display = 'block';
+  const total = quizQuestions.length;
+  const pct = Math.round((score/total)*100);
+  document.getElementById('finalScore').textContent = `${score} / ${total} (${pct}%)`;
+  
+  let grade = '';
+  if(pct >= 90) grade = '🌟 Excellent ! Félicitations !';
+  else if(pct >= 75) grade = '👍 Très bien ! Continue ainsi !';
+  else if(pct >= 60) grade = '✅ Bien ! Encore un peu d\'effort !';
+  else if(pct >= 50) grade = '📚 Passable. Révise les unités faibles.';
+  else grade = '💪 Courage ! Relis les leçons et réessaie !';
+  
+  document.getElementById('gradeMsg').textContent = grade;
+  setTimeout(() => {
+    document.getElementById('resultBarFill').style.width = pct + '%';
+  }, 300);
+}
+
+function restartQuiz() {
+  document.getElementById('quizBody').style.display = 'none';
+  document.getElementById('resultView').style.display = 'none';
+  document.getElementById('quizIntro').style.display = 'block';
+  document.getElementById('resultBarFill').style.width = '0%';
+}
+
+// Init conjugator on tab open
+document.querySelector('[onclick*="conjugator"]').addEventListener('click', ()=> setTimeout(conjugate, 100));
 </script>
 </body>
 </html>
